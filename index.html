@@ -140,6 +140,49 @@
   .rpday.next{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
   .rpday em{margin-left:auto;font-style:normal;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#b9801c}
   .rp-msg{font-weight:bold;color:var(--text)}
+  /* ---- Motion and polish ---- */
+  .card{border-radius:18px;box-shadow:0 2px 10px rgba(0,0,0,.06);background:linear-gradient(180deg,#f7f7f7,#ececec);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+  .card:active{transform:scale(.985)}
+  .btn{position:relative;overflow:hidden;transition:transform .15s ease,box-shadow .2s ease}
+  .btn:active{transform:scale(.95)}
+  .btn:not(.ghost){box-shadow:0 4px 14px rgba(224,162,52,.45)}
+  .strip figure{transition:transform .25s ease}
+  .strip figure:active{transform:rotate(0) scale(1.08);z-index:2}
+  .rpday{transition:transform .15s ease,box-shadow .2s ease,opacity .3s ease}
+  .rpday:active{transform:scale(.97)}
+  .cf{position:fixed;left:0;top:0;z-index:50;width:8px;height:8px;border-radius:2px;pointer-events:none;animation:cf .95s cubic-bezier(.1,.7,.3,1) forwards}
+  @keyframes cf{from{transform:translate(var(--x),var(--y)) rotate(0);opacity:1}to{transform:translate(calc(var(--x) + var(--dx)),calc(var(--y) + var(--dy) + 70px)) rotate(var(--rot));opacity:0}}
+  @media (hover:hover){
+    .card:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(0,0,0,.15);border-color:var(--accent)}
+    .strip figure:hover{transform:rotate(0) scale(1.08);z-index:2}
+    .dot:hover{filter:brightness(1.15);transform:scaleY(1.12)}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    section.active{animation:pgIn .35s ease backwards}
+    @keyframes pgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+    .rv{opacity:0;transform:translateY(26px) scale(.97);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0ms)}
+    .rv.in{opacity:1;transform:none}
+    .crown{animation:floaty 4s ease-in-out infinite}
+    @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+    .hero{background:linear-gradient(135deg,#ededed 0%,#fbf1d6 50%,#ededed 100%);background-size:220% 220%;animation:heroShift 10s ease-in-out infinite}
+    @keyframes heroShift{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+    .hero h1{background:linear-gradient(90deg,#111 0%,#111 38%,#c88a1d 50%,#111 62%,#111 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:txtShine 5s linear infinite}
+    @keyframes txtShine{from{background-position:130% 0}to{background-position:-130% 0}}
+    .btn:not(.ghost)::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:shine 3.6s ease-in-out infinite}
+    @keyframes shine{0%,65%{left:-60%}100%{left:140%}}
+    .dot{transform-origin:bottom;animation:dotUp .7s cubic-bezier(.3,1.6,.5,1) backwards;transition:transform .2s ease,filter .2s ease}
+    @keyframes dotUp{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+    .dot.d1{animation-delay:.05s}.dot.d2{animation-delay:.12s}.dot.d3{animation-delay:.19s}.dot.d4{animation-delay:.26s}.dot.d5{animation-delay:.33s}.dot.d6{animation-delay:.40s}.dot.d7{animation-delay:.47s}
+    nav button.on svg{animation:navPop .45s cubic-bezier(.3,1.6,.5,1)}
+    @keyframes navPop{0%{transform:scale(.7)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+    nav button:active{transform:scale(.9)}
+    .rpday.pop{animation:rpPop .5s cubic-bezier(.3,1.6,.5,1)}
+    @keyframes rpPop{0%{transform:scale(.93)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
+    .rpday.next{animation:nextPulse 2s ease-in-out infinite}
+    @keyframes nextPulse{0%,100%{box-shadow:0 0 0 2px var(--accent)}50%{box-shadow:0 0 0 6px rgba(224,162,52,.3)}}
+    .rp-bar i{background:linear-gradient(90deg,#e0a234,#f3dca4,#e0a234);background-size:200% 100%;animation:barFlow 2s linear infinite}
+    @keyframes barFlow{from{background-position:0 0}to{background-position:-200% 0}}
+  }
 </style>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -747,6 +790,7 @@ for (const l in T2) Object.assign(T[l], T2[l]);
 
 // ---- 21-day reading plan (progress is saved on the phone) ----
 const RP_DAYS = 21, RP_KEY = "rp21";
+let rpPopDay = 0;
 function rpLoad(){
   try { const a = JSON.parse(localStorage.getItem(RP_KEY)); if (Array.isArray(a)) return a; } catch(e){}
   return [];
@@ -762,11 +806,20 @@ function renderPlan(){
     const isDone = !!done[d-1];
     if (!isDone && next < 0) next = d;
     const lab = document.createElement("label");
-    lab.className = "rpday" + (isDone ? " done" : "") + (next === d ? " next" : "");
+    lab.className = "rpday" + (isDone ? " done" : "") + (next === d ? " next" : "") + (rpPopDay === d ? " pop" : "");
     const cb = document.createElement("input");
     cb.type = "checkbox"; cb.checked = isDone;
     cb.addEventListener("change", () => {
-      const a = rpLoad(); a[d-1] = cb.checked; rpSave(a); renderPlan();
+      const a = rpLoad(); a[d-1] = cb.checked; rpSave(a);
+      if (cb.checked){
+        rpPopDay = d;
+        const r = cb.getBoundingClientRect();
+        const all = a.slice(0, RP_DAYS).filter(Boolean).length === RP_DAYS;
+        burst(r.left + r.width / 2, r.top + r.height / 2, 16);
+        if (all) setTimeout(() => burst(innerWidth / 2, innerHeight / 3, 80, true), 250);
+        try { navigator.vibrate && navigator.vibrate(all ? [30,60,30,60,60] : 25); } catch(e){}
+      }
+      renderPlan();
     });
     const txt = document.createElement("span");
     txt.className = "t";
@@ -781,6 +834,7 @@ function renderPlan(){
   const n = done.slice(0, RP_DAYS).filter(Boolean).length;
   $("#rpProg").textContent = t.rp_prog.replace("{a}", n).replace("{b}", RP_DAYS);
   $("#rpBar").style.width = Math.round(n / RP_DAYS * 100) + "%";
+  rpPopDay = 0;
   const msg = $("#rpDone");
   msg.hidden = n < RP_DAYS;
   msg.textContent = n < RP_DAYS ? "" : t.rp_done;
@@ -808,6 +862,40 @@ document.addEventListener("click", e => {
   const body = "EVENT RSVP\n\nEvent: " + name + " (" + when + ")\nName:\nPhone:\nHow many people are coming?\nQuestions:\n";
   window.location.href = "mailto:" + SHOP_EMAIL + "?subject=" + encodeURIComponent("Event RSVP - " + name) + "&body=" + encodeURIComponent(body);
 });
+// ---- Motion: confetti and scroll reveal ----
+function burst(x, y, n, big){
+  if (!window.matchMedia || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const cols = ["#e0a234","#f3dca4","#c88a1d","#111111","#8a5d10"];
+  for (let i = 0; i < n; i++){
+    const c = document.createElement("i");
+    c.className = "cf";
+    const ang = Math.random() * Math.PI * 2, dist = (big ? 140 : 55) + Math.random() * (big ? 200 : 60);
+    c.style.setProperty("--x", x + "px"); c.style.setProperty("--y", y + "px");
+    c.style.setProperty("--dx", Math.cos(ang) * dist + "px"); c.style.setProperty("--dy", Math.sin(ang) * dist + "px");
+    c.style.setProperty("--rot", (Math.random() * 720 - 360) + "deg");
+    c.style.background = cols[i % cols.length];
+    if (big) c.style.width = c.style.height = (6 + Math.random() * 8) + "px";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 1000);
+  }
+}
+try {
+  if (window.matchMedia && !matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window){
+    const io = new IntersectionObserver(es => {
+      let i = 0;
+      es.forEach(en => {
+        if (!en.isIntersecting) return;
+        const el = en.target; io.unobserve(el);
+        el.style.setProperty("--d", Math.min(i++, 6) * 70 + "ms");
+        el.classList.add("in");
+        setTimeout(() => { el.classList.remove("rv", "in"); el.style.removeProperty("--d"); }, 1100);
+      });
+    }, {threshold: .08});
+    $$(".hero,.card,.umb-home,.great,main h2,.pt-intro").forEach(el => { el.classList.add("rv"); io.observe(el); });
+    // safety net: never leave visible content hidden
+    setTimeout(() => $$(".rv:not(.in)").forEach(el => { if (el.offsetParent !== null) el.classList.add("in"); }), 3000);
+  }
+} catch(e){}
 setLang(lang);
 </script>
 <script>if("serviceWorker" in navigator&&location.protocol.startsWith("http"))navigator.serviceWorker.register("sw.js");</script>
