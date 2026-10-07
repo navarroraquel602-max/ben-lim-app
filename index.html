@@ -183,6 +183,36 @@
     .rp-bar i{background:linear-gradient(90deg,#e0a234,#f3dca4,#e0a234);background-size:200% 100%;animation:barFlow 2s linear infinite}
     @keyframes barFlow{from{background-position:0 0}to{background-position:-200% 0}}
   }
+  /* ---- Desktop layout (computers). Phones keep the layout above. ---- */
+  @media (min-width:1100px){
+    body{padding-bottom:0}
+    header{padding:12px 32px}
+    nav{position:fixed;top:0;bottom:auto;left:auto;right:176px;height:71px;background:transparent;border:0;padding:0;align-items:center;z-index:6;gap:2px}
+    nav button{flex:none;color:#111;font:500 14px Oswald,system-ui,sans-serif;letter-spacing:.12em;padding:10px 14px;border-radius:8px;transition:color .2s ease,background .2s ease}
+    nav button span{display:none}
+    nav button:hover{color:#b9801c;background:#fbf1d6}
+    nav button.on{color:#b9801c;background:transparent;box-shadow:inset 0 -3px 0 var(--accent);border-radius:0}
+    main{max-width:1100px;padding:28px 32px}
+    #home.active,#learn.active,#connect.active{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+    #home>*,#learn>*,#connect>*{grid-column:1/-1;margin-top:0;margin-bottom:0}
+    #home>.card.vg,#learn>.card,#connect>.card{grid-column:auto;margin:0}
+    #home>.card:has(img.about){grid-column:1/-1;display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:center;padding:24px}
+    #home>.card:has(img.about) img.about{margin:0}
+    #home>.card:has(img.about) p{font-size:18px;line-height:1.6;margin:0}
+    #home>.card:not(.vg):not(:has(img.about)){grid-column:1/-1;text-align:center}
+    #home>.card.vg{grid-column:1/-1}
+    #learn.active{grid-template-columns:repeat(2,1fr)}
+    #learn>.card:has(.clist){grid-column:1/-1}
+    #learn .clist{columns:2;column-gap:28px}
+    #learn .clist li{break-inside:avoid}
+    .hero{text-align:center;padding:56px 32px}
+    .hero h1{font-size:56px}
+    .hero p{max-width:34em;margin-left:auto;margin-right:auto}
+    .great{margin:28px -32px 0;padding:8px 32px 24px}
+    .great p{max-width:52em}
+    #partners,#invite,#reading,#hubpage,#missions,#shop,#hubs{max-width:760px;margin-left:auto;margin-right:auto}
+    footer .wrap{max-width:1100px;padding:0 32px}
+  }
 </style>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
