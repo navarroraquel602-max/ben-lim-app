@@ -213,6 +213,37 @@
     #partners,#invite,#reading,#hubpage,#missions,#shop,#hubs{max-width:760px;margin-left:auto;margin-right:auto}
     footer .wrap{max-width:1100px;padding:0 32px}
   }
+  /* ---- Languages page ---- */
+  #hubs h2,#hubs>p{text-align:center}
+  .globe{position:relative;width:96px;height:96px;margin:6px auto 0;color:var(--accent)}
+  .globe svg{position:relative;z-index:1;display:block;width:96px;height:96px}
+  .globe::before,.globe::after{content:"";position:absolute;inset:0;border:2px solid var(--accent);border-radius:50%;opacity:0}
+  .greet{position:relative;height:42px;margin:0 0 6px;text-align:center;font:500 28px Oswald,Impact,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#b9801c;overflow:hidden}
+  .greet span{position:absolute;left:0;right:0;opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+  .greet span.on{opacity:1;transform:none}
+  .hubs .card{position:relative;overflow:hidden;padding:24px 16px 20px}
+  .hubs .card::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#e0a234,#f3dca4,#e0a234);transform:scaleX(.25);transform-origin:center;transition:transform .35s ease}
+  .hubs .card:active::before{transform:scaleX(1)}
+  .hubs .flag{font-size:46px;line-height:1.1;display:inline-block;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+  .hg{color:#b9801c;font:500 13px Oswald,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;margin-top:2px}
+  .go{display:block;margin-top:8px;font-size:24px;line-height:1;color:var(--accent);transition:transform .25s ease}
+  .hubs .card:active .go{transform:translateX(8px)}
+  @media (hover:hover){
+    .hubs .card:hover::before{transform:scaleX(1)}
+    .hubs .card:hover .flag{transform:scale(1.18) rotate(-6deg)}
+    .hubs .card:hover .go{transform:translateX(8px)}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .globe::before{animation:ring 3s ease-out infinite}
+    .globe::after{animation:ring 3s ease-out 1.5s infinite}
+    @keyframes ring{0%{transform:scale(.7);opacity:.55}100%{transform:scale(1.8);opacity:0}}
+    .hubs .flag{animation:flagFloat 3.2s ease-in-out infinite}
+    .hubs .card:nth-child(2) .flag{animation-delay:-.8s}
+    .hubs .card:nth-child(3) .flag{animation-delay:-1.6s}
+    .hubs .card:nth-child(4) .flag{animation-delay:-2.4s}
+    @keyframes flagFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(3deg)}}
+    .hubs .card:hover .flag{animation-play-state:paused}
+  }
 </style>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -599,13 +630,15 @@
   </section>
 
   <section id="hubs">
+    <div class="globe" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="24" cy="24" r="20"/><path d="M4 24h40"/><path d="M6.7 14h34.6M6.7 34h34.6" opacity=".6"/><ellipse cx="24" cy="24" rx="20" ry="20"><animate attributeName="rx" values="20;0;20" dur="6s" repeatCount="indefinite"/></ellipse><ellipse cx="24" cy="24" rx="20" ry="20"><animate attributeName="rx" values="20;0;20" dur="6s" begin="-3s" repeatCount="indefinite"/></ellipse></svg></div>
     <h2 data-t="hubs_title"></h2>
+    <div class="greet" aria-hidden="true"><span class="on">Welcome</span><span>Bienvenido</span><span>欢迎</span><span>Добро пожаловать</span></div>
     <p data-t="hubs_text"></p>
     <div class="grid hubs">
-      <div class="card" data-pick="en"><div class="flag">🇺🇸</div><h3>English</h3></div>
-      <div class="card" data-pick="es"><div class="flag">🇪🇸</div><h3>Español</h3></div>
-      <div class="card" data-pick="zh"><div class="flag">🇨🇳</div><h3>中文</h3></div>
-      <div class="card" data-pick="ru"><div class="flag">🇷🇺</div><h3>Русский</h3></div>
+      <div class="card" data-pick="en"><div class="flag">🇺🇸</div><h3>English</h3><div class="hg">Welcome</div><span class="go" aria-hidden="true">→</span></div>
+      <div class="card" data-pick="es"><div class="flag">🇪🇸</div><h3>Español</h3><div class="hg">Bienvenido</div><span class="go" aria-hidden="true">→</span></div>
+      <div class="card" data-pick="zh"><div class="flag">🇨🇳</div><h3>中文</h3><div class="hg">欢迎</div><span class="go" aria-hidden="true">→</span></div>
+      <div class="card" data-pick="ru"><div class="flag">🇷🇺</div><h3>Русский</h3><div class="hg">Добро пожаловать</div><span class="go" aria-hidden="true">→</span></div>
     </div>
     <p class="note" data-t="hubs_note2"></p>
   </section>
@@ -926,6 +959,25 @@ try {
     setTimeout(() => $$(".rv:not(.in)").forEach(el => { if (el.offsetParent !== null) el.classList.add("in"); }), 3000);
   }
 } catch(e){}
+// ---- Languages page: greeting rotation and tap burst ----
+(function(){
+  const g = $$("#hubs .greet span");
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches){
+    $$("#hubs .globe animate").forEach(a => a.remove());
+  } else if (g.length > 1){
+    let i = 0;
+    setInterval(() => {
+      if (!$("#hubs").classList.contains("active")) return;
+      g[i].classList.remove("on"); i = (i + 1) % g.length; g[i].classList.add("on");
+    }, 2200);
+  }
+})();
+document.addEventListener("click", e => {
+  const c = e.target.closest("#hubs [data-pick]");
+  if (!c) return;
+  const r = c.getBoundingClientRect();
+  burst(r.left + r.width / 2, r.top + r.height / 2, 22);
+});
 setLang(lang);
 </script>
 <script>if("serviceWorker" in navigator&&location.protocol.startsWith("http"))navigator.serviceWorker.register("sw.js");</script>
