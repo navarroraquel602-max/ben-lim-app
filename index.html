@@ -129,6 +129,17 @@
   .strip{display:flex;gap:14px;overflow-x:auto;padding:18px 4px 10px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
   .strip figure{margin:0;flex:none;background:#fff;padding:8px;box-shadow:0 2px 10px rgba(0,0,0,.18);transform:rotate(var(--r,0deg));scroll-snap-align:center}
   .strip img{display:block;height:170px;width:auto}
+  .rp-bar{height:10px;background:var(--line);border-radius:999px;overflow:hidden;margin:10px 0 6px}
+  .rp-bar i{display:block;height:100%;width:0;background:var(--accent);border-radius:999px;transition:width .3s}
+  .rp-list{display:grid;gap:8px;margin:14px 0}
+  .rpday{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:14px;cursor:pointer;font-weight:bold}
+  .rpday input{width:22px;height:22px;accent-color:var(--accent);flex:none}
+  .rpday small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+  .rpday.done{opacity:.6}
+  .rpday.done span.t{text-decoration:line-through}
+  .rpday.next{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+  .rpday em{margin-left:auto;font-style:normal;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#b9801c}
+  .rp-msg{font-weight:bold;color:var(--text)}
 </style>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -170,6 +181,12 @@
         <div class="dots"><a class="dot d1" href="#" data-go="partners" data-lvl="1" aria-label="Bronze"></a><a class="dot d2" href="#" data-go="partners" data-lvl="2" aria-label="Silver"></a><a class="dot d3" href="#" data-go="partners" data-lvl="3" aria-label="Gold"></a><a class="dot d4" href="#" data-go="partners" data-lvl="4" aria-label="Platinum"></a><a class="dot d5" href="#" data-go="partners" data-lvl="5" aria-label="Titanium"></a><a class="dot d6" href="#" data-go="partners" data-lvl="6" aria-label="Diamond"></a><a class="dot d7" href="#" data-go="partners" data-lvl="7" aria-label="Red Diamond"></a></div>
         <a class="btn" href="#" data-go="partners" data-t="pt_btn"></a>
       </div>
+    </div>
+    <div class="card">
+      <h3 data-t="rp_card_h"></h3>
+      <p data-t="rp_card_p"></p>
+      <a class="btn" href="#" data-go="reading" data-t="rp_card_btn"></a>
+      <button class="btn ghost" type="button" id="shareApp" data-t="share_app"></button>
     </div>
     <h2 data-t="vision_title"></h2>
     <div class="card vg">
@@ -489,6 +506,21 @@
   </section>
 
   <!-- HUBS (language portals) -->
+  <!-- READING PLAN -->
+  <section id="reading">
+    <p><a class="btn ghost" href="#" data-go="home" data-t="inv_back"></a></p>
+    <h2 data-t="rp_title"></h2>
+    <p data-t="rp_intro"></p>
+    <div class="card">
+      <div id="rpProg" class="rp-msg"></div>
+      <div class="rp-bar" aria-hidden="true"><i id="rpBar"></i></div>
+      <p id="rpDone" class="rp-msg" hidden></p>
+    </div>
+    <div id="rpList" class="rp-list"></div>
+    <p><button class="btn" type="button" id="rpShare" data-t="share_app"></button>
+       <button class="btn ghost" type="button" id="rpReset" data-t="rp_reset"></button></p>
+  </section>
+
   <section id="hubs">
     <h2 data-t="hubs_title"></h2>
     <p data-t="hubs_text"></p>
@@ -608,6 +640,7 @@ function setLang(l){
   document.documentElement.lang = lang;
   $("#lang").value = lang;
   $$("[data-t]").forEach(el => { el.textContent = T[lang][el.dataset.t] || ""; });
+  if (window.renderPlan) renderPlan();
 }
 function go(id){
   $$("section").forEach(s => s.classList.toggle("active", s.id === id));
@@ -697,6 +730,71 @@ $("#rsvpMission").addEventListener("click", e => {
   const body = "MISSION TRIP RSVP\n\nName:\nPhone:\nWhich trip (Dominican Republic, Middle East, Uganda, Mexico)?\nQuestions:\n";
   window.location.href = "mailto:missions@benlimglobal.com?subject=" + encodeURIComponent("Mission trip RSVP") + "&body=" + encodeURIComponent(body);
 });
+setLang(lang);
+</script>
+<script>
+const T2 = {
+  en:{rp_card_h:"21 Days in John",rp_card_p:"Read one chapter a day. Check off each day and watch your progress grow.",rp_card_btn:"Start Reading",rp_title:"21 Days in John",rp_intro:"Read one chapter of the Gospel of John each day. Tap a day when you finish it. Your progress stays on this phone.",rp_book:"John",rp_day:"Day {n}",rp_prog:"{a} of {b} days done",rp_next:"Up next",rp_done:"You finished all 21 days. Well done!",rp_reset:"Start over",rp_reset_q:"Clear your progress and start over?",share_app:"Share this App",sh_text:"Read the Gospel of John with Ben Lim Global.",sh_copied:"Link copied. Paste it into a message."},
+  es:{rp_card_h:"21 días en Juan",rp_card_p:"Lea un capítulo al día. Marque cada día y vea crecer su progreso.",rp_card_btn:"Empezar a leer",rp_title:"21 días en Juan",rp_intro:"Lea un capítulo del Evangelio de Juan cada día. Toque el día cuando lo termine. Su progreso se queda en este teléfono.",rp_book:"Juan",rp_day:"Día {n}",rp_prog:"{a} de {b} días completos",rp_next:"Sigue",rp_done:"Terminó los 21 días. ¡Bien hecho!",rp_reset:"Empezar de nuevo",rp_reset_q:"¿Borrar su progreso y empezar de nuevo?",share_app:"Compartir esta app",sh_text:"Lea el Evangelio de Juan con Ben Lim Global.",sh_copied:"Enlace copiado. Péguelo en un mensaje."},
+  zh:{rp_card_h:"约翰福音21天",rp_card_p:"每天读一章。读完就打勾，看着进度增长。",rp_card_btn:"开始阅读",rp_title:"约翰福音21天",rp_intro:"每天读一章约翰福音。读完后点选该天。您的进度会保存在这支手机上。",rp_book:"约翰福音",rp_day:"第{n}天",rp_prog:"已完成{a}/{b}天",rp_next:"下一个",rp_done:"您读完了全部21天。做得好！",rp_reset:"重新开始",rp_reset_q:"清除进度并重新开始吗？",share_app:"分享此应用",sh_text:"和本·林全球一起读约翰福音。",sh_copied:"链接已复制。请粘贴到消息中。"},
+  ru:{rp_card_h:"21 день в Евангелии от Иоанна",rp_card_p:"Читайте по одной главе в день. Отмечайте каждый день и смотрите, как растёт ваш прогресс.",rp_card_btn:"Начать читать",rp_title:"21 день в Евангелии от Иоанна",rp_intro:"Читайте по одной главе Евангелия от Иоанна каждый день. Нажмите на день, когда закончите. Ваш прогресс хранится на этом телефоне.",rp_book:"От Иоанна",rp_day:"День {n}",rp_prog:"Пройдено дней: {a} из {b}",rp_next:"Дальше",rp_done:"Вы прошли все 21 день. Молодец!",rp_reset:"Начать заново",rp_reset_q:"Стереть прогресс и начать заново?",share_app:"Поделиться приложением",sh_text:"Читайте Евангелие от Иоанна вместе с Ben Lim Global.",sh_copied:"Ссылка скопирована. Вставьте её в сообщение."}
+};
+for (const l in T2) Object.assign(T[l], T2[l]);
+
+// ---- 21-day reading plan (progress is saved on the phone) ----
+const RP_DAYS = 21, RP_KEY = "rp21";
+function rpLoad(){
+  try { const a = JSON.parse(localStorage.getItem(RP_KEY)); if (Array.isArray(a)) return a; } catch(e){}
+  return [];
+}
+function rpSave(a){ try { localStorage.setItem(RP_KEY, JSON.stringify(a)); } catch(e){} }
+function renderPlan(){
+  const t = T[lang], done = rpLoad();
+  const box = $("#rpList");
+  if (!box) return;
+  box.textContent = "";
+  let next = -1;
+  for (let d = 1; d <= RP_DAYS; d++){
+    const isDone = !!done[d-1];
+    if (!isDone && next < 0) next = d;
+    const lab = document.createElement("label");
+    lab.className = "rpday" + (isDone ? " done" : "") + (next === d ? " next" : "");
+    const cb = document.createElement("input");
+    cb.type = "checkbox"; cb.checked = isDone;
+    cb.addEventListener("change", () => {
+      const a = rpLoad(); a[d-1] = cb.checked; rpSave(a); renderPlan();
+    });
+    const txt = document.createElement("span");
+    txt.className = "t";
+    txt.textContent = t.rp_day.replace("{n}", d);
+    const sm = document.createElement("small");
+    sm.textContent = t.rp_book + " " + d;
+    txt.appendChild(sm);
+    lab.append(cb, txt);
+    if (next === d){ const em = document.createElement("em"); em.textContent = t.rp_next; lab.appendChild(em); }
+    box.appendChild(lab);
+  }
+  const n = done.slice(0, RP_DAYS).filter(Boolean).length;
+  $("#rpProg").textContent = t.rp_prog.replace("{a}", n).replace("{b}", RP_DAYS);
+  $("#rpBar").style.width = Math.round(n / RP_DAYS * 100) + "%";
+  const msg = $("#rpDone");
+  msg.hidden = n < RP_DAYS;
+  msg.textContent = n < RP_DAYS ? "" : t.rp_done;
+}
+$("#rpReset").addEventListener("click", () => {
+  if (confirm(T[lang].rp_reset_q)){ rpSave([]); renderPlan(); }
+});
+
+// ---- Share ----
+async function shareApp(){
+  const url = location.href.split("#")[0], text = T[lang].sh_text;
+  try { if (navigator.share){ await navigator.share({title:"Ben Lim Global", text, url}); return; } }
+  catch(e){ if (e && e.name === "AbortError") return; }
+  try { await navigator.clipboard.writeText(text + " " + url); alert(T[lang].sh_copied); }
+  catch(e){ prompt(T[lang].sh_copied, text + " " + url); }
+}
+$("#shareApp").addEventListener("click", shareApp);
+$("#rpShare").addEventListener("click", shareApp);
 setLang(lang);
 </script>
 <script>if("serviceWorker" in navigator&&location.protocol.startsWith("http"))navigator.serviceWorker.register("sw.js");</script>
