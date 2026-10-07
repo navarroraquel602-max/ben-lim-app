@@ -237,6 +237,30 @@
     .hhelp i{animation:hpulse 1.8s ease-out infinite}
     @keyframes hpulse{0%{box-shadow:0 0 0 0 rgba(224,162,52,.7)}100%{box-shadow:0 0 0 10px rgba(224,162,52,0)}}
   }
+  /* ---- Shop: oil cards ---- */
+  .oils{display:grid;grid-template-columns:1fr;gap:14px;margin:12px 0 18px}
+  @media (min-width:560px){.oils{grid-template-columns:1fr 1fr}}
+  .oil-card{text-align:center;padding:18px 16px 20px;margin:0}
+  .bottle{height:210px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:12px}
+  .bottle svg{display:block;width:112px;height:auto;transform:scale(var(--s,.82));transform-origin:bottom center;transition:transform .5s cubic-bezier(.3,1.4,.5,1);filter:drop-shadow(0 12px 12px rgba(0,0,0,.22))}
+  .osz{display:block;text-align:left;margin:12px 0 0;font-size:13px}
+  .osz span{display:block;font-weight:bold;letter-spacing:.04em;margin-bottom:4px;color:var(--text)}
+  .osz select{width:100%;font:16px Lato,system-ui,sans-serif;padding:11px 12px;border-radius:10px}
+  .oprice{margin:12px 0 10px;font-size:15px;color:var(--muted)}
+  .oprice b{display:inline-block;margin-left:8px;font:600 30px Oswald,system-ui,sans-serif;color:var(--text)}
+  .oprice b.pop{animation:pricePop .35s ease}
+  @keyframes pricePop{0%{transform:scale(.8);opacity:.4}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+  .oadd{width:100%}
+  .oilpick{color:#8a5d10;font-weight:bold;min-height:1.2em}
+  #oilFormCard{scroll-margin-top:90px}
+  #oilFormCard.flash{animation:formFlash 1.3s ease}
+  @keyframes formFlash{0%,100%{box-shadow:0 2px 10px rgba(0,0,0,.06)}30%{box-shadow:0 0 0 4px rgba(224,162,52,.55)}}
+  @media (hover:hover){.oil-card:hover .bottle svg{transform:scale(var(--s,.82)) rotate(-3deg)}}
+  @media (prefers-reduced-motion:no-preference){
+    .bottle .bw{animation:bfloat 4s ease-in-out infinite}
+    .oil-card:nth-child(2) .bottle .bw{animation-delay:-2s}
+    @keyframes bfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  }
 </style>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -394,10 +418,24 @@
   <section id="shop">
     <h2 data-t="shop_title"></h2>
     <h3 data-t="oils_h"></h3>
-    <div class="card"><h3 data-t="oil_grace_h"></h3><p data-t="oil_grace_p"></p></div>
-    <div class="card"><h3 data-t="oil_bride_h"></h3><p data-t="oil_bride_p"></p></div>
-    <p class="price"><span data-t="sz_small"></span> $15 &nbsp;·&nbsp; <span data-t="sz_med"></span> $30 &nbsp;·&nbsp; <span data-t="sz_large"></span> $45</p>
+    <div class="oils">
+      <div class="card oil-card" data-oil="Oil of Grace">
+        <div class="bottle"><div class="bw"><svg viewBox="0 0 120 200" role="img" aria-label="OIL OF GRACE"><defs><linearGradient id="gG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9a6a14"/><stop offset=".45" stop-color="#e8b04a"/><stop offset="1" stop-color="#9a6a14"/></linearGradient></defs><rect x="43" y="4" width="34" height="28" rx="6" fill="#111"/><path d="M48 10v16M54 10v16M60 10v16M66 10v16M72 10v16" stroke="#333" stroke-width="1.5"/><rect x="49" y="32" width="22" height="14" rx="2" fill="#c88a1d"/><rect x="18" y="44" width="84" height="148" rx="24" fill="url(#gG)"/><rect x="27" y="58" width="9" height="112" rx="4.5" fill="#fff" opacity=".28"/><rect x="30" y="92" width="60" height="62" rx="6" fill="#fffaf0"/><path transform="translate(50 98) scale(.5)" d="M4 24 2 6l9 8 9-12 9 12 9-8-2 18Z" fill="none" stroke="#c88a1d" stroke-width="2.2" stroke-linejoin="round"/><text x="60" y="130" text-anchor="middle" font-family="Oswald,Impact,sans-serif" font-size="10" letter-spacing="1.2" fill="#111">OIL OF</text><text x="60" y="144" text-anchor="middle" font-family="Oswald,Impact,sans-serif" font-size="10" letter-spacing="1.2" fill="#8a5d10">GRACE</text></svg></div></div>
+        <h3 data-t="oil_grace_h"></h3><p data-t="oil_grace_p"></p>
+        <label class="osz"><span data-t="oil_size"></span><select class="oSize"></select></label>
+        <div class="oprice"><span data-t="oil_price"></span><b class="opv">$15.00</b></div>
+        <button class="btn oadd" type="button" data-t="oil_add"></button>
+      </div>
+      <div class="card oil-card" data-oil="Bridegroom Oil">
+        <div class="bottle"><div class="bw"><svg viewBox="0 0 120 200" role="img" aria-label="BRIDEGROOM OIL"><defs><linearGradient id="gB" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#521019"/><stop offset=".45" stop-color="#a8404c"/><stop offset="1" stop-color="#521019"/></linearGradient></defs><rect x="43" y="4" width="34" height="28" rx="6" fill="#111"/><path d="M48 10v16M54 10v16M60 10v16M66 10v16M72 10v16" stroke="#333" stroke-width="1.5"/><rect x="49" y="32" width="22" height="14" rx="2" fill="#c88a1d"/><rect x="18" y="44" width="84" height="148" rx="24" fill="url(#gB)"/><rect x="27" y="58" width="9" height="112" rx="4.5" fill="#fff" opacity=".28"/><rect x="30" y="92" width="60" height="62" rx="6" fill="#fffaf0"/><path transform="translate(50 98) scale(.5)" d="M4 24 2 6l9 8 9-12 9 12 9-8-2 18Z" fill="none" stroke="#c88a1d" stroke-width="2.2" stroke-linejoin="round"/><text x="60" y="130" text-anchor="middle" font-family="Oswald,Impact,sans-serif" font-size="7.6" letter-spacing=".5" fill="#111">BRIDEGROOM</text><text x="60" y="144" text-anchor="middle" font-family="Oswald,Impact,sans-serif" font-size="10" letter-spacing="1.2" fill="#8a5d10">OIL</text></svg></div></div>
+        <h3 data-t="oil_bride_h"></h3><p data-t="oil_bride_p"></p>
+        <label class="osz"><span data-t="oil_size"></span><select class="oSize"></select></label>
+        <div class="oprice"><span data-t="oil_price"></span><b class="opv">$15.00</b></div>
+        <button class="btn oadd" type="button" data-t="oil_add"></button>
+      </div>
+    </div>
     <p data-t="oil_how"></p>
+    <div class="card" id="oilFormCard"><h3 data-t="oil_form_h"></h3><p id="oilPick" class="note oilpick" role="status"></p>
     <form id="oilForm" novalidate>
       <label>Oil *<select name="Oil" required><option>Oil of Grace</option><option>Bridegroom Oil</option></select></label>
       <label>Size *<select name="Size" required><option>Small roll-on ($15)</option><option>Medium ($30)</option><option>Large ($45)</option></select></label>
@@ -410,7 +448,7 @@
       <p><button class="btn" type="submit" data-t="inv_send"></button>
          <button class="btn ghost" type="button" id="copyOil" data-t="inv_copy"></button></p>
       <p id="oilMsg" class="note"></p>
-    </form>
+    </form></div>
 
     <h3 data-t="books_title"></h3>
     <div class="card book"><img src="books/prophetic-frenzy.jpg" alt="Prophetic Frenzy cover"><div>
@@ -743,6 +781,7 @@ function setLang(l){
   $("#lang").value = lang;
   $$("[data-t]").forEach(el => { el.textContent = T[lang][el.dataset.t] || ""; });
   if (window.renderPlan) renderPlan();
+  if (window.renderShop) renderShop();
 }
 function go(id){
   $$("section").forEach(s => s.classList.toggle("active", s.id === id));
@@ -836,10 +875,10 @@ setLang(lang);
 </script>
 <script>
 const T2 = {
-  en:{rp_card_h:"21 Days in John",rp_card_p:"Read one chapter a day. Check off each day and watch your progress grow.",rp_card_btn:"Start Reading",rp_title:"21 Days in John",rp_intro:"Read one chapter of the Gospel of John each day. Tap a day when you finish it. Your progress stays on this phone.",rp_book:"John",rp_day:"Day {n}",rp_prog:"{a} of {b} days done",rp_next:"Up next",rp_done:"You finished all 21 days. Well done!",rp_reset:"Start over",rp_reset_q:"Clear your progress and start over?",share_app:"Share this App",sh_text:"Read the Gospel of John with Ben Lim Global.",sh_copied:"Link copied. Paste it into a message.",hubs_badge:"Global Community",hubs_join:"Join Hub",hubs_auto:"Not sure? Use my phone's language",hubs_text:"Choose your language and step into a hub made for you: teaching, events, and community."},
-  es:{rp_card_h:"21 días en Juan",rp_card_p:"Lea un capítulo al día. Marque cada día y vea crecer su progreso.",rp_card_btn:"Empezar a leer",rp_title:"21 días en Juan",rp_intro:"Lea un capítulo del Evangelio de Juan cada día. Toque el día cuando lo termine. Su progreso se queda en este teléfono.",rp_book:"Juan",rp_day:"Día {n}",rp_prog:"{a} de {b} días completos",rp_next:"Sigue",rp_done:"Terminó los 21 días. ¡Bien hecho!",rp_reset:"Empezar de nuevo",rp_reset_q:"¿Borrar su progreso y empezar de nuevo?",share_app:"Compartir esta app",sh_text:"Lea el Evangelio de Juan con Ben Lim Global.",sh_copied:"Enlace copiado. Péguelo en un mensaje.",hubs_badge:"Comunidad global",hubs_join:"Unirse al centro",hubs_auto:"¿No está seguro? Use el idioma de su teléfono",hubs_text:"Elija su idioma y entre a un centro hecho para usted: enseñanza, eventos y comunidad."},
-  zh:{rp_card_h:"约翰福音21天",rp_card_p:"每天读一章。读完就打勾，看着进度增长。",rp_card_btn:"开始阅读",rp_title:"约翰福音21天",rp_intro:"每天读一章约翰福音。读完后点选该天。您的进度会保存在这支手机上。",rp_book:"约翰福音",rp_day:"第{n}天",rp_prog:"已完成{a}/{b}天",rp_next:"下一个",rp_done:"您读完了全部21天。做得好！",rp_reset:"重新开始",rp_reset_q:"清除进度并重新开始吗？",share_app:"分享此应用",sh_text:"和本·林全球一起读约翰福音。",sh_copied:"链接已复制。请粘贴到消息中。",hubs_badge:"全球社群",hubs_join:"加入中心",hubs_auto:"不确定？使用手机语言",hubs_text:"选择您的语言，进入为您预备的中心：教导、活动和社群。"},
-  ru:{rp_card_h:"21 день в Евангелии от Иоанна",rp_card_p:"Читайте по одной главе в день. Отмечайте каждый день и смотрите, как растёт ваш прогресс.",rp_card_btn:"Начать читать",rp_title:"21 день в Евангелии от Иоанна",rp_intro:"Читайте по одной главе Евангелия от Иоанна каждый день. Нажмите на день, когда закончите. Ваш прогресс хранится на этом телефоне.",rp_book:"От Иоанна",rp_day:"День {n}",rp_prog:"Пройдено дней: {a} из {b}",rp_next:"Дальше",rp_done:"Вы прошли все 21 день. Молодец!",rp_reset:"Начать заново",rp_reset_q:"Стереть прогресс и начать заново?",share_app:"Поделиться приложением",sh_text:"Читайте Евангелие от Иоанна вместе с Ben Lim Global.",sh_copied:"Ссылка скопирована. Вставьте её в сообщение.",hubs_badge:"Мировое сообщество",hubs_join:"Войти в центр",hubs_auto:"Не уверены? Язык вашего телефона",hubs_text:"Выберите язык и войдите в центр, созданный для вас: обучение, события и община."}
+  en:{rp_card_h:"21 Days in John",rp_card_p:"Read one chapter a day. Check off each day and watch your progress grow.",rp_card_btn:"Start Reading",rp_title:"21 Days in John",rp_intro:"Read one chapter of the Gospel of John each day. Tap a day when you finish it. Your progress stays on this phone.",rp_book:"John",rp_day:"Day {n}",rp_prog:"{a} of {b} days done",rp_next:"Up next",rp_done:"You finished all 21 days. Well done!",rp_reset:"Start over",rp_reset_q:"Clear your progress and start over?",share_app:"Share this App",sh_text:"Read the Gospel of John with Ben Lim Global.",sh_copied:"Link copied. Paste it into a message.",hubs_badge:"Global Community",hubs_join:"Join Hub",hubs_auto:"Not sure? Use my phone's language",hubs_text:"Choose your language and step into a hub made for you: teaching, events, and community.",oil_size:"Size",oil_price:"Price",oil_add:"Add to Request",oil_form_h:"Order Request",oil_picked:"Selected: {oil}, {size}. Fill in your details below."},
+  es:{rp_card_h:"21 días en Juan",rp_card_p:"Lea un capítulo al día. Marque cada día y vea crecer su progreso.",rp_card_btn:"Empezar a leer",rp_title:"21 días en Juan",rp_intro:"Lea un capítulo del Evangelio de Juan cada día. Toque el día cuando lo termine. Su progreso se queda en este teléfono.",rp_book:"Juan",rp_day:"Día {n}",rp_prog:"{a} de {b} días completos",rp_next:"Sigue",rp_done:"Terminó los 21 días. ¡Bien hecho!",rp_reset:"Empezar de nuevo",rp_reset_q:"¿Borrar su progreso y empezar de nuevo?",share_app:"Compartir esta app",sh_text:"Lea el Evangelio de Juan con Ben Lim Global.",sh_copied:"Enlace copiado. Péguelo en un mensaje.",hubs_badge:"Comunidad global",hubs_join:"Unirse al centro",hubs_auto:"¿No está seguro? Use el idioma de su teléfono",hubs_text:"Elija su idioma y entre a un centro hecho para usted: enseñanza, eventos y comunidad.",oil_size:"Tamaño",oil_price:"Precio",oil_add:"Agregar a la solicitud",oil_form_h:"Solicitud de pedido",oil_picked:"Seleccionado: {oil}, {size}. Llene sus datos abajo."},
+  zh:{rp_card_h:"约翰福音21天",rp_card_p:"每天读一章。读完就打勾，看着进度增长。",rp_card_btn:"开始阅读",rp_title:"约翰福音21天",rp_intro:"每天读一章约翰福音。读完后点选该天。您的进度会保存在这支手机上。",rp_book:"约翰福音",rp_day:"第{n}天",rp_prog:"已完成{a}/{b}天",rp_next:"下一个",rp_done:"您读完了全部21天。做得好！",rp_reset:"重新开始",rp_reset_q:"清除进度并重新开始吗？",share_app:"分享此应用",sh_text:"和本·林全球一起读约翰福音。",sh_copied:"链接已复制。请粘贴到消息中。",hubs_badge:"全球社群",hubs_join:"加入中心",hubs_auto:"不确定？使用手机语言",hubs_text:"选择您的语言，进入为您预备的中心：教导、活动和社群。",oil_size:"规格",oil_price:"价格",oil_add:"加入申请",oil_form_h:"订购申请",oil_picked:"已选择：{oil}，{size}。请在下方填写您的资料。"},
+  ru:{rp_card_h:"21 день в Евангелии от Иоанна",rp_card_p:"Читайте по одной главе в день. Отмечайте каждый день и смотрите, как растёт ваш прогресс.",rp_card_btn:"Начать читать",rp_title:"21 день в Евангелии от Иоанна",rp_intro:"Читайте по одной главе Евангелия от Иоанна каждый день. Нажмите на день, когда закончите. Ваш прогресс хранится на этом телефоне.",rp_book:"От Иоанна",rp_day:"День {n}",rp_prog:"Пройдено дней: {a} из {b}",rp_next:"Дальше",rp_done:"Вы прошли все 21 день. Молодец!",rp_reset:"Начать заново",rp_reset_q:"Стереть прогресс и начать заново?",share_app:"Поделиться приложением",sh_text:"Читайте Евангелие от Иоанна вместе с Ben Lim Global.",sh_copied:"Ссылка скопирована. Вставьте её в сообщение.",hubs_badge:"Мировое сообщество",hubs_join:"Войти в центр",hubs_auto:"Не уверены? Язык вашего телефона",hubs_text:"Выберите язык и войдите в центр, созданный для вас: обучение, события и община.",oil_size:"Размер",oil_price:"Цена",oil_add:"Добавить в заявку",oil_form_h:"Заявка на заказ",oil_picked:"Выбрано: {oil}, {size}. Заполните свои данные ниже."}
 };
 for (const l in T2) Object.assign(T[l], T2[l]);
 
@@ -962,6 +1001,46 @@ document.addEventListener("click", e => {
   if (!c) return;
   const r = c.getBoundingClientRect();
   burst(r.left + r.width / 2, r.top + r.height / 2, 22);
+});
+// ---- Shop: oil cards (size, live price, add to request) ----
+const OIL_SIZES = [
+  {k:"sz_small", p:15, v:"Small roll-on ($15)", sc:.82},
+  {k:"sz_med",   p:30, v:"Medium ($30)",        sc:.92},
+  {k:"sz_large", p:45, v:"Large ($45)",         sc:1}
+];
+function oilUpdate(card, animate){
+  const sel = $(".oSize", card), z = OIL_SIZES[sel.selectedIndex] || OIL_SIZES[0];
+  const b = $(".opv", card);
+  b.textContent = "$" + z.p + ".00";
+  $(".bottle svg", card).style.setProperty("--s", z.sc);
+  if (animate){ b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); }
+}
+function renderShop(){
+  $$(".oil-card").forEach(card => {
+    const sel = $(".oSize", card), keep = sel.selectedIndex >= 0 ? sel.selectedIndex : 0;
+    sel.textContent = "";
+    OIL_SIZES.forEach((z, i) => {
+      const o = document.createElement("option");
+      o.value = i; o.textContent = T[lang][z.k] + " · $" + z.p;
+      sel.appendChild(o);
+    });
+    sel.selectedIndex = keep;
+    oilUpdate(card, false);
+  });
+}
+$$(".oil-card").forEach(card => {
+  $(".oSize", card).addEventListener("change", () => oilUpdate(card, true));
+  $(".oadd", card).addEventListener("click", e => {
+    const f = $("#oilForm"), z = OIL_SIZES[$(".oSize", card).selectedIndex] || OIL_SIZES[0];
+    f.elements["Oil"].value = card.dataset.oil;
+    f.elements["Size"].value = z.v;
+    $("#oilPick").textContent = T[lang].oil_picked.replace("{oil}", card.dataset.oil).replace("{size}", z.v);
+    const fc = $("#oilFormCard");
+    fc.scrollIntoView({behavior:"smooth", block:"start"});
+    fc.classList.remove("flash"); void fc.offsetWidth; fc.classList.add("flash");
+    const r = e.currentTarget.getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height / 2, 16);
+  });
 });
 setLang(lang);
 </script>
