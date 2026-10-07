@@ -72,15 +72,21 @@
   form input:invalid.touched,form textarea:invalid.touched{border-color:#c0392b}
   form select{width:100%;font:16px Lato,system-ui,sans-serif;padding:11px 12px;border-radius:10px;margin-top:6px}
   h3.sec{font-size:22px;margin:28px 0 8px;letter-spacing:.04em;text-transform:uppercase;font-weight:400}
-  .umb-home{border-left:0;border-top:4px solid var(--accent);text-align:center;padding-bottom:18px}
-  .umb-home .umb-h{margin:4px 0 6px;font-size:24px}
-  .umb-home .umb-p{margin:0 0 14px;color:var(--muted)}
-  .tlist{text-align:left;display:grid;gap:8px}
-  .trow{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-decoration:none;color:var(--text)}
-  .trow .tn{flex:0 0 30px;height:30px;border-radius:50%;background:#111;color:var(--accent);font:600 15px Oswald,system-ui,sans-serif;display:flex;align-items:center;justify-content:center}
-  .trow .tt{flex:1;font-weight:700;font-size:15px}
-  .trow .chev{color:var(--accent);font-size:22px;line-height:1}
-  .umb-home .umb-cta{margin:18px 0 0}
+  .umb-home{margin:18px 0 8px;text-align:center}
+  .umb-home .canopy{display:block;width:100%;max-width:420px;margin:0 auto -2px}
+  .tlist{display:grid;gap:6px;justify-items:center}
+  .trow{display:flex;align-items:center;gap:10px;border-radius:10px;padding:10px 12px;text-decoration:none;color:#111;box-sizing:border-box}
+  .trow .tn{flex:0 0 28px;height:28px;border-radius:50%;background:#111;color:var(--accent);font:600 14px Oswald,system-ui,sans-serif;display:flex;align-items:center;justify-content:center}
+  .trow .tt{flex:1;font-weight:700;font-size:14px;line-height:1.25;text-align:left}
+  .trow .chev{font-size:22px;line-height:1}
+  .trow.t1{width:98%;background:#f7e6c0}
+  .trow.t2{width:92%;background:#efcd84}
+  .trow.t3{width:86%;background:#e0a234}
+  .trow.t4{width:80%;background:#111;color:#fff}
+  .trow.t4 .tn{background:var(--accent);color:#111}
+  .trow.t4 .chev{color:var(--accent)}
+  .umb-home .handle{display:block;width:44px;height:42px;margin:2px auto 0}
+  .umb-home .umb-cta{margin:12px 0 0}
   .umb-wrap{text-align:center;color:var(--accent);margin:6px 0 0}
   .card.tier{display:flex;gap:14px;align-items:flex-start}
   .card.tier .tn{flex:0 0 38px;height:38px;border-radius:50%;background:#111;color:var(--accent);font:600 18px Oswald,system-ui,sans-serif;display:flex;align-items:center;justify-content:center;margin-top:2px}
@@ -132,15 +138,19 @@
       <p><a class="btn" data-go="learn" href="#" data-t="btn_learn"></a>
          <a class="btn ghost" data-go="connect" href="#" data-t="btn_connect"></a></p>
     </div>
-    <div class="card umb-home">
-      <div class="umb-wrap"><svg class="umb" viewBox="0 0 120 80" width="120" height="80" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 40C8 20 32 8 60 8s52 12 52 32c-8-6-16-6-26 0-6-6-20-6-26 0-6-6-20-6-26 0-10-6-18-6-26 0Z"/><path d="M60 8v4"/><path d="M60 40v28c0 6-4 9-9 9s-9-3-9-8"/></svg></div>
-      <p class="umb-p" data-t="um_home_p"></p>
+    <div class="umb-home">
+      <svg class="canopy" viewBox="0 0 300 96" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <path d="M10 88C10 44 70 12 150 12S290 44 290 88Q255 68 220 88Q185 68 150 88Q115 68 80 88Q45 68 10 88Z" fill="#e0a234"/>
+        <path d="M150 12 80 88M150 12 150 88M150 12 220 88M150 12 45 74M150 12 255 74" stroke="#111" stroke-opacity=".22" stroke-width="1.5" fill="none"/>
+        <rect x="146" y="2" width="8" height="12" rx="2" fill="#111"/>
+      </svg>
       <div class="tlist">
-      <a class="trow" href="#" data-go="learn"><span class="tn">1</span><span class="tt" data-t="um_t1_h"></span><span class="chev">›</span></a>
-      <a class="trow" href="#" data-go="partners"><span class="tn">2</span><span class="tt" data-t="um_t2_h"></span><span class="chev">›</span></a>
-      <a class="trow" href="#" data-go="learn"><span class="tn">3</span><span class="tt" data-t="um_t3_h"></span><span class="chev">›</span></a>
-      <a class="trow" href="#" data-go="partners"><span class="tn">4</span><span class="tt" data-t="um_t4_h"></span><span class="chev">›</span></a>
+      <a class="trow t1" href="#" data-go="learn"><span class="tn">1</span><span class="tt" data-t="um_t1_h"></span><span class="chev">›</span></a>
+      <a class="trow t2" href="#" data-go="partners"><span class="tn">2</span><span class="tt" data-t="um_t2_h"></span><span class="chev">›</span></a>
+      <a class="trow t3" href="#" data-go="learn"><span class="tn">3</span><span class="tt" data-t="um_t3_h"></span><span class="chev">›</span></a>
+      <a class="trow t4" href="#" data-go="partners"><span class="tn">4</span><span class="tt" data-t="um_t4_h"></span><span class="chev">›</span></a>
       </div>
+      <svg class="handle" viewBox="0 0 60 56" aria-hidden="true"><path d="M30 0v38c0 10-6 15-13 15s-11-4-11-11" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/></svg>
       <p class="umb-cta"><a class="btn" href="#" data-go="umbrella" data-t="um_home_btn"></a></p>
     </div>
     <h2 data-t="vision_title"></h2>
