@@ -214,35 +214,28 @@
     footer .wrap{max-width:1100px;padding:0 32px}
   }
   /* ---- Languages page ---- */
-  #hubs h2,#hubs>p{text-align:center}
-  .globe{position:relative;width:96px;height:96px;margin:6px auto 0;color:var(--accent)}
-  .globe svg{position:relative;z-index:1;display:block;width:96px;height:96px}
-  .globe::before,.globe::after{content:"";position:absolute;inset:0;border:2px solid var(--accent);border-radius:50%;opacity:0}
-  .greet{position:relative;height:42px;margin:0 0 6px;text-align:center;font:500 28px Oswald,Impact,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#b9801c;overflow:hidden}
-  .greet span{position:absolute;left:0;right:0;opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
-  .greet span.on{opacity:1;transform:none}
-  .hubs .card{position:relative;overflow:hidden;padding:24px 16px 20px}
-  .hubs .card::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#e0a234,#f3dca4,#e0a234);transform:scaleX(.25);transform-origin:center;transition:transform .35s ease}
-  .hubs .card:active::before{transform:scaleX(1)}
-  .hubs .flag{font-size:46px;line-height:1.1;display:inline-block;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
-  .hg{color:#b9801c;font:500 13px Oswald,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;margin-top:2px}
-  .go{display:block;margin-top:8px;font-size:24px;line-height:1;color:var(--accent);transition:transform .25s ease}
-  .hubs .card:active .go{transform:translateX(8px)}
+  #hubs{text-align:center}
+  .hbadge{display:inline-block;background:linear-gradient(90deg,#e0a234,#f3dca4);color:#111;font:600 12px Oswald,system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;padding:7px 16px;border-radius:999px;box-shadow:0 4px 12px rgba(224,162,52,.35);margin-top:6px}
+  #hubs h2{font-size:34px;margin:12px 0 6px;text-align:center;background:linear-gradient(90deg,#111 0%,#8a5d10 55%,#e0a234 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  #hubs .sub{max-width:30em;margin:0 auto 22px;color:var(--muted);font-size:16px}
+  .hubs{gap:16px}
+  .hubs .card{position:relative;margin:0;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:20px;box-shadow:0 10px 25px -5px rgba(0,0,0,.05);padding:22px 12px 18px;text-align:center;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+  .hubs .card:active{transform:scale(.97)}
+  .fl{width:48px;height:48px;border-radius:50%;overflow:hidden;margin:0 auto 12px;border:2px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+  .fl svg{display:block;width:100%;height:100%}
+  .hubs h3{font-size:20px;font-weight:800;margin:0 0 10px;color:var(--text)}
+  .join{display:inline-block;font:600 12px Oswald,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a5d10;background:#fbf1d6;border:1px solid rgba(224,162,52,.5);border-radius:999px;padding:6px 14px;transition:background .2s ease,color .2s ease}
+  .hhelp{display:inline-flex;align-items:center;gap:10px;margin:24px auto 0;background:#111;color:#fff;border:0;border-radius:999px;padding:12px 20px;font:600 14px system-ui,sans-serif;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.2);transition:transform .15s ease}
+  .hhelp:active{transform:scale(.96)}
+  .hhelp i{flex:none;width:9px;height:9px;border-radius:50%;background:var(--accent)}
   @media (hover:hover){
-    .hubs .card:hover::before{transform:scaleX(1)}
-    .hubs .card:hover .flag{transform:scale(1.18) rotate(-6deg)}
-    .hubs .card:hover .go{transform:translateX(8px)}
+    .hubs .card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 18px 32px -8px rgba(0,0,0,.18),0 0 0 3px rgba(224,162,52,.28)}
+    .hubs .card:hover .fl{transform:scale(1.12) rotate(-5deg)}
+    .hubs .card:hover .join{background:var(--accent);color:#111}
   }
   @media (prefers-reduced-motion:no-preference){
-    .globe::before{animation:ring 3s ease-out infinite}
-    .globe::after{animation:ring 3s ease-out 1.5s infinite}
-    @keyframes ring{0%{transform:scale(.7);opacity:.55}100%{transform:scale(1.8);opacity:0}}
-    .hubs .flag{animation:flagFloat 3.2s ease-in-out infinite}
-    .hubs .card:nth-child(2) .flag{animation-delay:-.8s}
-    .hubs .card:nth-child(3) .flag{animation-delay:-1.6s}
-    .hubs .card:nth-child(4) .flag{animation-delay:-2.4s}
-    @keyframes flagFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(3deg)}}
-    .hubs .card:hover .flag{animation-play-state:paused}
+    .hhelp i{animation:hpulse 1.8s ease-out infinite}
+    @keyframes hpulse{0%{box-shadow:0 0 0 0 rgba(224,162,52,.7)}100%{box-shadow:0 0 0 10px rgba(224,162,52,0)}}
   }
 </style>
 <link rel="manifest" href="manifest.json">
@@ -630,17 +623,16 @@
   </section>
 
   <section id="hubs">
-    <div class="globe" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="24" cy="24" r="20"/><path d="M4 24h40"/><path d="M6.7 14h34.6M6.7 34h34.6" opacity=".6"/><ellipse cx="24" cy="24" rx="20" ry="20"><animate attributeName="rx" values="20;0;20" dur="6s" repeatCount="indefinite"/></ellipse><ellipse cx="24" cy="24" rx="20" ry="20"><animate attributeName="rx" values="20;0;20" dur="6s" begin="-3s" repeatCount="indefinite"/></ellipse></svg></div>
+    <div class="hbadge" data-t="hubs_badge"></div>
     <h2 data-t="hubs_title"></h2>
-    <div class="greet" aria-hidden="true"><span class="on">Welcome</span><span>Bienvenido</span><span>欢迎</span><span>Добро пожаловать</span></div>
-    <p data-t="hubs_text"></p>
+    <p class="sub" data-t="hubs_text"></p>
     <div class="grid hubs">
-      <div class="card" data-pick="en"><div class="flag">🇺🇸</div><h3>English</h3><div class="hg">Welcome</div><span class="go" aria-hidden="true">→</span></div>
-      <div class="card" data-pick="es"><div class="flag">🇪🇸</div><h3>Español</h3><div class="hg">Bienvenido</div><span class="go" aria-hidden="true">→</span></div>
-      <div class="card" data-pick="zh"><div class="flag">🇨🇳</div><h3>中文</h3><div class="hg">欢迎</div><span class="go" aria-hidden="true">→</span></div>
-      <div class="card" data-pick="ru"><div class="flag">🇷🇺</div><h3>Русский</h3><div class="hg">Добро пожаловать</div><span class="go" aria-hidden="true">→</span></div>
+      <div class="card" data-pick="en"><div class="fl"><svg viewBox="0 0 48 48" aria-hidden="true"><rect y="0.00" width="48" height="3.79" fill="#B22234"/><rect y="3.69" width="48" height="3.79" fill="#fff"/><rect y="7.38" width="48" height="3.79" fill="#B22234"/><rect y="11.08" width="48" height="3.79" fill="#fff"/><rect y="14.77" width="48" height="3.79" fill="#B22234"/><rect y="18.46" width="48" height="3.79" fill="#fff"/><rect y="22.15" width="48" height="3.79" fill="#B22234"/><rect y="25.85" width="48" height="3.79" fill="#fff"/><rect y="29.54" width="48" height="3.79" fill="#B22234"/><rect y="33.23" width="48" height="3.79" fill="#fff"/><rect y="36.92" width="48" height="3.79" fill="#B22234"/><rect y="40.62" width="48" height="3.79" fill="#fff"/><rect y="44.31" width="48" height="3.79" fill="#B22234"/><rect width="25" height="25.8" fill="#3C3B6E"/><circle cx="3.6" cy="3.6" r=".95" fill="#fff"/><circle cx="9.0" cy="3.6" r=".95" fill="#fff"/><circle cx="14.4" cy="3.6" r=".95" fill="#fff"/><circle cx="19.8" cy="3.6" r=".95" fill="#fff"/><circle cx="3.6" cy="8.8" r=".95" fill="#fff"/><circle cx="9.0" cy="8.8" r=".95" fill="#fff"/><circle cx="14.4" cy="8.8" r=".95" fill="#fff"/><circle cx="19.8" cy="8.8" r=".95" fill="#fff"/><circle cx="3.6" cy="14.0" r=".95" fill="#fff"/><circle cx="9.0" cy="14.0" r=".95" fill="#fff"/><circle cx="14.4" cy="14.0" r=".95" fill="#fff"/><circle cx="19.8" cy="14.0" r=".95" fill="#fff"/><circle cx="3.6" cy="19.2" r=".95" fill="#fff"/><circle cx="9.0" cy="19.2" r=".95" fill="#fff"/><circle cx="14.4" cy="19.2" r=".95" fill="#fff"/><circle cx="19.8" cy="19.2" r=".95" fill="#fff"/></svg></div><h3>English</h3><span class="join"><span data-t="hubs_join"></span> →</span></div>
+      <div class="card" data-pick="es"><div class="fl"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" fill="#AA151B"/><rect y="12" width="48" height="24" fill="#F1BF00"/></svg></div><h3>Español</h3><span class="join"><span data-t="hubs_join"></span> →</span></div>
+      <div class="card" data-pick="zh"><div class="fl"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" fill="#DE2910"/><polygon fill="#FFDE00" points="14.0,7.0 15.8,12.5 21.6,12.5 16.9,15.9 18.7,21.5 14.0,18.1 9.3,21.5 11.1,15.9 6.4,12.5 12.2,12.5"/><polygon fill="#FFDE00" points="27.8,4.3 27.7,6.0 29.3,6.6 27.7,7.0 27.6,8.7 26.7,7.3 25.1,7.8 26.1,6.5 25.2,5.1 26.8,5.7"/><polygon fill="#FFDE00" points="33.6,10.4 32.9,11.9 34.0,13.0 32.4,12.8 31.6,14.3 31.4,12.6 29.7,12.4 31.2,11.6 31.0,10.0 32.1,11.1"/><polygon fill="#FFDE00" points="34.2,18.2 32.8,19.2 33.4,20.8 32.0,19.9 30.7,20.9 31.2,19.3 29.8,18.4 31.5,18.3 31.9,16.7 32.5,18.3"/><polygon fill="#FFDE00" points="29.3,24.7 27.7,25.1 27.5,26.7 26.7,25.3 25.0,25.7 26.1,24.4 25.3,23.0 26.8,23.6 27.9,22.4 27.8,24.0"/></svg></div><h3>中文</h3><span class="join"><span data-t="hubs_join"></span> →</span></div>
+      <div class="card" data-pick="ru"><div class="fl"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="16" fill="#fff"/><rect y="16" width="48" height="16" fill="#0039A6"/><rect y="32" width="48" height="16" fill="#D52B1E"/></svg></div><h3>Русский</h3><span class="join"><span data-t="hubs_join"></span> →</span></div>
     </div>
-    <p class="note" data-t="hubs_note2"></p>
+    <button class="hhelp" type="button" id="hubAuto"><i></i><span data-t="hubs_auto"></span></button>
   </section>
 </main>
 
@@ -844,10 +836,10 @@ setLang(lang);
 </script>
 <script>
 const T2 = {
-  en:{rp_card_h:"21 Days in John",rp_card_p:"Read one chapter a day. Check off each day and watch your progress grow.",rp_card_btn:"Start Reading",rp_title:"21 Days in John",rp_intro:"Read one chapter of the Gospel of John each day. Tap a day when you finish it. Your progress stays on this phone.",rp_book:"John",rp_day:"Day {n}",rp_prog:"{a} of {b} days done",rp_next:"Up next",rp_done:"You finished all 21 days. Well done!",rp_reset:"Start over",rp_reset_q:"Clear your progress and start over?",share_app:"Share this App",sh_text:"Read the Gospel of John with Ben Lim Global.",sh_copied:"Link copied. Paste it into a message."},
-  es:{rp_card_h:"21 días en Juan",rp_card_p:"Lea un capítulo al día. Marque cada día y vea crecer su progreso.",rp_card_btn:"Empezar a leer",rp_title:"21 días en Juan",rp_intro:"Lea un capítulo del Evangelio de Juan cada día. Toque el día cuando lo termine. Su progreso se queda en este teléfono.",rp_book:"Juan",rp_day:"Día {n}",rp_prog:"{a} de {b} días completos",rp_next:"Sigue",rp_done:"Terminó los 21 días. ¡Bien hecho!",rp_reset:"Empezar de nuevo",rp_reset_q:"¿Borrar su progreso y empezar de nuevo?",share_app:"Compartir esta app",sh_text:"Lea el Evangelio de Juan con Ben Lim Global.",sh_copied:"Enlace copiado. Péguelo en un mensaje."},
-  zh:{rp_card_h:"约翰福音21天",rp_card_p:"每天读一章。读完就打勾，看着进度增长。",rp_card_btn:"开始阅读",rp_title:"约翰福音21天",rp_intro:"每天读一章约翰福音。读完后点选该天。您的进度会保存在这支手机上。",rp_book:"约翰福音",rp_day:"第{n}天",rp_prog:"已完成{a}/{b}天",rp_next:"下一个",rp_done:"您读完了全部21天。做得好！",rp_reset:"重新开始",rp_reset_q:"清除进度并重新开始吗？",share_app:"分享此应用",sh_text:"和本·林全球一起读约翰福音。",sh_copied:"链接已复制。请粘贴到消息中。"},
-  ru:{rp_card_h:"21 день в Евангелии от Иоанна",rp_card_p:"Читайте по одной главе в день. Отмечайте каждый день и смотрите, как растёт ваш прогресс.",rp_card_btn:"Начать читать",rp_title:"21 день в Евангелии от Иоанна",rp_intro:"Читайте по одной главе Евангелия от Иоанна каждый день. Нажмите на день, когда закончите. Ваш прогресс хранится на этом телефоне.",rp_book:"От Иоанна",rp_day:"День {n}",rp_prog:"Пройдено дней: {a} из {b}",rp_next:"Дальше",rp_done:"Вы прошли все 21 день. Молодец!",rp_reset:"Начать заново",rp_reset_q:"Стереть прогресс и начать заново?",share_app:"Поделиться приложением",sh_text:"Читайте Евангелие от Иоанна вместе с Ben Lim Global.",sh_copied:"Ссылка скопирована. Вставьте её в сообщение."}
+  en:{rp_card_h:"21 Days in John",rp_card_p:"Read one chapter a day. Check off each day and watch your progress grow.",rp_card_btn:"Start Reading",rp_title:"21 Days in John",rp_intro:"Read one chapter of the Gospel of John each day. Tap a day when you finish it. Your progress stays on this phone.",rp_book:"John",rp_day:"Day {n}",rp_prog:"{a} of {b} days done",rp_next:"Up next",rp_done:"You finished all 21 days. Well done!",rp_reset:"Start over",rp_reset_q:"Clear your progress and start over?",share_app:"Share this App",sh_text:"Read the Gospel of John with Ben Lim Global.",sh_copied:"Link copied. Paste it into a message.",hubs_badge:"Global Community",hubs_join:"Join Hub",hubs_auto:"Not sure? Use my phone's language",hubs_text:"Choose your language and step into a hub made for you: teaching, events, and community."},
+  es:{rp_card_h:"21 días en Juan",rp_card_p:"Lea un capítulo al día. Marque cada día y vea crecer su progreso.",rp_card_btn:"Empezar a leer",rp_title:"21 días en Juan",rp_intro:"Lea un capítulo del Evangelio de Juan cada día. Toque el día cuando lo termine. Su progreso se queda en este teléfono.",rp_book:"Juan",rp_day:"Día {n}",rp_prog:"{a} de {b} días completos",rp_next:"Sigue",rp_done:"Terminó los 21 días. ¡Bien hecho!",rp_reset:"Empezar de nuevo",rp_reset_q:"¿Borrar su progreso y empezar de nuevo?",share_app:"Compartir esta app",sh_text:"Lea el Evangelio de Juan con Ben Lim Global.",sh_copied:"Enlace copiado. Péguelo en un mensaje.",hubs_badge:"Comunidad global",hubs_join:"Unirse al centro",hubs_auto:"¿No está seguro? Use el idioma de su teléfono",hubs_text:"Elija su idioma y entre a un centro hecho para usted: enseñanza, eventos y comunidad."},
+  zh:{rp_card_h:"约翰福音21天",rp_card_p:"每天读一章。读完就打勾，看着进度增长。",rp_card_btn:"开始阅读",rp_title:"约翰福音21天",rp_intro:"每天读一章约翰福音。读完后点选该天。您的进度会保存在这支手机上。",rp_book:"约翰福音",rp_day:"第{n}天",rp_prog:"已完成{a}/{b}天",rp_next:"下一个",rp_done:"您读完了全部21天。做得好！",rp_reset:"重新开始",rp_reset_q:"清除进度并重新开始吗？",share_app:"分享此应用",sh_text:"和本·林全球一起读约翰福音。",sh_copied:"链接已复制。请粘贴到消息中。",hubs_badge:"全球社群",hubs_join:"加入中心",hubs_auto:"不确定？使用手机语言",hubs_text:"选择您的语言，进入为您预备的中心：教导、活动和社群。"},
+  ru:{rp_card_h:"21 день в Евангелии от Иоанна",rp_card_p:"Читайте по одной главе в день. Отмечайте каждый день и смотрите, как растёт ваш прогресс.",rp_card_btn:"Начать читать",rp_title:"21 день в Евангелии от Иоанна",rp_intro:"Читайте по одной главе Евангелия от Иоанна каждый день. Нажмите на день, когда закончите. Ваш прогресс хранится на этом телефоне.",rp_book:"От Иоанна",rp_day:"День {n}",rp_prog:"Пройдено дней: {a} из {b}",rp_next:"Дальше",rp_done:"Вы прошли все 21 день. Молодец!",rp_reset:"Начать заново",rp_reset_q:"Стереть прогресс и начать заново?",share_app:"Поделиться приложением",sh_text:"Читайте Евангелие от Иоанна вместе с Ben Lim Global.",sh_copied:"Ссылка скопирована. Вставьте её в сообщение.",hubs_badge:"Мировое сообщество",hubs_join:"Войти в центр",hubs_auto:"Не уверены? Язык вашего телефона",hubs_text:"Выберите язык и войдите в центр, созданный для вас: обучение, события и община."}
 };
 for (const l in T2) Object.assign(T[l], T2[l]);
 
@@ -959,19 +951,12 @@ try {
     setTimeout(() => $$(".rv:not(.in)").forEach(el => { if (el.offsetParent !== null) el.classList.add("in"); }), 3000);
   }
 } catch(e){}
-// ---- Languages page: greeting rotation and tap burst ----
-(function(){
-  const g = $$("#hubs .greet span");
-  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches){
-    $$("#hubs .globe animate").forEach(a => a.remove());
-  } else if (g.length > 1){
-    let i = 0;
-    setInterval(() => {
-      if (!$("#hubs").classList.contains("active")) return;
-      g[i].classList.remove("on"); i = (i + 1) % g.length; g[i].classList.add("on");
-    }, 2200);
-  }
-})();
+// ---- Languages page: tap burst and "use my phone's language" ----
+$("#hubAuto").addEventListener("click", () => {
+  const l = (navigator.language || "en").slice(0, 2).toLowerCase();
+  setLang(["en","es","zh","ru"].includes(l) ? l : "en");
+  go("hubpage");
+});
 document.addEventListener("click", e => {
   const c = e.target.closest("#hubs [data-pick]");
   if (!c) return;
