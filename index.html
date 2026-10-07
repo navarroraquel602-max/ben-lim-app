@@ -216,9 +216,11 @@
   <section id="learn">
     <h2 data-t="events_title"></h2>
     <div class="card"><h3>Milwaukee</h3><p data-t="ev1"></p>
-      <a class="btn" href="https://benlimglobal.com/events/" target="_blank" rel="noopener" data-t="ev_detail"></a></div>
+      <a class="btn" href="https://benlimglobal.com/events/" target="_blank" rel="noopener" data-t="ev_detail"></a>
+      <a class="btn ghost rsvpEv" href="#" data-ev="Milwaukee" data-evk="ev1" data-t="ms_rsvp"></a></div>
     <div class="card"><h3>Singapore Prophetic Crossover</h3><p data-t="ev2"></p>
-      <a class="btn" href="https://benlimglobal.com/events/" target="_blank" rel="noopener" data-t="ev_detail"></a></div>
+      <a class="btn" href="https://benlimglobal.com/events/" target="_blank" rel="noopener" data-t="ev_detail"></a>
+      <a class="btn ghost rsvpEv" href="#" data-ev="Singapore Prophetic Crossover" data-evk="ev2" data-t="ms_rsvp"></a></div>
     <p class="note" data-t="events_note"></p>
 
     <h2 data-t="courses_title"></h2>
@@ -398,9 +400,11 @@
     <p data-t="hp_welcome"></p>
     <h3 class="sec" data-t="events_title"></h3>
     <div class="card"><h3>Milwaukee</h3><p data-t="ev1"></p>
-      <a class="btn" href="https://benlimglobal.com/events/" target="_blank" rel="noopener" data-t="ev_detail"></a></div>
+      <a class="btn" href="https://benlimglobal.com/events/" target="_blank" rel="noopener" data-t="ev_detail"></a>
+      <a class="btn ghost rsvpEv" href="#" data-ev="Milwaukee" data-evk="ev1" data-t="ms_rsvp"></a></div>
     <div class="card"><h3>Singapore Prophetic Crossover</h3><p data-t="ev2"></p>
-      <a class="btn" href="https://benlimglobal.com/events/" target="_blank" rel="noopener" data-t="ev_detail"></a></div>
+      <a class="btn" href="https://benlimglobal.com/events/" target="_blank" rel="noopener" data-t="ev_detail"></a>
+      <a class="btn ghost rsvpEv" href="#" data-ev="Singapore Prophetic Crossover" data-evk="ev2" data-t="ms_rsvp"></a></div>
     <p class="note" data-t="events_note"></p>
 
     <h3 class="sec" data-t="shop_title"></h3>
@@ -795,6 +799,15 @@ async function shareApp(){
 }
 $("#shareApp").addEventListener("click", shareApp);
 $("#rpShare").addEventListener("click", shareApp);
+// ---- Event RSVP (opens an email to the team with the event filled in) ----
+document.addEventListener("click", e => {
+  const a = e.target.closest(".rsvpEv");
+  if (!a) return;
+  e.preventDefault();
+  const name = a.dataset.ev, when = T.en[a.dataset.evk];
+  const body = "EVENT RSVP\n\nEvent: " + name + " (" + when + ")\nName:\nPhone:\nHow many people are coming?\nQuestions:\n";
+  window.location.href = "mailto:" + SHOP_EMAIL + "?subject=" + encodeURIComponent("Event RSVP - " + name) + "&body=" + encodeURIComponent(body);
+});
 setLang(lang);
 </script>
 <script>if("serviceWorker" in navigator&&location.protocol.startsWith("http"))navigator.serviceWorker.register("sw.js");</script>
