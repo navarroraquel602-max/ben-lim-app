@@ -69,6 +69,7 @@
   .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
   form input:invalid.touched,form textarea:invalid.touched{border-color:#c0392b}
   form select{width:100%;font:16px Lato,system-ui,sans-serif;padding:11px 12px;border-radius:10px;margin-top:6px}
+  h3.sec{font-size:22px;margin:28px 0 8px;letter-spacing:.04em;text-transform:uppercase;font-weight:400}
   .price{font-weight:bold;color:var(--text)}
   button.btn{border:0;cursor:pointer}
   button.btn.ghost{border:1px solid var(--accent)}
@@ -279,10 +280,53 @@
     <p><a href="#" data-go="hubs" data-t="inv_back"></a></p>
     <h2 data-t="hp_title"></h2>
     <p data-t="hp_welcome"></p>
-    <div class="card"><h3 data-t="hp_free_h"></h3><p data-t="hp_free_p"></p>
-      <a class="btn" href="#" data-go="learn" data-t="n_learn"></a></div>
-    <div class="card"><h3 data-t="hp_events_h"></h3><p data-t="hp_events_p"></p>
-      <a class="btn" href="#" data-go="learn" data-t="ev_detail"></a></div>
+    <h3 class="sec" data-t="events_title"></h3>
+    <div class="card"><h3>Milwaukee</h3><p data-t="ev1"></p>
+      <a class="btn" href="https://benlimglobal.com/events/" target="_blank" rel="noopener" data-t="ev_detail"></a></div>
+    <div class="card"><h3>Singapore Prophetic Crossover</h3><p data-t="ev2"></p>
+      <a class="btn" href="https://benlimglobal.com/events/" target="_blank" rel="noopener" data-t="ev_detail"></a></div>
+    <p class="note" data-t="events_note"></p>
+
+    <h3 class="sec" data-t="books_title"></h3>
+    <div class="card book"><img src="books/prophetic-frenzy.jpg" alt="Prophetic Frenzy cover"><div>
+      <h3>Prophetic Frenzy</h3><p data-t="b_frenzy"></p>
+      <a class="btn" href="https://propheticfrenzy.com/" target="_blank" rel="noopener" data-t="open"></a></div></div>
+    <div class="card book"><img src="books/power-of-honor.jpg" alt="The Supernatural Power of Honor cover"><div>
+      <h3>The Supernatural Power of Honor</h3><p data-t="b_honor"></p>
+      <a class="btn" href="https://www.powerofhonor.com/" target="_blank" rel="noopener" data-t="open"></a></div></div>
+    <div class="card book"><img src="books/new-breed.jpg" alt="The New Breed cover"><div>
+      <h3>The New Breed</h3><p data-t="b_breed"></p>
+      <a class="btn" href="https://www.amazon.com/New-Breed-Wonder-Working-Reformers-Revivalists-ebook/dp/B07NBR2GW7" target="_blank" rel="noopener" data-t="open"></a></div></div>
+    <div class="card book"><img src="books/men-of-valor.jpg" alt="Men of Valor cover"><div>
+      <h3>Men of Valor</h3><p data-t="b_valor"></p>
+      <a class="btn" href="https://benlimglobal.com/books/" target="_blank" rel="noopener" data-t="open"></a></div></div>
+
+    <h3 class="sec" data-t="courses_title"></h3>
+    <div class="card"><p data-t="courses_p"></p>
+      <ul class="clist">
+        <li>7M Glory Equip <small data-t="t_mentor"></small></li>
+        <li>Atmospheres Online School</li>
+        <li>The Gift of Discernment Online School</li>
+        <li>School of Healing</li>
+        <li>School of Prayer</li>
+        <li>School of Revival</li>
+        <li>Inner Healing and Deliverance</li>
+        <li>Sozo Inner Healing and Deliverance E-course</li>
+        <li>Identity, Sonship, and the Father's Heart</li>
+        <li>The Supernatural Gifts of the Holy Spirit</li>
+        <li>Supernatural Prosperity eCourse</li>
+        <li>Elite / Executive <small data-t="t_coach"></small></li>
+        <li>Consultation <small data-t="t_coach"></small></li>
+      </ul>
+      <a class="btn" href="https://benlimcourses.teachable.com/courses" target="_blank" rel="noopener" data-t="courses_btn"></a></div>
+
+    <h3 class="sec" data-t="watch_title"></h3>
+    <div class="card"><h3>Prophetic Wire</h3><p data-t="c_wire_p"></p>
+      <a class="btn" href="https://www.facebook.com/benlimglobal" target="_blank" rel="noopener" data-t="open"></a>
+      <a class="btn ghost" href="https://benlimglobal.com/ben-lim-tv/" target="_blank" rel="noopener">Ben Lim TV</a></div>
+    <div class="card"><h3 data-t="blog_h"></h3><p data-t="blog_p"></p>
+      <a class="btn" href="https://benlimglobal.com/blog/" target="_blank" rel="noopener" data-t="open"></a></div>
+
     <div class="card"><h3 data-t="hp_circle_h"></h3><p data-t="hp_circle_p"></p>
       <a class="btn" href="#" data-go="partners" data-t="pt_title"></a></div>
     <div class="card"><h3 data-t="hp_int_h"></h3><p data-t="hp_int_p"></p>
