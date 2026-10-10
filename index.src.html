@@ -628,7 +628,7 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
     <div class="card"><h3>Mexico Glory Harvest</h3>
       <a class="btn" href="https://benlimglobal.com/missions/" target="_blank" rel="noopener" data-t="ms_more"></a></div>
     <p class="note" data-t="ms_note"></p>
-    <p><a class="btn" id="rsvpMission" href="#" data-t="ms_rsvp"></a></p>
+    <p><a class="btn" href="#" data-go="crusadeApp" data-t="cr_apply"></a></p>
   </section>
 
   <section id="invite">
@@ -1050,11 +1050,6 @@ $("#hubInterest").addEventListener("click", e => {
   const names = {en:"English",es:"Spanish",zh:"Chinese",ru:"Russian"};
   const body = "HUB INTEREST - " + names[lang] + "\n\nName:\nCountry or city:\nWhat would you like to see in this hub?\n";
   window.location.href = "mailto:" + SHOP_EMAIL + "?subject=" + encodeURIComponent("Hub interest - " + names[lang]) + "&body=" + encodeURIComponent(body);
-});
-$("#rsvpMission").addEventListener("click", e => {
-  e.preventDefault();
-  const body = "MISSION TRIP RSVP\n\nName:\nPhone:\nWhich trip (Dominican Republic, Middle East, Uganda, Mexico)?\nQuestions:\n";
-  window.location.href = "mailto:missions@benlimglobal.com?subject=" + encodeURIComponent("Mission trip RSVP") + "&body=" + encodeURIComponent(body);
 });
 setLang(lang);
 </script>
