@@ -511,6 +511,7 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
   </section>
 
   <section id="partners">
+    <p><a class="btn ghost" href="#" data-back="home" data-t="inv_back"></a></p>
     <h2 data-t="pt_title"></h2>
     <p class="pt-intro" data-t="pt_intro"></p>
     <div class="lvls">
@@ -686,7 +687,7 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
   <!-- HUBS (language portals) -->
   <!-- READING PLAN -->
   <section id="reading">
-    <p><a class="btn ghost" href="#" data-go="home" data-t="inv_back"></a></p>
+    <p><a class="btn ghost" href="#" data-back="learn" data-t="inv_back"></a></p>
     <h2 data-t="rp_title"></h2>
     <p data-t="rp_intro"></p>
     <div class="card">
@@ -824,12 +825,17 @@ function setLang(l){
   if (window.renderPlan) renderPlan();
   if (window.renderShop) renderShop();
 }
-function go(id){
+let currentPage = "home", pageTrail = [];
+function go(id, isBack){
+  if (!isBack && id !== currentPage){ pageTrail.push(currentPage); if (pageTrail.length > 20) pageTrail.shift(); }
+  currentPage = id;
   $$("section").forEach(s => s.classList.toggle("active", s.id === id));
   $$("nav button").forEach(b => b.classList.toggle("on", b.dataset.go === id));
   window.scrollTo({top:0});
 }
 document.addEventListener("click", e => {
+  const bk = e.target.closest("[data-back]");
+  if (bk){ e.preventDefault(); go(pageTrail.pop() || bk.dataset.back, true); return; }
   const g = e.target.closest("[data-go]");
   if (g){ e.preventDefault(); go(g.dataset.go);
     if (g.dataset.lvl){ const t = document.getElementById("lvl-"+g.dataset.lvl); if (t) t.scrollIntoView(); }
