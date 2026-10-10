@@ -305,7 +305,7 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
     <div><b>BEN LIM GLOBAL</b><small data-t="tagline"></small></div>
   </div>
   <div class="topNavs">
-    <button class="topNav" id="topFwd" disabled aria-label="Forward"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    <button class="topNav" id="topFwd" aria-label="Forward"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
   <a class="btn giveTop" href="https://benlimglobal.com/partnering/" target="_blank" rel="noopener" data-t="give_btn"></a>
   </div>
 </header>
@@ -979,11 +979,14 @@ function setLang(l){
 }
 // Page history: every page visited, and where we are in it (like a web browser)
 let currentPage = "home", trail = ["home"], spot = 0;
+const tabs = $$("nav button").map(b => b.dataset.go);  // menu order
+let lastTab = "home";
 try { history.replaceState({spot:0}, ""); } catch(e){}
 function show(id){
   currentPage = id;
-  $("#topBack").disabled = spot === 0 && id === "home";
-  $("#topFwd").disabled = spot >= trail.length - 1;
+    if (tabs.includes(id)) lastTab = id;
+  $("#topFwd").disabled = tabs.indexOf(lastTab) >= tabs.length - 1;
+  $("#topBack").disabled = id === tabs[0];
   $$("section").forEach(s => s.classList.toggle("active", s.id === id));
   $$("nav button").forEach(b => b.classList.toggle("on", b.dataset.go === id));
   window.scrollTo({top:0});
@@ -995,24 +998,27 @@ function go(id){
   }
   show(id);
 }
-// Back/forward: top arrows, in-page back links, and the phone's own back button all use the same history
+// In-page "Back" links and the phone's own back button return to the page you came from
 function goBack(fallback){
   if (spot > 0) history.back();
   else if (currentPage !== "home") go(fallback || "home");
 }
-// Forward moves on its own (iPhone home-screen apps can block the browser's forward)
+// Forward goes to the next page in the bottom menu (Home > Learn > Events > Shop > Connect > Languages)
 function goForward(){
-  if (spot >= trail.length - 1) return;
-  spot++;
-  try { history.pushState({spot}, ""); } catch(e){}
-  show(trail[spot]);
+  const next = tabs[tabs.indexOf(lastTab) + 1];
+  if (next) go(next);
 }
 window.addEventListener("popstate", e => {
   const i = e.state && e.state.spot;
   if (typeof i === "number" && trail[i]){ spot = i; show(trail[i]); }
   else { spot = 0; trail = ["home"]; show("home"); }
 });
-$("#topBack").addEventListener("click", () => goBack());
+// Top arrows step through the bottom menu (Home > Learn > Events > Shop > Connect > Languages)
+$("#topBack").addEventListener("click", () => {
+  if (!tabs.includes(currentPage)) return go(lastTab);   // on a sub-page: first back goes to its tab
+  const prev = tabs[tabs.indexOf(lastTab) - 1];
+  if (prev) go(prev);
+});
 $("#topFwd").addEventListener("click", goForward);
 document.addEventListener("click", e => {
   const bk = e.target.closest("[data-back]");
