@@ -280,6 +280,9 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
 .hb{display:flex;align-items:center}
 @media (max-width:480px){nav button{font-size:10px;letter-spacing:.02em;padding-left:2px;padding-right:2px}}
 .giveTop{padding:9px 18px;font-size:14px;margin:0}
+.topBack{flex:none;width:40px;height:40px;margin-right:-4px;border:1px solid var(--line);border-radius:50%;background:#fff;color:#111;display:grid;place-items:center;cursor:pointer;padding:0}
+.topBack[hidden]{display:none}
+.topBack:active{transform:scale(.9)}
 </style>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -290,7 +293,8 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
 <body>
 
 <header>
-  <div class="brand">
+  <button class="topBack" id="topBack" hidden aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <div class="brand" style="margin-right:auto">
     <img class="crown" src="logo.png" alt="Ben Lim Global crown logo">
     <div><b>BEN LIM GLOBAL</b><small data-t="tagline"></small></div>
   </div>
@@ -966,15 +970,26 @@ function setLang(l){
 }
 let currentPage = "home", pageTrail = [];
 function go(id, isBack){
-  if (!isBack && id !== currentPage){ pageTrail.push(currentPage); if (pageTrail.length > 20) pageTrail.shift(); }
+  if (!isBack && id !== currentPage){
+    pageTrail.push(currentPage); if (pageTrail.length > 20) pageTrail.shift();
+    try { history.pushState({page:id}, ""); } catch(e){}
+  }
   currentPage = id;
+  $("#topBack").hidden = id === "home" && !pageTrail.length;
   $$("section").forEach(s => s.classList.toggle("active", s.id === id));
   $$("nav button").forEach(b => b.classList.toggle("on", b.dataset.go === id));
   window.scrollTo({top:0});
 }
+// Back: top arrow, in-page back links, and the phone's own back button all go to the last page
+function goBack(fallback){
+  if (pageTrail.length) history.back();
+  else if (currentPage !== "home") go(fallback || "home", true);
+}
+window.addEventListener("popstate", () => go(pageTrail.pop() || "home", true));
+$("#topBack").addEventListener("click", () => goBack());
 document.addEventListener("click", e => {
   const bk = e.target.closest("[data-back]");
-  if (bk){ e.preventDefault(); go(pageTrail.pop() || bk.dataset.back, true); return; }
+  if (bk){ e.preventDefault(); goBack(bk.dataset.back); return; }
   const g = e.target.closest("[data-go]");
   if (g){ e.preventDefault(); go(g.dataset.go);
     if (g.dataset.lvl){ const t = document.getElementById("lvl-"+g.dataset.lvl); if (t) t.scrollIntoView(); }
