@@ -391,6 +391,11 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
 .done h3{margin:6px 0;font-size:22px}
 .done svg{width:44px;height:44px;color:#2e7d32}
 @media (max-width:359px){.onode i{font-size:7.5px}.lnode i{font-size:8.5px}}
+.ghubs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:4px 0 8px}
+.ghub{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;padding:14px 8px;min-height:82px;border-radius:16px;border:1px solid rgba(224,162,52,.55);background:linear-gradient(160deg,#111,#2a1f0b);color:#fff;text-decoration:none;cursor:pointer;font:inherit;transition:transform .15s ease}
+.ghub b{font:500 14px Oswald,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#f3dca4;line-height:1.2}
+.ghub small{font-size:12px;color:#d8d2c4}
+.ghub:active{transform:scale(.96)}
 /* Burmese: letter-spacing breaks the script, and words run longer */
 html[lang=my] *{letter-spacing:0!important}
 html[lang=my] body{line-height:1.7}
@@ -455,6 +460,13 @@ html[lang=my] .onode i{font-size:8px}
     <h2 data-t="lang_h"></h2>
     <p class="note" data-t="lang_p" style="margin-top:-4px"></p>
     <div class="langs"><button class="lchip" type="button" data-pick="en"><span class="fl" data-flag="en"></span>English</button><button class="lchip" type="button" data-pick="es"><span class="fl" data-flag="es"></span>Español</button><button class="lchip" type="button" data-pick="my"><span class="fl" data-flag="my"></span>မြန်မာ</button><button class="lchip" type="button" data-pick="zh"><span class="fl" data-flag="zh"></span>中文</button><button class="lchip" type="button" data-pick="ru"><span class="fl" data-flag="ru"></span>Русский</button><span class="lchip soon"><span class="fl"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" fill="#009C3B"/><polygon points="24,8 44,24 24,40 4,24" fill="#FFDF00"/><circle cx="24" cy="24" r="8.5" fill="#002776"/></svg></span>Português <small data-t="soon"></small></span><span class="lchip soon"><span class="fl"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="24" fill="#CE1126"/><rect y="24" width="48" height="24" fill="#fff"/></svg></span>Bahasa <small data-t="soon"></small></span></div>
+    <!-- GLOBAL HUBS: only Ben Lim Fuego has its own site. Put the Asia / Myanmar links here when the ministry sends them. -->
+    <h3 class="sec" data-t="gh_h"></h3>
+    <div class="ghubs">
+      <a class="ghub" href="#" data-go="hubs"><b>Ben Lim Asia</b><small data-t="gh_asia"></small></a>
+      <a class="ghub" href="https://benlimfuego.com/" target="_blank" rel="noopener"><b>Ben Lim Fuego</b><small data-t="gh_fuego"></small></a>
+      <button class="ghub" type="button" data-pick="my"><b>Ben Lim Myanmar</b><small data-t="gh_myanmar"></small></button>
+    </div>
 
     <h2 data-t="cr_title"></h2>
     <p data-t="cr_intro"></p>
@@ -1320,6 +1332,11 @@ Object.assign(T3.es, {"g_kick":"Aprender · Conectar · Alcanzar las naciones","
 Object.assign(T3.zh, {"g_kick":"学习 · 连接 · 触及列国","g_title":"全球教育与连接","g_sub":"学习先知性教导，用您自己的语言与信徒连接，一同参与列国中的末世大收割。"});
 Object.assign(T3.ru, {"g_kick":"Учиться · Общаться · Достигать народы","g_title":"Глобальное обучение и общение","g_sub":"Изучайте пророческое учение, общайтесь с верующими на своём языке и участвуйте в жатве последнего времени среди народов."});
 Object.assign(T3.my, {"g_kick":"လေ့လာ · ချိတ်ဆက် · လူမျိုးများထံ ရောက်ရှိ","g_title":"ကမ္ဘာလုံးဆိုင်ရာ ပညာရေးနှင့် ချိတ်ဆက်မှု","g_sub":"ပရောဖက်ပြုသော သွန်သင်ချက်ကို လေ့လာပါ၊ သင့်ဘာသာစကားဖြင့် ယုံကြည်သူများနှင့် ချိတ်ဆက်ပါ၊ လူမျိုးများကြားရှိ နောက်ဆုံးကာလ စပါးရိတ်သိမ်းခြင်း၌ ပါဝင်ပါ။"});
+Object.assign(T3.en, {"gh_h":"Global Hubs","gh_asia":"Asia","gh_fuego":"Latin America · Español","gh_myanmar":"Myanmar · မြန်မာ"});
+Object.assign(T3.es, {"gh_h":"Centros globales","gh_asia":"Asia","gh_fuego":"Latinoamérica · Español","gh_myanmar":"Myanmar · မြန်မာ"});
+Object.assign(T3.zh, {"gh_h":"全球中心","gh_asia":"亚洲","gh_fuego":"拉丁美洲 · 西班牙语","gh_myanmar":"缅甸 · မြန်မာ"});
+Object.assign(T3.ru, {"gh_h":"Мировые центры","gh_asia":"Азия","gh_fuego":"Латинская Америка · испанский","gh_myanmar":"Мьянма · မြန်မာ"});
+Object.assign(T3.my, {"gh_h":"ကမ္ဘာလုံးဆိုင်ရာ Hub များ","gh_asia":"အာရှ","gh_fuego":"လက်တင်အမေရိက · စပိန်","gh_myanmar":"မြန်မာ"});
 for (const l in T3) Object.assign(T[l], T3[l]);
 for (const l in T) for (const k in T.en) if (!(k in T[l])) T[l][k] = T.en[k];  // fill gaps with English
 
