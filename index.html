@@ -209,7 +209,7 @@
     .hero p{max-width:34em;margin-left:auto;margin-right:auto}
     .great{margin:28px -32px 0;padding:8px 32px 24px}
     .great p{max-width:52em}
-    #partners,#invite,#reading,#hubpage,#crusades,#prophecy,#shop,#hubs{max-width:760px;margin-left:auto;margin-right:auto}
+    #partners,#invite,#reading,#hubpage,#crusades,#prophecy,#members,#shop,#hubs{max-width:760px;margin-left:auto;margin-right:auto}
     footer .wrap{max-width:1100px;padding:0 32px}
   }
   /* ---- Languages page ---- */
@@ -396,6 +396,41 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
 .ghub b{font:500 14px Oswald,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#f3dca4;line-height:1.2}
 .ghub small{font-size:12px;color:#d8d2c4}
 .ghub:active{transform:scale(.96)}
+/* Prophecy library */
+.psearch{width:100%;font:16px Lato,system-ui,sans-serif;padding:12px 14px 12px 40px;border-radius:12px;border:1px solid var(--line);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") no-repeat 12px center/18px}
+.pchips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.pchip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font:600 13px Lato,system-ui,sans-serif;cursor:pointer;color:var(--text)}
+.pchip.on{background:#111;color:#f3dca4;border-color:#111}
+.pitem{margin:10px 0;padding:0;overflow:hidden}
+.pitem>button{all:unset;box-sizing:border-box;display:block;width:100%;padding:16px;cursor:pointer}
+.pitem .pd{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#b9801c}
+.pitem h3{margin:4px 0 6px;font-size:17px;line-height:1.3}
+.pitem .px{color:var(--muted);font-size:14px;margin:0}
+.pitem .pbody{display:none;padding:0 16px 16px;border-top:1px solid var(--line)}
+.pitem.open .pbody{display:block}
+.pitem.open .px{display:none}
+.pbody p{color:var(--text);font-size:16px;line-height:1.65;margin:12px 0}
+.ptag{display:inline-block;font:600 10px Lato,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:#fbf1d6;color:#8a5d10;margin-left:6px;vertical-align:middle}
+.pempty{text-align:center;color:var(--muted);padding:20px 0}
+/* Partner area */
+.pa-badge{display:inline-block;background:#fbf1d6;color:#8a5d10;border:1px solid rgba(224,162,52,.6);border-radius:999px;padding:4px 12px;font:600 12px Lato,system-ui,sans-serif}
+.pa-sign{background:linear-gradient(160deg,#111,#2a1f0b);color:#fff;border:0}
+.pa-sign h3,.pa-sign label{color:#fff}
+.pa-sign p{color:#d8d2c4}
+.pa-sign input{width:100%;font:16px Lato,system-ui,sans-serif;padding:12px;border-radius:10px;border:1px solid rgba(224,162,52,.5);background:rgba(255,255,255,.08);color:#fff;margin:6px 0 10px}
+.pa-sign button[disabled]{opacity:.55;cursor:not-allowed}
+.pa-tier{display:flex;align-items:center;gap:12px;padding:12px 14px;margin:8px 0}
+.pa-tier .pl{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#111;color:#e0a234}
+.pa-tier .pl svg{width:16px;height:16px}
+.pa-tier .pt{flex:1;min-width:0}
+.pa-tier b{display:block;font:500 15px Oswald,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.pa-tier span{font-size:14px;color:var(--muted)}
+.pa-tier em{flex:none;font-style:normal;font-weight:bold;font-size:13px;color:#8a5d10}
+.pa-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.pa-lock{position:relative;border-radius:16px;padding:16px 12px;min-height:110px;background:linear-gradient(160deg,#f7f7f7,#e9e9e9);border:1px dashed #c9b27a;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.pa-lock svg{width:22px;height:22px;color:#8a5d10}
+.pa-lock b{font-size:14px}
+.pa-lock small{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 /* Burmese: letter-spacing breaks the script, and words run longer */
 html[lang=my] *{letter-spacing:0!important}
 html[lang=my] body{line-height:1.7}
@@ -479,6 +514,7 @@ html[lang=my] .onode i{font-size:8px}
       <div class="vref" data-t="pn_today"></div>
       <blockquote id="homeVerse"></blockquote>
       <h3 data-t="pn_h"></h3><p data-t="pn_p"></p>
+      <p id="homeLatest" hidden></p>
       <a class="btn" href="#" data-go="prophecy" data-t="pn_btn"></a></div>
 
     <div class="umb-home">
@@ -673,6 +709,8 @@ html[lang=my] .onode i{font-size:8px}
     <p><a class="btn ghost" href="#" data-back="home" data-t="inv_back"></a></p>
     <h2 data-t="pt_title"></h2>
     <p class="pt-intro" data-t="pt_intro"></p>
+    <div class="card pa-sign" style="text-align:center"><h3 data-t="pa_h"></h3><p data-t="pa_entry_p"></p>
+      <a class="btn" href="#" data-go="members" data-t="pa_entry_btn"></a></div>
     <div class="lvls">
     <div class="lvl l1" id="lvl-1">
       <svg class="lc" viewBox="0 0 40 28" width="34" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 24 2 6l9 8 9-12 9 12 9-8-2 18Z"/><path d="M4 24h32"/></svg>
@@ -865,8 +903,42 @@ html[lang=my] .onode i{font-size:8px}
       <div class="vref" data-t="pn_today"></div>
       <blockquote id="pageVerse"></blockquote>
       <button class="btn ghost" type="button" id="pwShare" data-t="pw_share" style="color:#fff"></button></div>
+    <h2 data-t="pl_h"></h2>
+    <p class="note" data-t="pl_p"></p>
+    <input class="psearch" id="plSearch" type="search" autocomplete="off">
+    <div class="pchips" id="plYears"></div>
+    <div id="plList"><p class="pempty" data-t="pl_loading"></p></div>
+    <p class="src" id="plSrc"></p>
     <div class="card"><h3 data-t="k_prayer_h"></h3><p data-t="pr_p"></p>
       <a class="btn" href="https://benlimglobal.com/need-prayer/" target="_blank" rel="noopener" data-t="open"></a></div>
+  </section>
+
+  <!-- PARTNER AREA (preview): no real sign-in yet. See HANDOFF notes before switching logins on. -->
+  <section id="members">
+    <p><a class="btn ghost" href="#" data-back="partners" data-t="inv_back"></a></p>
+    <h2 data-t="pa_h"></h2>
+    <p><span class="pa-badge" data-t="pa_badge"></span></p>
+    <p data-t="pa_p"></p>
+    <div class="card pa-sign">
+      <h3 data-t="pa_sign_h"></h3>
+      <p data-t="pa_sign_p"></p>
+      <label for="paEmail" data-t="pa_email"></label>
+      <input id="paEmail" type="email" disabled>
+      <button class="btn" type="button" disabled data-t="pa_sign_btn"></button>
+    </div>
+    <h3 class="sec" data-t="pa_levels_h"></h3>
+    <p class="note" data-t="pa_levels_p"></p>
+    <div id="paTiers"></div>
+    <h3 class="sec" data-t="pa_planned_h"></h3>
+    <p class="note" data-t="pa_planned_p"></p>
+    <div class="pa-grid">
+      <div class="pa-lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><b data-t="pa_c1"></b><small data-t="pa_planned"></small></div>
+      <div class="pa-lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><b data-t="pa_c2"></b><small data-t="pa_planned"></small></div>
+      <div class="pa-lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><b data-t="pa_c3"></b><small data-t="pa_planned"></small></div>
+      <div class="pa-lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><b data-t="pa_c4"></b><small data-t="pa_planned"></small></div>
+    </div>
+    <p><a class="btn" href="#" data-go="partners" data-t="pt_btn"></a>
+       <a class="btn ghost" href="mailto:hello@benlimglobal.com?subject=Partner%20access%20-%20Glory%20App" data-t="pa_contact"></a></p>
   </section>
 
   <!-- CRUSADE / MISSION APPLICATION -->
@@ -1071,7 +1143,6 @@ html[lang=my] .onode i{font-size:8px}
   <button data-go="events"><span><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span><i data-t="n_events"></i></button>
   <button data-go="shop"><span><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span><i data-t="n_shop"></i></button>
   <button data-go="connect"><span><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6.5L20.5 7"/></svg></span><i data-t="n_connect"></i></button>
-  <button data-go="hubs"><span><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.5 2.3 3.7 5.1 3.7 8.5s-1.2 6.2-3.7 8.5c-2.5-2.3-3.7-5.1-3.7-8.5S9.5 5.8 12 3.5Z"/></svg></span><i data-t="n_hubs"></i></button>
 </nav>
 
 <script>
@@ -1154,31 +1225,8 @@ function setLang(l){
   if (window.renderShop) renderShop();
   if (window.renderProphecy) renderProphecy();
   if (window.renderMissions) renderMissions();
-// ---- Missions & Crusades: pulled live from benlimglobal.com (WordPress, "Missions" shop category) ----
-// Add, edit or remove a mission on the website and the app follows. If the site can't be reached,
-// the last copy saved on this phone is shown, then the built-in list.
-const MISSIONS_URL = "https://benlimglobal.com/wp-json/wp/v2/product?product_cat=91&per_page=20&_embed=wp:featuredmedia&_fields=title,link,excerpt,_links,_embedded";
-const MS_KEY = "benlim-missions";
-const unhtml = h => { const d = document.createElement("div"); d.innerHTML = h || ""; return (d.textContent || "").replace(/\s+/g, " ").replace(/\[…\]|\[…\]/g, "…").trim(); };
-let missionsLive = null;
-function renderMissions(){
-  if (!missionsLive || !missionsLive.length) return;
-  const t = T[lang], esc = x => x.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-  $$('[data-live="tiles"]').forEach(box => {
-    box.innerHTML = missionsLive.slice(0, 3).map(m => '<a href="' + esc(m.link) + '" target="_blank" rel="noopener">' + (m.img ? '<img src="' + esc(m.img) + '" alt="" loading="lazy">' : '') + '<span>' + esc(m.title) + '</span></a>').join("");
-  });
-  $$('[data-live="src"]').forEach(p => { p.innerHTML = '<b>●</b> ' + esc(t.ms_live) + (lang !== "en" ? " " + esc(t.in_english) : ""); });
-  $("#missionList").innerHTML = missionsLive.map(m => '<div class="card mtrip">' + (m.img ? '<img src="' + esc(m.img) + '" alt="" loading="lazy">' : '') + '<div><h3>' + esc(m.title) + '</h3>' + (m.text ? '<p>' + esc(m.text) + '</p>' : '') + '<a class="btn" href="' + esc(m.link) + '" target="_blank" rel="noopener">' + esc(t.ms_more) + '</a></div></div>').join("");
-}
-function useMissions(list){ missionsLive = list; renderMissions(); }
-try { const c = JSON.parse(localStorage.getItem(MS_KEY)); if (c && c.length) useMissions(c); } catch(e){}
-fetch(MISSIONS_URL).then(r => r.ok ? r.json() : Promise.reject()).then(items => {
-  const list = items.map(p => {
-    const m = ((p._embedded || {})["wp:featuredmedia"] || [])[0] || {}, sz = (m.media_details || {}).sizes || {};
-    return {title: unhtml(p.title && p.title.rendered), link: p.link, text: unhtml(p.excerpt && p.excerpt.rendered), img: (sz.medium || sz.full || {}).source_url || m.source_url || ""};
-  }).filter(m => m.title && /^https:\/\/benlimglobal\.com\//.test(m.link));
-  if (list.length){ useMissions(list); try { localStorage.setItem(MS_KEY, JSON.stringify(list)); } catch(e){} }
-}).catch(() => {});
+  if (window.renderLibrary) renderLibrary();
+  if (window.renderPartnerArea) renderPartnerArea();
 }
 // Page history: every page visited, and where we are in it (like a web browser)
 let currentPage = "home", trail = ["home"], spot = 0;
@@ -1206,7 +1254,7 @@ function goBack(fallback){
   if (spot > 0) history.back();
   else if (currentPage !== "home") go(fallback || "home");
 }
-// Forward goes to the next page in the bottom menu (Home > Learn > Events > Shop > Connect > Languages)
+// Forward goes to the next page in the bottom menu (Home > Learn > Events > Shop > Connect)
 function goForward(){
   const next = tabs[tabs.indexOf(lastTab) + 1];
   if (next) go(next);
@@ -1216,7 +1264,7 @@ window.addEventListener("popstate", e => {
   if (typeof i === "number" && trail[i]){ spot = i; show(trail[i]); }
   else { spot = 0; trail = ["home"]; show("home"); }
 });
-// Top arrows step through the bottom menu (Home > Learn > Events > Shop > Connect > Languages)
+// Top arrows step through the bottom menu (Home > Learn > Events > Shop > Connect)
 $("#topBack").addEventListener("click", () => {
   if (!tabs.includes(currentPage)) return go(lastTab);   // on a sub-page: first back goes to its tab
   const prev = tabs[tabs.indexOf(lastTab) - 1];
@@ -1337,6 +1385,11 @@ Object.assign(T3.es, {"gh_h":"Centros globales","gh_asia":"Asia","gh_fuego":"Lat
 Object.assign(T3.zh, {"gh_h":"全球中心","gh_asia":"亚洲","gh_fuego":"拉丁美洲 · 西班牙语","gh_myanmar":"缅甸 · မြန်မာ"});
 Object.assign(T3.ru, {"gh_h":"Мировые центры","gh_asia":"Азия","gh_fuego":"Латинская Америка · испанский","gh_myanmar":"Мьянма · မြန်မာ"});
 Object.assign(T3.my, {"gh_h":"ကမ္ဘာလုံးဆိုင်ရာ Hub များ","gh_asia":"အာရှ","gh_fuego":"လက်တင်အမေရိက · စပိန်","gh_myanmar":"မြန်မာ"});
+Object.assign(T3.en, {"pl_h":"Prophecy Library","pl_p":"Prophetic words and teachings from Dr. Ben Lim. Search, or pick a year.","pl_search":"Search words and teachings","pl_all":"All","pl_loading":"Loading…","pl_none":"Nothing matches that search.","pl_offline":"The library needs an internet connection the first time.","pl_src":"Live from the blog on benlimglobal.com","pl_latest":"Latest from the library","pl_video":"Video","pl_watch":"Watch","pl_site":"Open on benlimglobal.com","pa_h":"Partner Area","pa_badge":"Preview · Sign-in coming soon","pa_p":"This is where partners will sign in and find what their level includes. Sign-in is not switched on yet, so everything here is a preview.","pa_sign_h":"Partner sign-in","pa_sign_p":"Coming soon. Partners will sign in with the email they give with.","pa_email":"Email","pa_sign_btn":"Sign In","pa_levels_h":"What each level opens","pa_levels_p":"Each level includes everything in the levels above it on this list.","pa_planned_h":"Planned partner content","pa_planned_p":"Dr. Ben wants partners to reach content made for them. The ministry will decide what goes here.","pa_planned":"Planned","pa_c1":"Partner-only teachings","pa_c2":"Content in your language","pa_c3":"Course access","pa_c4":"Zoom call replays","pa_contact":"Already a partner? Email us","pa_entry_p":"Partners will soon sign in here to reach what their level includes.","pa_entry_btn":"Preview the Partner Area"});
+Object.assign(T3.es, {"pl_h":"Biblioteca profética","pl_p":"Palabras proféticas y enseñanzas del Dr. Ben Lim. Busque o elija un año.","pl_search":"Buscar palabras y enseñanzas","pl_all":"Todas","pl_loading":"Cargando…","pl_none":"Nada coincide con esa búsqueda.","pl_offline":"La biblioteca necesita internet la primera vez.","pl_src":"En vivo desde el blog de benlimglobal.com","pl_latest":"Lo más reciente de la biblioteca","pl_video":"Video","pl_watch":"Ver","pl_site":"Abrir en benlimglobal.com","pa_h":"Área de socios","pa_badge":"Vista previa · Acceso próximamente","pa_p":"Aquí los socios iniciarán sesión y verán lo que incluye su nivel. El acceso aún no está activado, así que todo es una vista previa.","pa_sign_h":"Acceso de socios","pa_sign_p":"Próximamente. Los socios entrarán con el correo con el que donan.","pa_email":"Correo","pa_sign_btn":"Iniciar sesión","pa_levels_h":"Lo que abre cada nivel","pa_levels_p":"Cada nivel incluye todo lo de los niveles anteriores en esta lista.","pa_planned_h":"Contenido planeado para socios","pa_planned_p":"El Dr. Ben quiere que los socios tengan contenido hecho para ellos. El ministerio decidirá qué va aquí.","pa_planned":"Planeado","pa_c1":"Enseñanzas solo para socios","pa_c2":"Contenido en su idioma","pa_c3":"Acceso a cursos","pa_c4":"Grabaciones de Zoom","pa_contact":"¿Ya es socio? Escríbanos","pa_entry_p":"Pronto los socios entrarán aquí para ver lo que incluye su nivel.","pa_entry_btn":"Ver el Área de socios"});
+Object.assign(T3.zh, {"pl_h":"先知话语库","pl_p":"Ben Lim博士的先知性话语和教导。可搜索或选择年份。","pl_search":"搜索话语和教导","pl_all":"全部","pl_loading":"加载中…","pl_none":"没有符合的结果。","pl_offline":"首次使用话语库需要联网。","pl_src":"实时来自 benlimglobal.com 博客","pl_latest":"话语库最新","pl_video":"视频","pl_watch":"观看","pl_site":"在 benlimglobal.com 打开","pa_h":"伙伴专区","pa_badge":"预览 · 登录即将开放","pa_p":"伙伴将在这里登录，查看其级别包含的内容。登录尚未开放，这里的一切都是预览。","pa_sign_h":"伙伴登录","pa_sign_p":"即将开放。伙伴将用奉献时使用的电子邮件登录。","pa_email":"电子邮件","pa_sign_btn":"登录","pa_levels_h":"各级别包含的内容","pa_levels_p":"每个级别都包含此列表中之前级别的所有内容。","pa_planned_h":"计划中的伙伴内容","pa_planned_p":"Ben博士希望伙伴能获得为他们准备的内容。具体内容由事工决定。","pa_planned":"计划中","pa_c1":"伙伴专属教导","pa_c2":"您语言的内容","pa_c3":"课程访问","pa_c4":"Zoom 回放","pa_contact":"已是伙伴？给我们发邮件","pa_entry_p":"伙伴很快可以在这里登录，查看其级别包含的内容。","pa_entry_btn":"预览伙伴专区"});
+Object.assign(T3.ru, {"pl_h":"Пророческая библиотека","pl_p":"Пророческие слова и учения доктора Бена Лима. Ищите или выберите год.","pl_search":"Поиск слов и учений","pl_all":"Все","pl_loading":"Загрузка…","pl_none":"Ничего не найдено.","pl_offline":"Для первого запуска библиотеке нужен интернет.","pl_src":"Обновляется из блога benlimglobal.com","pl_latest":"Новое в библиотеке","pl_video":"Видео","pl_watch":"Смотреть","pl_site":"Открыть на benlimglobal.com","pa_h":"Раздел партнёров","pa_badge":"Предпросмотр · Вход скоро","pa_p":"Здесь партнёры будут входить и видеть, что включает их уровень. Вход пока не включён, поэтому всё здесь — предпросмотр.","pa_sign_h":"Вход для партнёров","pa_sign_p":"Скоро. Партнёры будут входить по e-mail, с которого они жертвуют.","pa_email":"E-mail","pa_sign_btn":"Войти","pa_levels_h":"Что открывает каждый уровень","pa_levels_p":"Каждый уровень включает всё из предыдущих уровней в этом списке.","pa_planned_h":"Планируемые материалы для партнёров","pa_planned_p":"Доктор Бен хочет, чтобы у партнёров были материалы для них. Служение решит, что здесь будет.","pa_planned":"Планируется","pa_c1":"Учения только для партнёров","pa_c2":"Материалы на вашем языке","pa_c3":"Доступ к курсам","pa_c4":"Записи Zoom","pa_contact":"Уже партнёр? Напишите нам","pa_entry_p":"Скоро партнёры смогут входить здесь и видеть, что включает их уровень.","pa_entry_btn":"Открыть предпросмотр"});
+Object.assign(T3.my, {"pl_h":"ပရောဖက်ပြုချက် စာကြည့်တိုက်","pl_p":"ဒေါက်တာဘင်လင်းထံမှ ပရောဖက်ပြုချက်များနှင့် သွန်သင်ချက်များ။ ရှာဖွေပါ သို့မဟုတ် နှစ်တစ်နှစ် ရွေးပါ။","pl_search":"ပရောဖက်ပြုချက်နှင့် သွန်သင်ချက်များ ရှာရန်","pl_all":"အားလုံး","pl_loading":"ဖွင့်နေသည်…","pl_none":"ကိုက်ညီသည့်အရာ မရှိပါ။","pl_offline":"ပထမဆုံးအကြိမ်တွင် အင်တာနက် လိုအပ်ပါသည်။","pl_src":"benlimglobal.com ဘလော့ဂ်မှ တိုက်ရိုက်","pl_latest":"စာကြည့်တိုက်မှ နောက်ဆုံး","pl_video":"ဗီဒီယို","pl_watch":"ကြည့်ရန်","pl_site":"benlimglobal.com တွင် ဖွင့်ရန်","pa_h":"မိတ်ဖက်များ ကဏ္ဍ","pa_badge":"အစမ်းကြည့်ရှုခြင်း · ဝင်ရောက်ခွင့် မကြာမီ","pa_p":"မိတ်ဖက်များသည် ဤနေရာတွင် ဝင်ရောက်ပြီး ၎င်းတို့၏ အဆင့်တွင် ပါဝင်သည့်အရာများကို တွေ့ရပါမည်။ ဝင်ရောက်ခွင့် မဖွင့်ရသေးသဖြင့် ဤနေရာရှိ အရာအားလုံးမှာ အစမ်းကြည့်ရှုခြင်း ဖြစ်သည်။","pa_sign_h":"မိတ်ဖက် ဝင်ရောက်ရန်","pa_sign_p":"မကြာမီ။ မိတ်ဖက်များသည် လှူဒါန်းရာတွင် သုံးသော အီးမေးလ်ဖြင့် ဝင်ရောက်ပါမည်။","pa_email":"အီးမေးလ်","pa_sign_btn":"ဝင်ရောက်ရန်","pa_levels_h":"အဆင့်တိုင်း ဖွင့်ပေးသည့်အရာ","pa_levels_p":"အဆင့်တိုင်းတွင် ဤစာရင်းရှိ ယခင်အဆင့်များပါ အရာအားလုံး ပါဝင်သည်။","pa_planned_h":"စီစဉ်ထားသော မိတ်ဖက် အကြောင်းအရာ","pa_planned_p":"ဒေါက်တာဘင်သည် မိတ်ဖက်များအတွက် သီးသန့် အကြောင်းအရာ ရှိစေလိုသည်။ ဓမ္မအမှုတော်က ဆုံးဖြတ်ပါမည်။","pa_planned":"စီစဉ်ထားသည်","pa_c1":"မိတ်ဖက်များအတွက်သာ သွန်သင်ချက်များ","pa_c2":"သင့်ဘာသာစကားဖြင့် အကြောင်းအရာ","pa_c3":"သင်တန်း ဝင်ခွင့်","pa_c4":"Zoom ပြန်ကြည့်ရန်","pa_contact":"မိတ်ဖက်ဖြစ်ပြီးသားလား။ အီးမေးလ်ပို့ပါ","pa_entry_p":"မကြာမီ မိတ်ဖက်များသည် ဤနေရာတွင် ဝင်ရောက်နိုင်ပါမည်။","pa_entry_btn":"မိတ်ဖက်များ ကဏ္ဍကို ကြည့်ရန်","ca_sending":"ပို့နေသည်...","ca_sent":"ပို့ပြီးပါပြီ။ ကျေးဇူးတင်ပါသည်။ ဒေါက်တာဘင်၏ သာသနာပြုအဖွဲ့က သင့်လျှောက်လွှာကို စစ်ဆေးပါမည်။","ca_fail":"တိုက်ရိုက် မပို့နိုင်သဖြင့် သင့်အီးမေးလ်အက်ပ် ပွင့်လာပါမည်။ ထိုနေရာမှ ပို့ပေးပါ။","ca_title":"ခရူးဆိတ် လျှောက်လွှာ","ca_intro":"ခရူးဆိတ် သို့မဟုတ် သာသနာပြုခရီးစဉ်တွင် ပါဝင်ရန် လျှောက်ထားပါ။ အပိုင်းအားလုံးကို ဖြည့်ပြီး ပို့ပါ။ သာသနာပြုအဖွဲ့ထံ တိုက်ရိုက် ရောက်ရှိပါမည်။","ca_send":"လျှောက်လွှာ ပို့ရန်","cr_next_h":"နောက်လာမည့် ခရူးဆိတ်","cr_next_p":"ခရူးဆိတ် ရက်စွဲများ မကြေညာရသေးပါ။ ယခု လျှောက်ထားပါ၊ ရက်စွဲ ထွက်လာသည့်အခါ အဖွဲ့က ဆက်သွယ်ပါမည်။","ap_title":"တက်ရောက်မည်ဟု အကြောင်းကြားရန်","ap_intro":"သင်လာမည်ကို ဒေါက်တာဘင်၏ အဖွဲ့ သိစေရန် ဤပုံစံကို ဖြည့်ပါ။ ပို့ရန် အီးမေးလ်တစ်စောင် ပွင့်လာပါမည်။","ap_send":"ပို့ရန်","uh_p":"အဆင့် ခုနစ်ဆင့်၊ တစ်လလျှင် $25 မှ စတင်သည်။ သင်နှင့် ကိုက်ညီသည့်အဆင့်ကို ရွေးပါ။","pt_every":"အောက်ပါအဆင့်ပါ အားလုံးအပြင်","pt_mo":"တစ်လလျှင်","pt_join":"ယခု ပါဝင်ပါ","ms_card_p":"သာသနာပြုလယ်ကွင်းတွင် ဒေါက်တာဘင်လင်းနှင့်အတူ အံ့ဖွယ်အမှုများကို ကိုယ်တိုင် တွေ့ကြုံပါ။","ms_more":"အသေးစိတ်","ms_note":"ရက်စွဲနှင့် ကုန်ကျစရိတ်များကို ခရီးစဉ်စာမျက်နှာတိုင်းတွင် ကြည့်ပါ။ သာသနာပြုအဖွဲ့ကိုလည်း မေးနိုင်ပါသည်။ ဤဆယ်စုနှစ်ကုန်တွင် ဝိညာဉ် သန်း ၁၀ ကို ရောက်ရှိရန် ကျွန်ုပ်တို့၏ ပန်းတိုင်ဖြစ်သည်။","pt_title":"မိတ်ဖက်များ","pt_intro":"ပျောက်ဆုံးနေသူများထံ ရောက်ရှိရန် မိတ်ဖက်များက လစဉ် လှူဒါန်းကြသည်။ အဆင့်တိုင်းတွင် ၎င်းအောက်ရှိ အဆင့်များပါ အရာအားလုံး ပါဝင်သည်။","pt_note":"ဈေးနှုန်းများမှာ တစ်လစာ ဖြစ်သည်။ နောက်ဆုံးအချက်အလက်ကို ဝက်ဘ်ဆိုက်တွင် ကြည့်ပါ။","pl_bronze":"လစဉ် သတင်းလွှာနှင့် ပစ္စည်းများ 15% လျှော့ဈေး။","pl_silver":"မိတ်ဖက်များ၏ သီးသန့် Facebook အုပ်စု။","pl_gold":"YouTube တွင် Covenant Member ဝင်ခွင့်။","pl_plat":"အဖွဲ့နှင့် အုပ်စုလိုက် Zoom ခေါ်ဆိုမှုများ။","pl_titan":"ဒေါက်တာဘင်နှင့် ၃၀ မိနစ် ကိုယ်ပိုင် ခေါ်ဆိုမှု တစ်ကြိမ်။","pl_diam":"ဒေါက်တာဘင်နှင့် ကိုယ်တိုင် တွေ့ဆုံမှု တစ်ကြိမ်။","pl_red":"ဒေါက်တာဘင်ထံ ကိုယ်ပိုင် ဆက်သွယ်ခွင့်နှင့် ဖုန်းနံပါတ်။","hp_circle_h":"သင့်အသိုင်းအဝိုင်း","hp_circle_p":"မိတ်ဖက်များသည် သီးသန့်အုပ်စုနှင့် အဖွဲ့နှင့် ခေါ်ဆိုမှုများ ရရှိသည်။ မိတ်ဖက်များ စာမျက်နှာကို ကြည့်ပါ။","hp_int_h":"သင့်လိုအပ်ချက်ကို ပြောပြပါ","hp_int_p":"ဤ hub တွင် တစ်ခုခု ထပ်ထည့်စေလိုပါသလား။ အဖွဲ့ထံ မှတ်စု ပို့ပါ။","hp_int_btn":"မှတ်စု ပို့ရန်","call_title":"ဒေါက်တာဘင်နှင့် တစ်ဦးချင်း","call_p":"ဒေါက်တာဘင်နှင့် အချိန်ယူလိုပါသလား။ ဤအစီအစဉ်များတွင် ကိုယ်ပိုင် ဆက်သွယ်ခွင့် ပါဝင်သည်။","call_l1":"၃၀ မိနစ် ခေါ်ဆိုမှု တစ်ကြိမ်","call_l2":"ကိုယ်တိုင် တွေ့ဆုံမှု တစ်ကြိမ်","call_l3":"နည်းပြ အစီအစဉ်","call_l4":"နည်းပြ အစီအစဉ်","call_note":"အဖွဲ့ထံ အီးမေးလ်ပို့ရန် ခလုတ်ကို နှိပ်ပါ။ သင်စိတ်ဝင်စားသည့်အရာကို ပြောပါ။ နောက်အဆင့်များဖြင့် ပြန်ကြားပါမည်။","call_btn":"ခေါ်ဆိုမှု တောင်းဆိုရန်","shop_title":"ဆိုင်","oils_h":"ဘိသိက်ဆီများ","oil_grace_h":"Oil of Grace","oil_grace_p":"အံ့ဖွယ်အမှုများအတွက် အမျိုးငါးမျိုး ရောစပ်ထားသော ဆီ။","oil_bride_h":"Bridegroom Oil","oil_bride_p":"ရင်းနှီးမှုနှင့် ဆုတောင်းခြင်းအတွက် အမျိုးသုံးမျိုး ရောစပ်ထားသော ဆီ။","sz_small":"အသေး","sz_med":"အလတ်","sz_large":"အကြီး","oil_how":"မှာယူနည်း: အောက်တွင် တောင်းဆိုချက် ပို့ပါ။ အဖွဲ့က ငွေတောင်းခံလွှာ အီးမေးလ်ပို့ပါမည်။ ငွေပေးချေပြီးနောက် ဆီကို ပို့ပေးပါမည်။","oil_note":"* မဖြစ်မနေ ဖြည့်ရန်။ အဖွဲ့ ဖတ်နိုင်ရန် ပုံစံမေးခွန်းများကို အင်္ဂလိပ်ဘာသာဖြင့် ထားပါသည်။ ဈေးနှုန်း ပြောင်းလဲနိုင်ပါသည်။","more_h":"တေးဂီတ၊ စာအုပ်များနှင့် အခြား","more_p":"CD များ၊ တေးဂီတ ဒေါင်းလုဒ်များနှင့် စာအုပ်များကို ဝက်ဘ်ဆိုက်တွင် ရောင်းချသည်။","events_title":"လာမည့် အစီအစဉ်များ","ev_detail":"အစီအစဉ် အသေးစိတ်","ev1":"၂၀၂၆ အောက်တိုဘာ ၁၀–၁၁။ Milwaukee, Wisconsin။","ev2":"၂၀၂၆ အောက်တိုဘာ ၃၀ – နိုဝင်ဘာ ၁။ 8th Floor, TSL Building, 101 Eunos Ave 3, Singapore။","events_note":"ရက်စွဲများ ပြောင်းလဲနိုင်ပါသည်။ နောက်ဆုံးအချက်အလက်ကို အစီအစဉ်များ စာမျက်နှာတွင် ကြည့်ပါ။","books_title":"စာအုပ်များ","b_frenzy":"ပရောဖက်အမှုသို့ ခေါ်ခံရသူများအတွက်။ ပရောဖက်ပြုခြင်း၏ ပိုမိုနက်ရှိုင်းသော အဆင့်များသို့ ဝင်ရောက်ပြီး နိမိတ်လက္ခဏာနှင့် အံ့ဖွယ်အမှု ဖြစ်လာပါ။","b_honor":"ဘုရားသခင်နှင့် အခြားသူများကို ဂုဏ်ပြုခြင်းက အောင်မြင်မှု၊ ပြည့်စုံမှု၊ ပြန်လည်ထူထောင်မှုနှင့် ကျေးဇူးတော်သို့ တံခါးဖွင့်ပေးပုံ။","b_breed":"အံ့ဖွယ်အမှုပြုသော ပြုပြင်ပြောင်းလဲသူနှင့် နိုးကြားမှုဆောင်သူ မျိုးဆက်သစ် ထွန်းကားလာနေသည်။ သင့်အမွေသစ်ထဲသို့ ဝင်ရောက်ပါ။","b_valor":"ဘုရားသခင်သည် အလွန်ထူးခြားသော တန်ခိုး၊ မေတ္တာနှင့် သမာဓိရှိသော ရဲရင့်သူ အမျိုးသားများကို ထူထောင်နေတော်မူသည်။","courses_title":"သင်တန်းများနှင့် လမ်းညွှန်ပေးခြင်း","courses_p":"ဒေါက်တာဘင်လင်းနှင့်အတူ အွန်လိုင်းကျောင်းများ၊ အုပ်စုလိုက် လမ်းညွှန်ပေးခြင်းနှင့် နည်းပြပေးခြင်း။","courses_btn":"သင်တန်းအားလုံး ကြည့်ရန်","t_mentor":"အုပ်စုလိုက် လမ်းညွှန်ပေးခြင်း","t_coach":"နည်းပြပေးခြင်း","watch_title":"ကြည့်ရှုရန်နှင့် ဖတ်ရှုရန်","blog_h":"ဘလော့ဂ်","blog_p":"ဒေါက်တာဘင်လင်းထံမှ ပရောဖက်ပြုချက်များနှင့် သွန်သင်ချက်များ။","inv_fill":"ပုံစံ ဖြည့်ရန်","inv_title":"ဖိတ်ကြားရန် တောင်းဆိုချက်","inv_intro":"ဒေါက်တာဘင်လင်း၏ ဓမ္မအမှုတော်ကို စိတ်ဝင်စားသည့်အတွက် ကျေးဇူးတင်ပါသည်။ ဖိတ်ကြားရန် ဤပုံစံကို ဖြည့်ပါ။ တောင်းဆိုချက် များစွာ ရောက်ရှိပြီး တစ်ခုချင်းစီကို ဂရုတစိုက် စဉ်းစားပါသည်။ အချိန်မီ ပြန်ကြားပါမည်။","inv_note":"* မဖြစ်မနေ ဖြည့်ရန်။ အဖွဲ့ ဖတ်နိုင်ရန် ပုံစံမေးခွန်းများကို အင်္ဂလိပ်ဘာသာဖြင့် ထားပါသည်။","inv_send":"အီးမေးလ်ဖြင့် ပို့ရန်","inv_copy":"တောင်းဆိုချက်ကို ကူးယူရန်","inv_sent":"တောင်းဆိုချက် ဖြည့်ပြီးသား သင့်အီးမေးလ်အက်ပ် ပွင့်လာပါမည်။ ပြီးဆုံးရန် ထိုနေရာတွင် ပို့ရန် နှိပ်ပါ။","inv_copied":"ကူးယူပြီးပါပြီ။ အီးမေးလ် သို့မဟုတ် မက်ဆေ့ချ်ထဲသို့ ကူးထည့်ပါ။","goals_title":"ကျွန်ုပ်တို့၏ ပန်းတိုင်များ","g1":"ဝိညာဉ် သန်း ၁၀ ကယ်တင်ခြင်း ခံရရန်","g2":"ရေတိုသာသနာပြု ၁၀,၀၀၀","g3":"အသင်းတော် ၁,၀၀၀ တည်ထောင်ရန်","g4":"အသင်းတော် ၁၀၀","g5":"California တွင် အသင်းတော် ၁၀၀","f_info":"အချက်အလက်","f_about":"ကျွန်ုပ်တို့အကြောင်း","f_loc":"တည်နေရာ","f_social":"ဆိုရှယ်မီဒီယာ","f_follow":"Ben Lim Global ကို လိုက်ကြည့်ပါ","f_rights":"မူပိုင်ခွင့် အားလုံး ရယူထားသည်။","k_visit_h":"လာရောက်ရန်နှင့် အီးမေးလ်","k_map":"မြေပုံ ဖွင့်ရန်","c_wire_p":"ပစိဖိတ်စံတော်ချိန် တနင်္လာနေ့တိုင်း ညနေ ၆ နာရီတွင် ဒေါက်တာဘင်လင်းနှင့် တိုက်ရိုက်။","k_yt_h":"YouTube အသင်းဝင်","k_yt_p":"အသင်းဝင်ရန် ကွန်ပျူတာဖြင့် ဝင်ပါ။","k_links_h":"လင့်ခ်အားလုံး","k_links_p":"Ben Lim Global လင့်ခ်အားလုံးကို တစ်နေရာတည်းတွင်။","vision_text":"ဤဆယ်စုနှစ်ကုန်တွင် ဝိညာဉ် သန်း ၁၀ ကို ယေရှုထံ ရရှိရန်။ ကမ္ဘာတစ်ဝှမ်းရှိ ယုံကြည်သူ သန်း ၁ ကို တန်ဆာဆင်ပေးရန်။","c_events_h":"အစီအစဉ်များ","connect_title":"ဆက်သွယ်ရန်","k_prayer_p":"သင့်ဆုတောင်းချက်ကို ပေးပို့ပါ။","k_msg_h":"မက်ဆေ့ချ် ပို့ရန်","k_msg_p":"မေးခွန်း မေးပါ သို့မဟုတ် နှုတ်ဆက်ပါ။","k_invite_h":"ဒေါက်တာဘင်လင်းကို ဖိတ်ကြားရန်","k_invite_p":"ဖိတ်ကြားရန် တောင်းဆိုချက်။ ဒေါက်တာဘင်လင်း၏ ဓမ္မအမှုတော်ကို စိတ်ဝင်စားသည့်အတွက် ကျေးဇူးတင်ပါသည်။ ဖိတ်ကြားရန် ပုံစံကို ဖြည့်ပါ။ တောင်းဆိုချက်တိုင်းကို ဂရုတစိုက် စဉ်းစားပြီး အချိန်မီ ပြန်ကြားပါမည်။","k_give_h":"လှူဒါန်းရန်","k_give_p":"သာသနာနှင့် မိတ်ဖက်ဖြစ်ပါ။","follow":"လိုက်ကြည့်ရန်","hubs_title":"ဘာသာစကား Hub များ","hubs_text":"သင့်ဘာသာစကားကို ရွေးပြီး သင့်အတွက် ပြုလုပ်ထားသော hub ထဲသို့ ဝင်ပါ: သွန်သင်ချက်၊ အစီအစဉ်များနှင့် အသိုင်းအဝိုင်း။","cm_calls_h":"တစ်ဦးချင်း ခေါ်ဆိုမှုများ","cm_calls_p":"ဒေါက်တာဘင်နှင့် ကိုယ်ပိုင်အချိန်သည် မိတ်ဖက်အဆင့်များ၏ အစိတ်အပိုင်း ဖြစ်သည်။","cm_ment_h":"လမ်းညွှန်ပေးခြင်း အုပ်စုများ","cm_ment_p":"ဒေါက်တာဘင်၏ အဖွဲ့ ဦးဆောင်သော အုပ်စုငယ်တွင် အခြားသူများနှင့်အတူ ကြီးထွားပါ။","cm_circ_h":"မိတ်ဖက် အသိုင်းအဝိုင်းများ","cm_circ_p":"မိတ်ဖက်များသည် Facebook ပေါ်ရှိ အုပ်စုတွင် တွေ့ဆုံပြီး အတူ ဆုတောင်းကြသည်။","cm_levels":"အဆင့်များ ကြည့်ရန်","cm_fb":"Facebook ဖွင့်ရန်","fuego_p":"လက်တင်အမေရိကအတွက် ဒေါက်တာဘင်၏ စပိန်ဘာသာ ဓမ္မအမှုတော် ဝက်ဘ်ဆိုက်။","ln_h":"လေ့လာရန်","ln_p":"ဒေါက်တာဘင်ထံမှ သွန်သင်ချက်နှင့် အရင်းအမြစ်များ။ ကြည့်ပါ၊ ဖတ်ပါ၊ ကြီးထွားပါ — လူတိုင်းအတွက် ဖွင့်ထားသည်။","ln_yt_h":"YouTube ပေါ်ရှိ တရားဒေသနာများ","ln_yt_p":"ဒေါက်တာဘင် သွန်သင်သည်ကို အချိန်မရွေး ကြည့်ပါ။","ln_deep":"ပိုမို နက်ရှိုင်းစွာ","ln_deep_p":"သင်တန်းများနှင့် ဒေါက်တာဘင်နှင့် တစ်ဦးချင်း အချိန်။","rp_card_h":"ယောဟန် ၂၁ ရက်","rp_card_p":"တစ်နေ့ အခန်းတစ်ခန်း ဖတ်ပါ။ နေ့တိုင်း အမှတ်ခြစ်ပြီး သင့်တိုးတက်မှုကို ကြည့်ပါ။","rp_card_btn":"စတင် ဖတ်ရှုရန်","rp_title":"ယောဟန် ၂၁ ရက်","rp_intro":"ယောဟန်ခရစ်ဝင်ကျမ်းကို နေ့စဉ် အခန်းတစ်ခန်း ဖတ်ပါ။ ဖတ်ပြီးသည့်နေ့ကို နှိပ်ပါ။ သင့်တိုးတက်မှုကို ဤဖုန်းတွင် သိမ်းထားပါမည်။","rp_book":"ယောဟန်","rp_day":"နေ့ {n}","rp_prog":"{b} ရက်အနက် {a} ရက် ပြီးပါပြီ","rp_next":"နောက်တစ်ခု","rp_done":"၂၁ ရက်လုံး ပြီးဆုံးပါပြီ။ ကောင်းလှပါသည်!","rp_reset":"အစမှ ပြန်စရန်","rp_reset_q":"သင့်တိုးတက်မှုကို ဖျက်ပြီး အစမှ ပြန်စမလား။","sh_text":"Ben Lim Global နှင့်အတူ ယောဟန်ခရစ်ဝင်ကျမ်းကို ဖတ်ပါ။","sh_copied":"လင့်ခ် ကူးယူပြီးပါပြီ။ မက်ဆေ့ချ်ထဲသို့ ကူးထည့်ပါ။","hubs_badge":"ကမ္ဘာလုံးဆိုင်ရာ အသိုင်းအဝိုင်း","hubs_auto":"မသေချာဘူးလား။ ဖုန်း၏ ဘာသာစကားကို သုံးပါ","oil_size":"အရွယ်အစား","oil_price":"ဈေးနှုန်း","oil_add":"တောင်းဆိုချက်ထဲ ထည့်ရန်","oil_form_h":"မှာယူရန် တောင်းဆိုချက်","oil_picked":"ရွေးထားသည်: {oil}၊ {size}။ အောက်တွင် သင့်အချက်အလက်များ ဖြည့်ပါ။","oil_soon":"ဓာတ်ပုံ မကြာမီ ရောက်လာပါမည်"});
 for (const l in T3) Object.assign(T[l], T3[l]);
 for (const l in T) for (const k in T.en) if (!(k in T[l])) T[l][k] = T.en[k];  // fill gaps with English
 
@@ -1473,6 +1526,96 @@ $$("[data-flag]").forEach(f => {
   if (src) f.innerHTML = src.innerHTML;
 });
 renderProphecy();
+// ---- Missions & Crusades: pulled live from benlimglobal.com (WordPress, "Missions" shop category) ----
+// Add, edit or remove a mission on the website and the app follows. If the site can't be reached,
+// the last copy saved on this phone is shown, then the built-in list.
+const MISSIONS_URL = "https://benlimglobal.com/wp-json/wp/v2/product?product_cat=91&per_page=20&_embed=wp:featuredmedia&_fields=title,link,excerpt,_links,_embedded";
+const MS_KEY = "benlim-missions";
+const unhtml = h => { const d = document.createElement("div"); d.innerHTML = h || ""; return (d.textContent || "").replace(/\s+/g, " ").replace(/\[…\]|\[…\]/g, "…").trim(); };
+let missionsLive = null;
+function renderMissions(){
+  if (!missionsLive || !missionsLive.length) return;
+  const t = T[lang], esc = x => x.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  $$('[data-live="tiles"]').forEach(box => {
+    box.innerHTML = missionsLive.slice(0, 3).map(m => '<a href="' + esc(m.link) + '" target="_blank" rel="noopener">' + (m.img ? '<img src="' + esc(m.img) + '" alt="" loading="lazy">' : '') + '<span>' + esc(m.title) + '</span></a>').join("");
+  });
+  $$('[data-live="src"]').forEach(p => { p.innerHTML = '<b>●</b> ' + esc(t.ms_live) + (lang !== "en" ? " " + esc(t.in_english) : ""); });
+  $("#missionList").innerHTML = missionsLive.map(m => '<div class="card mtrip">' + (m.img ? '<img src="' + esc(m.img) + '" alt="" loading="lazy">' : '') + '<div><h3>' + esc(m.title) + '</h3>' + (m.text ? '<p>' + esc(m.text) + '</p>' : '') + '<a class="btn" href="' + esc(m.link) + '" target="_blank" rel="noopener">' + esc(t.ms_more) + '</a></div></div>').join("");
+}
+function useMissions(list){ missionsLive = list; renderMissions(); }
+try { const c = JSON.parse(localStorage.getItem(MS_KEY)); if (c && c.length) useMissions(c); } catch(e){}
+fetch(MISSIONS_URL).then(r => r.ok ? r.json() : Promise.reject()).then(items => {
+  const list = items.map(p => {
+    const m = ((p._embedded || {})["wp:featuredmedia"] || [])[0] || {}, sz = (m.media_details || {}).sizes || {};
+    return {title: unhtml(p.title && p.title.rendered), link: p.link, text: unhtml(p.excerpt && p.excerpt.rendered), img: (sz.medium || sz.full || {}).source_url || m.source_url || ""};
+  }).filter(m => m.title && /^https:\/\/benlimglobal\.com\//.test(m.link));
+  if (list.length){ useMissions(list); try { localStorage.setItem(MS_KEY, JSON.stringify(list)); } catch(e){} }
+}).catch(() => {});
+// ---- Prophecy library ----
+// Words come live from the blog on benlimglobal.com (newest first). To add a word that is not on the
+// blog, put it in PROPHECY_EXTRA: {date:"2026-10-20", title:"...", text:"...", video:"https://youtube.com/..."}
+const PROPHECY_FEED = "https://benlimglobal.com/wp-json/wp/v2/posts?per_page=50&_fields=id,date,title,link,excerpt";
+const PROPHECY_EXTRA = [];
+const PL_KEY = "benlim-prophecy";
+let plItems = [], plYear = "all", plQuery = "";
+const plEsc = x => String(x || "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function plDate(d){ try { return new Date(d).toLocaleDateString(lang === "my" ? "my-MM" : lang, {year:"numeric", month:"short", day:"numeric"}); } catch(e){ return d.slice(0, 10); } }
+function renderLibrary(){
+  const t = T[lang], box = $("#plList");
+  $("#plSearch").placeholder = t.pl_search;
+  const years = [...new Set(plItems.map(p => p.date.slice(0, 4)))].sort().reverse();
+  $("#plYears").innerHTML = ["all"].concat(years).map(y => '<button class="pchip' + (y === plYear ? " on" : "") + '" type="button" data-y="' + y + '">' + (y === "all" ? plEsc(t.pl_all) : y) + '</button>').join("");
+  if (!plItems.length) return;
+  const q = plQuery.toLowerCase();
+  const list = plItems.filter(p => (plYear === "all" || p.date.startsWith(plYear)) && (!q || (p.title + " " + p.text).toLowerCase().includes(q)));
+  box.innerHTML = list.length ? list.map(p => '<div class="card pitem" data-id="' + plEsc(p.id) + '"><button type="button" aria-expanded="false"><div class="pd">' + plEsc(plDate(p.date)) + (p.video ? '<span class="ptag">' + plEsc(t.pl_video) + '</span>' : '') + '</div><h3>' + plEsc(p.title) + '</h3><p class="px">' + plEsc(p.text) + '</p></button><div class="pbody"></div></div>').join("") : '<p class="pempty">' + plEsc(t.pl_none) + '</p>';
+  $("#plSrc").innerHTML = '<b>●</b> ' + plEsc(t.pl_src) + (lang !== "en" ? " " + plEsc(t.in_english) : "");
+  const latest = plItems[0], hl = $("#homeLatest");
+  hl.hidden = false; hl.innerHTML = '<span class="vref">' + plEsc(t.pl_latest) + '</span><br><b style="color:#fff">' + plEsc(latest.title) + '</b>';
+}
+async function openWord(card){
+  const p = plItems.find(x => String(x.id) === card.dataset.id), body = card.querySelector(".pbody"), t = T[lang];
+  const open = card.classList.toggle("open");
+  card.querySelector("button").setAttribute("aria-expanded", open);
+  if (!open || body.dataset.done) return;
+  body.innerHTML = '<p class="note">' + plEsc(t.pl_loading) + '</p>';
+  let paras = [];
+  if (p.full) paras = p.full;
+  else if (p.wp) {
+    try {
+      const r = await fetch("https://benlimglobal.com/wp-json/wp/v2/posts/" + p.wp + "?_fields=content");
+      const doc = new DOMParser().parseFromString((await r.json()).content.rendered, "text/html");
+      paras = [...doc.querySelectorAll("p,h2,h3,li")].map(e => e.textContent.trim()).filter(Boolean);
+    } catch(e){}
+  }
+  if (!paras.length) paras = [p.text];
+  body.innerHTML = paras.map(x => "<p>" + plEsc(x) + "</p>").join("") +
+    (p.video ? '<p><a class="btn" href="' + plEsc(p.video) + '" target="_blank" rel="noopener">' + plEsc(t.pl_watch) + '</a></p>' : '') +
+    (p.link ? '<p><a class="btn ghost" href="' + plEsc(p.link) + '" target="_blank" rel="noopener">' + plEsc(t.pl_site) + '</a></p>' : '');
+  body.dataset.done = 1;
+}
+document.addEventListener("click", e => {
+  const y = e.target.closest("#plYears .pchip"); if (y){ plYear = y.dataset.y; renderLibrary(); return; }
+  const c = e.target.closest(".pitem > button"); if (c) openWord(c.parentElement);
+});
+$("#plSearch").addEventListener("input", e => { plQuery = e.target.value.trim(); renderLibrary(); });
+function useWords(list){
+  plItems = PROPHECY_EXTRA.map((p, i) => Object.assign({id: "x" + i, full: p.text ? [p.text] : null}, p)).concat(list).sort((a, b) => b.date.localeCompare(a.date));
+  renderLibrary();
+}
+try { const c = JSON.parse(localStorage.getItem(PL_KEY)); if (c && c.length) useWords(c); } catch(e){}
+fetch(PROPHECY_FEED).then(r => r.ok ? r.json() : Promise.reject()).then(posts => {
+  const list = posts.map(p => ({id: "w" + p.id, wp: p.id, date: p.date, title: unhtml(p.title && p.title.rendered), link: p.link, text: unhtml(p.excerpt && p.excerpt.rendered)}))
+    .filter(p => p.title && /^https:\/\/benlimglobal\.com\//.test(p.link));
+  if (list.length){ useWords(list); try { localStorage.setItem(PL_KEY, JSON.stringify(list)); } catch(e){} }
+}).catch(() => { if (!plItems.length) { if (PROPHECY_EXTRA.length) useWords([]); else $("#plList").innerHTML = '<p class="pempty">' + plEsc(T[lang].pl_offline) + '</p>'; } });
+// ---- Partner area: what each level opens (from the partnership levels; no sign-in yet) ----
+const PA_TIERS = [["Bronze","$25","pl_bronze"],["Silver","$50","pl_silver"],["Gold","$100","pl_gold"],["Platinum","$250","pl_plat"],["Titanium","$500","pl_titan"],["Diamond","$1,000","pl_diam"],["Red Diamond","$2,500","pl_red"]];
+function renderPartnerArea(){
+  const t = T[lang], lock = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+  $("#paTiers").innerHTML = PA_TIERS.map(([n, p, k]) => '<div class="card pa-tier"><span class="pl">' + lock + '</span><div class="pt"><b>' + n + '</b><span>' + plEsc(t[k]) + '</span></div><em>' + p + '</em></div>').join("");
+}
+renderPartnerArea();
 // ---- Event RSVP (opens an email to the team with the event filled in) ----
 document.addEventListener("click", e => {
   const a = e.target.closest(".rsvpEv");
