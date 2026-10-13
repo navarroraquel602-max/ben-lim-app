@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
-<title>Ben Lim Global</title>
+<title>Glory App · Ben Lim Global</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Oswald:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -193,14 +193,13 @@
     nav button:hover{color:#b9801c;background:#fbf1d6}
     nav button.on{color:#b9801c;background:transparent;box-shadow:inset 0 -3px 0 var(--accent);border-radius:0}
     main{max-width:1100px;padding:28px 32px}
-    #home.active,#learn.active,#connect.active{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
-    #home>*,#learn>*,#connect>*{grid-column:1/-1;margin-top:0;margin-bottom:0}
-    #home>.card.vg,#learn>.card,#connect>.card{grid-column:auto;margin:0}
-    #home>.card:has(img.about){grid-column:1/-1;display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:center;padding:24px}
-    #home>.card:has(img.about) img.about{margin:0}
-    #home>.card:has(img.about) p{font-size:18px;line-height:1.6;margin:0}
-    #home>.card:not(.vg):not(:has(img.about)){grid-column:1/-1;text-align:center}
-    #home>.card.vg{grid-column:1/-1}
+    #learn.active,#connect.active{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+    #learn>*,#connect>*{grid-column:1/-1;margin-top:0;margin-bottom:0}
+    #learn>.card,#connect>.card{grid-column:auto;margin:0}
+    #home .card.ab{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:center;padding:24px}
+    #home .card.ab img.about{margin:0}
+    #home .ghero{padding:40px 32px 36px}
+    #home .orbit{max-width:420px}
     #learn.active{grid-template-columns:repeat(2,1fr)}
     #learn>.card:has(.clist){grid-column:1/-1}
     #learn .clist{columns:2;column-gap:28px}
@@ -210,7 +209,7 @@
     .hero p{max-width:34em;margin-left:auto;margin-right:auto}
     .great{margin:28px -32px 0;padding:8px 32px 24px}
     .great p{max-width:52em}
-    #partners,#invite,#reading,#hubpage,#missions,#shop,#hubs{max-width:760px;margin-left:auto;margin-right:auto}
+    #partners,#invite,#reading,#hubpage,#crusades,#prophecy,#shop,#hubs{max-width:760px;margin-left:auto;margin-right:auto}
     footer .wrap{max-width:1100px;padding:0 32px}
   }
   /* ---- Languages page ---- */
@@ -287,11 +286,121 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
 .brand{min-width:0}
 .giveTop{flex:none}
 @media (max-width:400px){header{gap:8px;padding:10px 12px}.crown{height:34px}.giveTop{padding:9px 12px}.brand small{font-size:10px}}
+/* ---- Home: globe hub ---- */
+.ghero{position:relative;overflow:hidden;margin:0 -4px;border-radius:24px;padding:26px 14px 24px;text-align:center;color:#fff;
+  background:radial-gradient(circle at 50% 45%,#2a1f0b 0%,#0d0b08 55%,#050505 100%)}
+.ghero::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;
+  background-image:radial-gradient(1px 1px at 12% 18%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 82% 12%,#f3dca4 50%,transparent 51%),radial-gradient(1.5px 1.5px at 70% 78%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 22% 84%,#f3dca4 50%,transparent 51%),radial-gradient(1px 1px at 92% 52%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 6% 56%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 40% 6%,#f3dca4 50%,transparent 51%),radial-gradient(1px 1px at 58% 94%,#fff 50%,transparent 51%)}
+.ghero>*{position:relative}
+.gkick{font:500 11px Oswald,system-ui,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#e0a234}
+.ghero h1{color:#fff;font-size:27px;margin:6px 0 2px;letter-spacing:.04em}
+.ghero .gsub{color:#d8d2c4;font-size:15px;max-width:26em;margin:6px auto 0}
+.orbit{position:relative;width:100%;max-width:340px;aspect-ratio:1;margin:14px auto 4px}
+.orbit .ring{position:absolute;inset:9%;border-radius:50%;border:1px dashed rgba(224,162,52,.45)}
+.orbit .ring.r2{inset:22%;border:1px solid rgba(224,162,52,.18)}
+.globe{position:absolute;left:50%;top:50%;width:44%;aspect-ratio:1;transform:translate(-50%,-50%);border:0;padding:0;background:none;cursor:pointer;border-radius:50%;
+  box-shadow:0 0 40px 6px rgba(224,162,52,.35),0 0 90px 20px rgba(224,162,52,.12)}
+.globe svg{display:block;width:100%;height:100%}
+.globe b{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);font:500 12px Oswald,system-ui,sans-serif;letter-spacing:.18em;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8);line-height:1.25}
+.onode{position:absolute;transform:translate(-50%,-50%);width:19.5%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(224,162,52,.7);
+  background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.16),rgba(255,255,255,.03) 60%),rgba(20,16,8,.85);
+  color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-decoration:none;cursor:pointer;padding:4px;
+  box-shadow:0 0 0 4px rgba(224,162,52,.08),0 6px 18px rgba(0,0,0,.5);transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+.onode svg{width:38%;height:auto;color:#e0a234}
+.onode i{position:relative;font:500 9px Oswald,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;font-style:normal;line-height:1.1;max-width:100%}
+.onode.hot{border-color:#e0a234;background:radial-gradient(circle at 35% 30%,rgba(255,220,150,.35),rgba(224,162,52,.12) 60%),rgba(40,28,8,.9)}
+.onode:active{transform:translate(-50%,-50%) scale(.92)}
+.lnode{overflow:hidden;justify-content:flex-end;padding:0 0 9%;border-width:2px}
+.lnode .fl{position:absolute;inset:0;width:100%;height:100%;margin:0;border:0;border-radius:0;box-shadow:none}
+.lnode .fl svg{width:100%;height:100%}
+.lnode::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(0,0,0,.85))}
+.lnode i{position:absolute;left:50%;bottom:10%;transform:translateX(-50%);z-index:1;white-space:nowrap;background:rgba(0,0,0,.7);border-radius:999px;padding:1px 6px;font:700 10px Lato,system-ui,sans-serif;letter-spacing:0;text-transform:none;text-shadow:0 1px 3px #000}
+.lnode.on{border-color:#fff;box-shadow:0 0 0 3px rgba(224,162,52,.9),0 6px 18px rgba(0,0,0,.5)}
+.oflag{position:absolute;z-index:2;transform:translate(-50%,-50%);width:12.5%;aspect-ratio:1;padding:0;border:0;background:none;cursor:pointer;border-radius:50%;box-shadow:0 0 0 2px rgba(224,162,52,.8),0 0 12px rgba(224,162,52,.5)}
+.oflag .fl{width:100%;height:100%;margin:0;border:0}
+.oflag em{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:3px;white-space:nowrap;font:600 9.5px Lato,system-ui,sans-serif;font-style:normal;color:#fff;background:rgba(0,0,0,.65);border:1px solid rgba(224,162,52,.5);border-radius:999px;padding:1px 6px;letter-spacing:0}
+.arms{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.arm{stroke:rgba(224,162,52,.55);vector-effect:non-scaling-stroke;stroke-width:1.6px}
+.arm.lang{stroke:rgba(243,220,164,.5);stroke-width:1.6px}
+.arm.flow{stroke:#f3dca4;stroke-width:2.2px;stroke-linecap:round;stroke-dasharray:3 97;stroke-dashoffset:0;opacity:0}
+.arm.flow.lang{stroke-width:1.8px}
+.onode{z-index:2}
+.globe{z-index:1}
+.oflag:active{transform:translate(-50%,-50%) scale(.9)}
+@media (hover:hover){.oflag:hover{transform:translate(-50%,-50%) scale(1.2)}}
+.gtap{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#a69c88;margin:4px 0 0}
+@media (hover:hover){.onode:hover{transform:translate(-50%,-50%) scale(1.08);box-shadow:0 0 0 6px rgba(224,162,52,.2),0 10px 24px rgba(0,0,0,.6)}}
+@media (prefers-reduced-motion:no-preference){
+  .orbit .ring{animation:spin 60s linear infinite}
+  .arm.flow{opacity:1;animation:armFlow 2.6s linear infinite}
+  @keyframes armFlow{from{stroke-dashoffset:22}to{stroke-dashoffset:-78}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .globe{animation:glow 4s ease-in-out infinite}
+  @keyframes glow{0%,100%{box-shadow:0 0 40px 6px rgba(224,162,52,.35),0 0 90px 20px rgba(224,162,52,.12)}50%{box-shadow:0 0 54px 10px rgba(224,162,52,.5),0 0 110px 28px rgba(224,162,52,.18)}}
+  .onode{animation:nodeIn .6s cubic-bezier(.3,1.5,.5,1) backwards}
+  .onode:nth-of-type(7){animation-delay:.48s}.onode:nth-of-type(8){animation-delay:.56s}.onode:nth-of-type(9){animation-delay:.64s}.onode:nth-of-type(10){animation-delay:.72s}.onode:nth-of-type(2){animation-delay:.08s}.onode:nth-of-type(3){animation-delay:.16s}.onode:nth-of-type(4){animation-delay:.24s}.onode:nth-of-type(5){animation-delay:.32s}.onode:nth-of-type(6){animation-delay:.4s}
+  @keyframes nodeIn{from{opacity:0;transform:translate(-50%,-50%) scale(.4)}}
+  .onode.hot{animation:nodeIn .6s cubic-bezier(.3,1.5,.5,1) backwards,hotPulse 2.4s ease-in-out 1s infinite}
+  @keyframes hotPulse{0%,100%{box-shadow:0 0 0 4px rgba(224,162,52,.12),0 6px 18px rgba(0,0,0,.5)}50%{box-shadow:0 0 0 9px rgba(224,162,52,.22),0 6px 18px rgba(0,0,0,.5)}}
+}
+.langs{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 10px;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
+.lchip{flex:none;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px 7px 7px;font:600 15px Lato,system-ui,sans-serif;color:var(--text);cursor:pointer;scroll-snap-align:start;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.lchip .fl{width:30px;height:30px;margin:0;border-width:1px}
+.lchip.soon{opacity:.55;cursor:default}
+.lchip.soon small{font:500 10px Oswald,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lchip.on{border-color:var(--accent);box-shadow:0 0 0 2px rgba(224,162,52,.35)}
+.pn-card{background:linear-gradient(135deg,#111 0%,#2a1f0b 100%);color:#fff;border:0}
+.pn-card h3{color:#fff}
+.pn-card p{color:#d8d2c4}
+.pn-card .vref{color:#e0a234;font:500 12px Oswald,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.pn-card blockquote{margin:6px 0 12px;font-size:16px;line-height:1.5;color:#fff;font-style:italic}
+.ctiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.ctiles div{aspect-ratio:3/4;border-radius:12px;display:grid;place-items:center;text-align:center;padding:8px;font:500 11px Oswald,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#fff;
+  background:radial-gradient(circle at 50% 110%,#e0a234 0%,#8a3b0c 35%,#1a0d05 75%)}
+.ctiles div:nth-child(2){background:radial-gradient(circle at 50% 110%,#f3dca4 0%,#c88a1d 30%,#2a1f0b 75%)}
+.ctiles div:nth-child(3){background:radial-gradient(circle at 50% 110%,#e0a234 0%,#521019 40%,#120507 80%)}
+.ctiles svg{width:26px;height:26px;margin:0 auto 6px;display:block;opacity:.9}
+/* ---- Prophecy Now page ---- */
+.pw{background:linear-gradient(160deg,#0d0b08 0%,#2a1f0b 100%);color:#fff;border:0;padding:24px 20px;text-align:center}
+.pw .gkick{display:block;margin-bottom:6px}
+.pw h3{color:#fff;font:500 24px Oswald,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;margin:4px 0 10px}
+.pw p{color:#eee6d6;font-size:17px;line-height:1.6}
+.pw .pwfrom{color:#e0a234;font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-top:12px}
+.amen{display:block;width:100%;margin-top:16px}
+.amen[disabled]{opacity:.85;cursor:default}
+.streak{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;font-weight:bold;color:#f3dca4;font-size:14px}
+.streak svg{width:18px;height:18px;color:#e0a234}
+/* Explore grid: plain buttons for every section (also the simple option on small phones) */
+.explore{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 4px}
+.xt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:84px;padding:12px 6px;border-radius:16px;background:#fff;border:1px solid var(--line);color:var(--text);text-decoration:none;text-align:center;font:600 13px Lato,system-ui,sans-serif;line-height:1.2;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:transform .15s ease,border-color .2s ease}
+.xt svg{width:26px;height:26px;color:#b9801c}
+.xt:active{transform:scale(.96)}
+@media (hover:hover){.xt:hover{border-color:var(--accent);transform:translateY(-2px)}}
+@media (min-width:700px){.explore{grid-template-columns:repeat(6,1fr)}}
+/* Missions pulled from the website */
+.ctiles a{display:block;position:relative;aspect-ratio:3/4;border-radius:12px;overflow:hidden;text-decoration:none;color:#fff;background:#2a1f0b}
+.ctiles a img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ctiles a span{position:absolute;left:0;right:0;bottom:0;padding:26px 8px 8px;background:linear-gradient(transparent,rgba(0,0,0,.85));font:500 11px Oswald,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;text-align:center}
+.card.mtrip{display:flex;gap:14px;align-items:flex-start}
+.card.mtrip img{width:96px;height:96px;object-fit:cover;border-radius:12px;flex:none}
+.card.mtrip p{font-size:14px}
+.src{font-size:12px;color:var(--muted);margin:4px 0 0}
+.src b{color:#2e7d32}
+/* Application confirmation */
+.done{background:#eef7ee;border:1px solid #9ccc9c;border-radius:16px;padding:20px;text-align:center}
+.done h3{margin:6px 0;font-size:22px}
+.done svg{width:44px;height:44px;color:#2e7d32}
+@media (max-width:359px){.onode i{font-size:7.5px}.lnode i{font-size:8.5px}}
+/* Burmese: letter-spacing breaks the script, and words run longer */
+html[lang=my] *{letter-spacing:0!important}
+html[lang=my] body{line-height:1.7}
+html[lang=my] .ghero h1{font-size:23px;line-height:1.5}
+html[lang=my] .onode i{font-size:8px}
 </style>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Ben Lim">
+<meta name="apple-mobile-web-app-title" content="Glory App">
 <meta name="theme-color" content="#e0a234">
 </head>
 <body>
@@ -302,27 +411,64 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
   </div>
   <div class="brand" style="margin-right:auto">
     <img class="crown" src="logo.png" alt="Ben Lim Global crown logo">
-    <div><b>BEN LIM GLOBAL</b><small data-t="tagline"></small></div>
+    <div><b>GLORY APP</b><small>by Ben Lim Global</small></div>
   </div>
   <div class="topNavs">
     <button class="topNav" id="topFwd" aria-label="Forward"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
-  <a class="btn giveTop" href="https://benlimglobal.com/partnering/" target="_blank" rel="noopener" data-t="give_btn"></a>
   </div>
 </header>
 
 <main>
-  <!-- HOME -->
+  <!-- HOME: globe hub. Every circle opens a part of the app. -->
   <section id="home" class="active">
-    <h2 data-t="about_title" style="margin-top:8px"></h2>
-    <div class="card"><img class="about" src="about.jpg" alt="Dr. Ben Lim"><p data-t="about_p2" style="color:var(--text)"></p></div>
-    <div class="hero">
-      <div class="eyebrow" data-t="tagline"></div>
-      <h1 data-t="hero_title"></h1>
-      <div class="hero-sub">Ben Lim Global</div>
-      <p data-t="hero_text"></p>
-      <p><a class="btn" data-go="learn" href="#" data-t="btn_learn"></a>
-         <a class="btn ghost" data-go="connect" href="#" data-t="btn_connect"></a></p>
+    <div class="ghero">
+      <div class="gkick" data-t="g_kick"></div>
+      <h1 data-t="g_title"></h1>
+      <div class="orbit">
+        <span class="ring"></span><span class="ring r2"></span>
+        <svg class="arms" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line class="arm" x1="50" y1="50" x2="50.0" y2="9.5"/><line pathLength="100" class="arm flow" x1="50" y1="50" x2="50.0" y2="9.5" style="animation-delay:-0.00s"/><line class="arm lang" x1="50" y1="50" x2="73.8" y2="17.2"/><line pathLength="100" class="arm flow lang" x1="50" y1="50" x2="73.8" y2="17.2" style="animation-delay:-0.26s"/><line class="arm" x1="50" y1="50" x2="88.5" y2="37.5"/><line pathLength="100" class="arm flow" x1="50" y1="50" x2="88.5" y2="37.5" style="animation-delay:-0.52s"/><line class="arm lang" x1="50" y1="50" x2="88.5" y2="62.5"/><line pathLength="100" class="arm flow lang" x1="50" y1="50" x2="88.5" y2="62.5" style="animation-delay:-0.78s"/><line class="arm" x1="50" y1="50" x2="73.8" y2="82.8"/><line pathLength="100" class="arm flow" x1="50" y1="50" x2="73.8" y2="82.8" style="animation-delay:-1.04s"/><line class="arm lang" x1="50" y1="50" x2="50.0" y2="90.5"/><line pathLength="100" class="arm flow lang" x1="50" y1="50" x2="50.0" y2="90.5" style="animation-delay:-1.30s"/><line class="arm" x1="50" y1="50" x2="26.2" y2="82.8"/><line pathLength="100" class="arm flow" x1="50" y1="50" x2="26.2" y2="82.8" style="animation-delay:-1.56s"/><line class="arm lang" x1="50" y1="50" x2="11.5" y2="62.5"/><line pathLength="100" class="arm flow lang" x1="50" y1="50" x2="11.5" y2="62.5" style="animation-delay:-1.82s"/><line class="arm" x1="50" y1="50" x2="11.5" y2="37.5"/><line pathLength="100" class="arm flow" x1="50" y1="50" x2="11.5" y2="37.5" style="animation-delay:-2.08s"/><line class="arm lang" x1="50" y1="50" x2="26.2" y2="17.2"/><line pathLength="100" class="arm flow lang" x1="50" y1="50" x2="26.2" y2="17.2" style="animation-delay:-2.34s"/></svg>
+        <button class="globe" type="button" data-go="hubs" aria-label="Ben Lim Global: all languages"><svg viewBox="0 0 200 200" aria-hidden="true"><defs><radialGradient id="gG" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#f7e3ad"/><stop offset=".45" stop-color="#c88a1d"/><stop offset="1" stop-color="#3d2705"/></radialGradient><clipPath id="gC"><circle cx="100" cy="100" r="96"/></clipPath></defs><circle cx="100" cy="100" r="96" fill="url(#gG)"/><g clip-path="url(#gC)" fill="none" stroke="rgba(255,255,255,.38)" stroke-width="1.2"><ellipse cx="100" cy="100" rx="96" ry="96"><animate attributeName="rx" values="96;0;96" dur="9s" begin="-0.0s" repeatCount="indefinite"/></ellipse><ellipse cx="100" cy="100" rx="96" ry="96"><animate attributeName="rx" values="96;0;96" dur="9s" begin="-1.5s" repeatCount="indefinite"/></ellipse><ellipse cx="100" cy="100" rx="96" ry="96"><animate attributeName="rx" values="96;0;96" dur="9s" begin="-3.0s" repeatCount="indefinite"/></ellipse><ellipse cx="100" cy="100" rx="96" ry="96"><animate attributeName="rx" values="96;0;96" dur="9s" begin="-4.5s" repeatCount="indefinite"/></ellipse><ellipse cx="100" cy="100" rx="96" ry="96"><animate attributeName="rx" values="96;0;96" dur="9s" begin="-6.0s" repeatCount="indefinite"/></ellipse><ellipse cx="100" cy="100" rx="96" ry="96"><animate attributeName="rx" values="96;0;96" dur="9s" begin="-7.5s" repeatCount="indefinite"/></ellipse><ellipse cx="100" cy="100" rx="96" ry="10"/><ellipse cx="100" cy="58" rx="80" ry="8"/><ellipse cx="100" cy="142" rx="80" ry="8"/><ellipse cx="100" cy="24" rx="48" ry="5"/><ellipse cx="100" cy="176" rx="48" ry="5"/></g><g fill="#fff"><circle cx="62" cy="70" r="2.5"/><circle cx="132" cy="84" r="2.5"/><circle cx="148" cy="122" r="2"/><circle cx="84" cy="136" r="2"/><circle cx="112" cy="52" r="2"/></g><circle cx="100" cy="100" r="96" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/></svg><b>BEN LIM<br>GLOBAL</b></button>
+        <a class="onode hot" href="#" data-go="prophecy" style="left:50.0%;top:9.5%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 3.2 2.8 4.6 4.4 6.4 1.4 1.6 2.1 3.2 2.1 5.1A6.5 6.5 0 0 1 12 21a6.5 6.5 0 0 1-6.5-6.5c0-2.4 1.2-4 2.6-5.2.2 1.6 1 2.7 2.2 3.2C10 9 10.6 5.6 12 3Z"/></svg><i data-t="o_prophecy"></i></a>
+        <button class="onode lnode" type="button" data-pick="en" style="left:73.8%;top:17.2%"><span class="fl" data-flag="en"></span><i>English</i></button>
+        <a class="onode" href="#" data-go="crusades" style="left:88.5%;top:37.5%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11A6.5 6.5 0 0 1 12 3.5 6.5 6.5 0 0 1 18.5 10c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></svg><i data-t="o_missions"></i></a>
+        <button class="onode lnode" type="button" data-pick="es" style="left:88.5%;top:62.5%"><span class="fl" data-flag="es"></span><i>Español</i></button>
+        <a class="onode" href="#" data-go="partners" style="left:73.8%;top:82.8%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 18 2.5 7l5 4.5L12 5l4.5 6.5 5-4.5-1 11Z"/><path d="M3.5 18h17"/></svg><i data-t="o_partners"></i></a>
+        <button class="onode lnode" type="button" data-pick="my" style="left:50.0%;top:90.5%"><span class="fl" data-flag="my"></span><i>မြန်မာ</i></button>
+        <a class="onode" href="#" data-go="learn" style="left:26.2%;top:82.8%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5Z"/><path d="M12 6.5v13"/></svg><i data-t="o_learn"></i></a>
+        <button class="onode lnode" type="button" data-pick="zh" style="left:11.5%;top:62.5%"><span class="fl" data-flag="zh"></span><i>中文</i></button>
+        <a class="onode" href="#" data-go="events" style="left:11.5%;top:37.5%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><i data-t="o_events"></i></a>
+        <button class="onode lnode" type="button" data-pick="ru" style="left:26.2%;top:17.2%"><span class="fl" data-flag="ru"></span><i>Русский</i></button>
+      </div>
+      <p class="gtap" data-t="g_tap"></p>
+      <p class="gsub" data-t="g_sub"></p>
     </div>
+
+    <div class="explore" role="navigation" aria-label="Explore">
+      <a class="xt" href="#" data-go="crusades"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11A6.5 6.5 0 0 1 12 3.5 6.5 6.5 0 0 1 18.5 10c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></svg><span data-t="x_missions"></span></a>
+      <a class="xt" href="#" data-go="events"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span data-t="o_events"></span></a>
+      <a class="xt" href="#" data-go="learn" data-to="coursesBlock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.6-3 2.8-5 5.5-5s4.9 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M15.5 14.2c2.5-.4 4.6 1.3 5 4.3"/></svg><span data-t="x_mentor"></span></a>
+      <a class="xt" href="#" data-go="prophecy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 3.2 2.8 4.6 4.4 6.4 1.4 1.6 2.1 3.2 2.1 5.1A6.5 6.5 0 0 1 12 21a6.5 6.5 0 0 1-6.5-6.5c0-2.4 1.2-4 2.6-5.2.2 1.6 1 2.7 2.2 3.2C10 9 10.6 5.6 12 3Z"/></svg><span data-t="o_prophecy"></span></a>
+      <a class="xt" href="#" data-go="shop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg><span data-t="n_shop"></span></a>
+      <a class="xt" href="#" data-go="home" data-to="aboutBlock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-6 7-6s6.2 2.4 7 6"/></svg><span data-t="x_about"></span></a>
+    </div>
+
+    <h2 data-t="lang_h"></h2>
+    <p class="note" data-t="lang_p" style="margin-top:-4px"></p>
+    <div class="langs"><button class="lchip" type="button" data-pick="en"><span class="fl" data-flag="en"></span>English</button><button class="lchip" type="button" data-pick="es"><span class="fl" data-flag="es"></span>Español</button><button class="lchip" type="button" data-pick="my"><span class="fl" data-flag="my"></span>မြန်မာ</button><button class="lchip" type="button" data-pick="zh"><span class="fl" data-flag="zh"></span>中文</button><button class="lchip" type="button" data-pick="ru"><span class="fl" data-flag="ru"></span>Русский</button><span class="lchip soon"><span class="fl"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" fill="#009C3B"/><polygon points="24,8 44,24 24,40 4,24" fill="#FFDF00"/><circle cx="24" cy="24" r="8.5" fill="#002776"/></svg></span>Português <small data-t="soon"></small></span><span class="lchip soon"><span class="fl"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="24" fill="#CE1126"/><rect y="24" width="48" height="24" fill="#fff"/></svg></span>Bahasa <small data-t="soon"></small></span></div>
+
+    <h2 data-t="cr_title"></h2>
+    <p data-t="cr_intro"></p>
+    <div class="ctiles" data-live="tiles"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 3.2 2.8 4.6 4.4 6.4 1.4 1.6 2.1 3.2 2.1 5.1A6.5 6.5 0 0 1 12 21a6.5 6.5 0 0 1-6.5-6.5c0-2.4 1.2-4 2.6-5.2.2 1.6 1 2.7 2.2 3.2C10 9 10.6 5.6 12 3Z"/></svg><span data-t="ct_1"></span></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.5 2.3 3.7 5.1 3.7 8.5s-1.2 6.2-3.7 8.5c-2.5-2.3-3.7-5.1-3.7-8.5S9.5 5.8 12 3.5Z"/></svg><span data-t="ct_2"></span></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11A6.5 6.5 0 0 1 12 3.5 6.5 6.5 0 0 1 18.5 10c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></svg><span data-t="ct_3"></span></div></div>
+    <p class="src" data-live="src"></p>
+    <p><a class="btn" href="#" data-go="crusades" data-t="cr_link_btn"></a>
+       <a class="btn ghost" href="#" data-go="crusadeApp" data-t="cr_apply"></a></p>
+
+    <div class="card pn-card">
+      <div class="vref" data-t="pn_today"></div>
+      <blockquote id="homeVerse"></blockquote>
+      <h3 data-t="pn_h"></h3><p data-t="pn_p"></p>
+      <a class="btn" href="#" data-go="prophecy" data-t="pn_btn"></a></div>
+
     <div class="umb-home">
       <div class="portal">
         <svg class="lc" viewBox="0 0 40 28" width="34" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 24 2 6l9 8 9-12 9 12 9-8-2 18Z"/><path d="M4 24h32"/></svg>
@@ -332,9 +478,6 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
         <a class="btn" href="#" data-go="partners" data-t="pt_btn"></a>
       </div>
     </div>
-    <div class="card">
-      <button class="btn ghost" type="button" id="shareApp" data-t="share_app"></button>
-    </div>
     <h2 data-t="vision_title"></h2>
     <div class="card vg">
       <p class="vt" data-t="vision_text"></p>
@@ -342,18 +485,18 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
       <div class="goals"><p data-t="g1"></p><p data-t="g2"></p><p data-t="g3"></p><p data-t="g4"></p><p data-t="g5"></p></div>
     </div>
 
-    <div class="great">
-      <h2 data-t="bg_title"></h2>
-      <p data-t="bg_p1"></p>
-      <p data-t="bg_p2"></p>
-      <p data-t="bg_p3"></p>
-      <div class="strip" aria-label="Photos">
-        <figure style="--r:-2deg"><img src="photos/p2.jpg" alt=""></figure>
-        <figure style="--r:1.5deg"><img src="photos/p1.jpg" alt=""></figure>
-        <figure style="--r:-1deg"><img src="photos/p3.jpg" alt=""></figure>
-        <figure style="--r:2deg"><img src="photos/p4.jpg" alt=""></figure>
-        <figure style="--r:-1.5deg"><img src="photos/p5.jpg" alt=""></figure>
-      </div>
+    <!-- BIO: replace about_p2 in the text tables with the approved bio when the ministry sends it -->
+    <h2 data-t="about_title" id="aboutBlock"></h2>
+    <div class="card ab"><img class="about" src="about.jpg" alt="Dr. Ben Lim"><p data-t="about_p2" style="color:var(--text)"></p></div>
+    <div class="strip" aria-label="Photos">
+      <figure style="--r:-2deg"><img src="photos/p2.jpg" alt=""></figure>
+      <figure style="--r:1.5deg"><img src="photos/p1.jpg" alt=""></figure>
+      <figure style="--r:-1deg"><img src="photos/p3.jpg" alt=""></figure>
+      <figure style="--r:2deg"><img src="photos/p4.jpg" alt=""></figure>
+      <figure style="--r:-1.5deg"><img src="photos/p5.jpg" alt=""></figure>
+    </div>
+    <div class="card" style="text-align:center">
+      <button class="btn ghost" type="button" id="shareApp" data-t="share_app"></button>
     </div>
   </section>
 
@@ -387,7 +530,7 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
 
     <h2 data-t="ln_deep"></h2>
     <p class="note" data-t="ln_deep_p"></p>
-    <h2 data-t="courses_title"></h2>
+    <h2 data-t="courses_title" id="coursesBlock"></h2>
     <div class="card"><p data-t="courses_p"></p>
       <ul class="clist">
         <li>7M Glory Equip <small data-t="t_mentor"></small></li>
@@ -442,7 +585,7 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
       <a class="btn" href="#" data-go="invite" data-t="inv_fill"></a>
       <a class="btn ghost" href="https://benlimglobal.com/invite-pastor-ben/" target="_blank" rel="noopener" data-t="open"></a></div>
     <div class="card"><h3 data-t="ms_card_h"></h3><p data-t="ms_card_p"></p>
-      <a class="btn" href="#" data-go="missions" data-t="ms_card_btn"></a></div>
+      <a class="btn" href="#" data-go="crusades" data-t="ms_card_btn"></a></div>
     <div class="card"><h3 data-t="k_give_h"></h3><p data-t="k_give_p"></p>
       <a class="btn" href="#" data-go="partners" data-t="pt_btn"></a>
       <a class="btn ghost" href="https://benlimglobal.com/partnering/" target="_blank" rel="noopener" data-t="open"></a></div>
@@ -508,7 +651,8 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
       <a class="btn" href="https://propheticfrenzy.com/" target="_blank" rel="noopener" data-t="open"></a></div></div>
     <div class="card book"><img src="books/power-of-honor.jpg" alt="The Supernatural Power of Honor cover"><div>
       <h3>The Supernatural Power of Honor</h3><p data-t="b_honor"></p>
-      <a class="btn" href="https://www.powerofhonor.com/" target="_blank" rel="noopener" data-t="open"></a></div></div>
+      <a class="btn" href="https://square.link/u/qzlQBPJM" target="_blank" rel="noopener" data-t="buy_now"></a>
+      <a class="btn ghost" href="https://www.powerofhonor.com/" target="_blank" rel="noopener" data-t="open"></a></div></div>
     <div class="card book"><img src="books/new-breed.jpg" alt="The New Breed cover"><div>
       <h3>The New Breed</h3><p data-t="b_breed"></p>
       <a class="btn" href="https://www.amazon.com/New-Breed-Wonder-Working-Reformers-Revivalists-ebook/dp/B07NBR2GW7" target="_blank" rel="noopener" data-t="open"></a></div></div>
@@ -520,7 +664,7 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
     <div class="card"><p data-t="more_p"></p>
       <a class="btn" href="https://benlimglobal.com/shop/" target="_blank" rel="noopener" data-t="open"></a></div>
     <div class="card"><h3 data-t="shawl_h"></h3><p data-t="shawl_p"></p>
-      <a class="btn ghost" id="askShawl" href="#" data-t="ask_email"></a></div>
+      <a class="btn" id="askShawl" href="#" data-t="shawl_btn"></a></div>
   </section>
 
   <section id="partners">
@@ -628,22 +772,6 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
       <a class="btn" id="hubInterest" href="#" data-t="hp_int_btn"></a></div>
   </section>
 
-  <section id="missions">
-    <p><a href="#" data-go="connect" data-t="inv_back"></a></p>
-    <h2 data-t="ms_title"></h2>
-    <p data-t="ms_intro"></p>
-    <div class="card"><h3>Dominican Republic Glory Invasion</h3>
-      <a class="btn" href="https://benlimglobal.com/missions/" target="_blank" rel="noopener" data-t="ms_more"></a></div>
-    <div class="card"><h3>Middle East Harvest Glory</h3>
-      <a class="btn" href="https://benlimglobal.com/missions/" target="_blank" rel="noopener" data-t="ms_more"></a></div>
-    <div class="card"><h3>Uganda Revival Glory</h3>
-      <a class="btn" href="https://benlimglobal.com/missions/" target="_blank" rel="noopener" data-t="ms_more"></a></div>
-    <div class="card"><h3>Mexico Glory Harvest</h3>
-      <a class="btn" href="https://benlimglobal.com/missions/" target="_blank" rel="noopener" data-t="ms_more"></a></div>
-    <p class="note" data-t="ms_note"></p>
-    <p><a class="btn" href="#" data-go="crusadeApp" data-t="cr_apply"></a></p>
-  </section>
-
   <section id="invite">
     <p><a href="#" data-go="connect" data-t="inv_back"></a></p>
     <h2 data-t="inv_title"></h2>
@@ -697,11 +825,46 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
 
   <!-- CRUSADES -->
   <section id="crusades">
-    <p><a class="btn ghost" href="#" data-back="events" data-t="inv_back"></a></p>
+    <p><a class="btn ghost" href="#" data-back="home" data-t="inv_back"></a></p>
     <h2 data-t="cr_title"></h2>
     <p data-t="cr_intro"></p>
+    <div class="ctiles" data-live="tiles"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 3.2 2.8 4.6 4.4 6.4 1.4 1.6 2.1 3.2 2.1 5.1A6.5 6.5 0 0 1 12 21a6.5 6.5 0 0 1-6.5-6.5c0-2.4 1.2-4 2.6-5.2.2 1.6 1 2.7 2.2 3.2C10 9 10.6 5.6 12 3Z"/></svg><span data-t="ct_1"></span></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.5 2.3 3.7 5.1 3.7 8.5s-1.2 6.2-3.7 8.5c-2.5-2.3-3.7-5.1-3.7-8.5S9.5 5.8 12 3.5Z"/></svg><span data-t="ct_2"></span></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11A6.5 6.5 0 0 1 12 3.5 6.5 6.5 0 0 1 18.5 10c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></svg><span data-t="ct_3"></span></div></div>
+    <p class="src" data-live="src"></p>
     <div class="card"><h3 data-t="cr_next_h"></h3><p data-t="cr_next_p"></p>
       <a class="btn" href="#" data-go="crusadeApp" data-t="cr_apply"></a></div>
+    <h3 class="sec" data-t="cr_trips"></h3>
+    <div id="missionList">
+    <div class="card"><h3>Dominican Republic Glory Invasion</h3>
+      <a class="btn" href="https://benlimglobal.com/missions/" target="_blank" rel="noopener" data-t="ms_more"></a></div>
+    <div class="card"><h3>Middle East Harvest Glory</h3>
+      <a class="btn" href="https://benlimglobal.com/missions/" target="_blank" rel="noopener" data-t="ms_more"></a></div>
+    <div class="card"><h3>Uganda Revival Glory</h3>
+      <a class="btn" href="https://benlimglobal.com/missions/" target="_blank" rel="noopener" data-t="ms_more"></a></div>
+    <div class="card"><h3>Mexico Glory Harvest</h3>
+      <a class="btn" href="https://benlimglobal.com/missions/" target="_blank" rel="noopener" data-t="ms_more"></a></div>
+    </div>
+    <p class="note" data-t="ms_note"></p>
+  </section>
+
+  <!-- PROPHECY NOW: word of the week + scripture for today -->
+  <section id="prophecy">
+    <p><a class="btn ghost" href="#" data-back="home" data-t="inv_back"></a></p>
+    <h2 data-t="pn_h"></h2>
+    <p data-t="pn_p"></p>
+    <div class="card pw">
+      <span class="gkick" data-t="pw_kick"></span>
+      <h3 id="pwTitle"></h3>
+      <p id="pwText"></p>
+      <div class="pwfrom" id="pwFrom"></div>
+      <button class="btn amen" type="button" id="pwAmen"></button>
+      <div class="streak" id="pwStreak" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 3.2 2.8 4.6 4.4 6.4 1.4 1.6 2.1 3.2 2.1 5.1A6.5 6.5 0 0 1 12 21a6.5 6.5 0 0 1-6.5-6.5c0-2.4 1.2-4 2.6-5.2.2 1.6 1 2.7 2.2 3.2C10 9 10.6 5.6 12 3Z"/></svg><span></span></div>
+    </div>
+    <div class="card pn-card">
+      <div class="vref" data-t="pn_today"></div>
+      <blockquote id="pageVerse"></blockquote>
+      <button class="btn ghost" type="button" id="pwShare" data-t="pw_share" style="color:#fff"></button></div>
+    <div class="card"><h3 data-t="k_prayer_h"></h3><p data-t="pr_p"></p>
+      <a class="btn" href="https://benlimglobal.com/need-prayer/" target="_blank" rel="noopener" data-t="open"></a></div>
   </section>
 
   <!-- CRUSADE / MISSION APPLICATION -->
@@ -710,6 +873,14 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
     <h2 data-t="ca_title"></h2>
     <p data-t="ca_intro"></p>
     <p class="note">Application fee: $40. Please pay on our website at <a href="https://benlimglobal.com/partnering/" target="_blank" rel="noopener">benlimglobal.com/partnering</a> and choose the &ldquo;Missions&rdquo; option. Please complete this application truthfully and in full.</p>
+    <div class="done" id="crusadeDone" hidden role="status">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="m7.5 12.5 3 3 6-6.5"/></svg>
+      <h3 data-t="cd_h"></h3>
+      <p data-t="ca_sent"></p>
+      <p class="note"><span data-t="cd_ref"></span> <b id="crusadeRef"></b></p>
+      <p><a class="btn" href="#" data-go="crusades" data-t="cd_back"></a>
+         <button class="btn ghost" type="button" id="crusadeAgain" data-t="cd_again"></button></p>
+    </div>
     <form id="crusadeForm" novalidate>
       <h3 class="sec">Mission / Applicant Information</h3>
       <label>Mission or crusade applying for *<input name="Mission or crusade applying for" required></label>
@@ -859,6 +1030,7 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
     <div class="grid hubs">
       <div class="card" data-pick="en"><div class="fl"><svg viewBox="0 0 48 48" aria-hidden="true"><rect y="0.00" width="48" height="3.79" fill="#B22234"/><rect y="3.69" width="48" height="3.79" fill="#fff"/><rect y="7.38" width="48" height="3.79" fill="#B22234"/><rect y="11.08" width="48" height="3.79" fill="#fff"/><rect y="14.77" width="48" height="3.79" fill="#B22234"/><rect y="18.46" width="48" height="3.79" fill="#fff"/><rect y="22.15" width="48" height="3.79" fill="#B22234"/><rect y="25.85" width="48" height="3.79" fill="#fff"/><rect y="29.54" width="48" height="3.79" fill="#B22234"/><rect y="33.23" width="48" height="3.79" fill="#fff"/><rect y="36.92" width="48" height="3.79" fill="#B22234"/><rect y="40.62" width="48" height="3.79" fill="#fff"/><rect y="44.31" width="48" height="3.79" fill="#B22234"/><rect width="25" height="25.8" fill="#3C3B6E"/><circle cx="3.6" cy="3.6" r=".95" fill="#fff"/><circle cx="9.0" cy="3.6" r=".95" fill="#fff"/><circle cx="14.4" cy="3.6" r=".95" fill="#fff"/><circle cx="19.8" cy="3.6" r=".95" fill="#fff"/><circle cx="3.6" cy="8.8" r=".95" fill="#fff"/><circle cx="9.0" cy="8.8" r=".95" fill="#fff"/><circle cx="14.4" cy="8.8" r=".95" fill="#fff"/><circle cx="19.8" cy="8.8" r=".95" fill="#fff"/><circle cx="3.6" cy="14.0" r=".95" fill="#fff"/><circle cx="9.0" cy="14.0" r=".95" fill="#fff"/><circle cx="14.4" cy="14.0" r=".95" fill="#fff"/><circle cx="19.8" cy="14.0" r=".95" fill="#fff"/><circle cx="3.6" cy="19.2" r=".95" fill="#fff"/><circle cx="9.0" cy="19.2" r=".95" fill="#fff"/><circle cx="14.4" cy="19.2" r=".95" fill="#fff"/><circle cx="19.8" cy="19.2" r=".95" fill="#fff"/></svg></div><h3>English</h3><span class="join"><span data-t="hubs_join"></span> →</span></div>
       <div class="card" data-pick="es"><div class="fl"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" fill="#AA151B"/><rect y="12" width="48" height="24" fill="#F1BF00"/></svg></div><h3>Español</h3><span class="join"><span data-t="hubs_join"></span> →</span></div>
+      <div class="card" data-pick="my"><div class="fl"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="16" fill="#FECB00"/><rect y="16" width="48" height="16" fill="#34B233"/><rect y="32" width="48" height="16" fill="#EA2839"/><polygon fill="#fff" points="24,11 27.17,20.63 37.31,20.67 29.14,26.67 32.23,36.33 24,30.4 15.77,36.33 18.86,26.67 10.69,20.67 20.83,20.63"/></svg></div><h3>မြန်မာ</h3><span class="join"><span data-t="hubs_join"></span> →</span></div>
       <div class="card" data-pick="zh"><div class="fl"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" fill="#DE2910"/><polygon fill="#FFDE00" points="14.0,7.0 15.8,12.5 21.6,12.5 16.9,15.9 18.7,21.5 14.0,18.1 9.3,21.5 11.1,15.9 6.4,12.5 12.2,12.5"/><polygon fill="#FFDE00" points="27.8,4.3 27.7,6.0 29.3,6.6 27.7,7.0 27.6,8.7 26.7,7.3 25.1,7.8 26.1,6.5 25.2,5.1 26.8,5.7"/><polygon fill="#FFDE00" points="33.6,10.4 32.9,11.9 34.0,13.0 32.4,12.8 31.6,14.3 31.4,12.6 29.7,12.4 31.2,11.6 31.0,10.0 32.1,11.1"/><polygon fill="#FFDE00" points="34.2,18.2 32.8,19.2 33.4,20.8 32.0,19.9 30.7,20.9 31.2,19.3 29.8,18.4 31.5,18.3 31.9,16.7 32.5,18.3"/><polygon fill="#FFDE00" points="29.3,24.7 27.7,25.1 27.5,26.7 26.7,25.3 25.0,25.7 26.1,24.4 25.3,23.0 26.8,23.6 27.9,22.4 27.8,24.0"/></svg></div><h3>中文</h3><span class="join"><span data-t="hubs_join"></span> →</span></div>
       <div class="card" data-pick="ru"><div class="fl"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="16" fill="#fff"/><rect y="16" width="48" height="16" fill="#0039A6"/><rect y="32" width="48" height="16" fill="#D52B1E"/></svg></div><h3>Русский</h3><span class="join"><span data-t="hubs_join"></span> →</span></div>
     </div>
@@ -964,6 +1136,7 @@ const T = {
     n_home:"Главная",n_learn:"Учёба",n_connect:"Контакты",n_hubs:"Языки"}
 };
 
+T.my = T.my || {};  // Burmese
 const $ = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 let lang = "en";
@@ -973,9 +1146,37 @@ function setLang(l){
   lang = T[l] ? l : "en";
   try { localStorage.setItem("lang", lang); } catch(e){}
   document.documentElement.lang = lang;
-  $$("[data-t]").forEach(el => { el.textContent = T[lang][el.dataset.t] || ""; });
+  $$("[data-t]").forEach(el => { el.textContent = T[lang][el.dataset.t] || T.en[el.dataset.t] || ""; });
+  $$(".lchip[data-pick],.lnode").forEach(c => c.classList.toggle("on", c.dataset.pick === lang));
   if (window.renderPlan) renderPlan();
   if (window.renderShop) renderShop();
+  if (window.renderProphecy) renderProphecy();
+  if (window.renderMissions) renderMissions();
+// ---- Missions & Crusades: pulled live from benlimglobal.com (WordPress, "Missions" shop category) ----
+// Add, edit or remove a mission on the website and the app follows. If the site can't be reached,
+// the last copy saved on this phone is shown, then the built-in list.
+const MISSIONS_URL = "https://benlimglobal.com/wp-json/wp/v2/product?product_cat=91&per_page=20&_embed=wp:featuredmedia&_fields=title,link,excerpt,_links,_embedded";
+const MS_KEY = "benlim-missions";
+const unhtml = h => { const d = document.createElement("div"); d.innerHTML = h || ""; return (d.textContent || "").replace(/\s+/g, " ").replace(/\[…\]|\[…\]/g, "…").trim(); };
+let missionsLive = null;
+function renderMissions(){
+  if (!missionsLive || !missionsLive.length) return;
+  const t = T[lang], esc = x => x.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  $$('[data-live="tiles"]').forEach(box => {
+    box.innerHTML = missionsLive.slice(0, 3).map(m => '<a href="' + esc(m.link) + '" target="_blank" rel="noopener">' + (m.img ? '<img src="' + esc(m.img) + '" alt="" loading="lazy">' : '') + '<span>' + esc(m.title) + '</span></a>').join("");
+  });
+  $$('[data-live="src"]').forEach(p => { p.innerHTML = '<b>●</b> ' + esc(t.ms_live) + (lang !== "en" ? " " + esc(t.in_english) : ""); });
+  $("#missionList").innerHTML = missionsLive.map(m => '<div class="card mtrip">' + (m.img ? '<img src="' + esc(m.img) + '" alt="" loading="lazy">' : '') + '<div><h3>' + esc(m.title) + '</h3>' + (m.text ? '<p>' + esc(m.text) + '</p>' : '') + '<a class="btn" href="' + esc(m.link) + '" target="_blank" rel="noopener">' + esc(t.ms_more) + '</a></div></div>').join("");
+}
+function useMissions(list){ missionsLive = list; renderMissions(); }
+try { const c = JSON.parse(localStorage.getItem(MS_KEY)); if (c && c.length) useMissions(c); } catch(e){}
+fetch(MISSIONS_URL).then(r => r.ok ? r.json() : Promise.reject()).then(items => {
+  const list = items.map(p => {
+    const m = ((p._embedded || {})["wp:featuredmedia"] || [])[0] || {}, sz = (m.media_details || {}).sizes || {};
+    return {title: unhtml(p.title && p.title.rendered), link: p.link, text: unhtml(p.excerpt && p.excerpt.rendered), img: (sz.medium || sz.full || {}).source_url || m.source_url || ""};
+  }).filter(m => m.title && /^https:\/\/benlimglobal\.com\//.test(m.link));
+  if (list.length){ useMissions(list); try { localStorage.setItem(MS_KEY, JSON.stringify(list)); } catch(e){} }
+}).catch(() => {});
 }
 // Page history: every page visited, and where we are in it (like a web browser)
 let currentPage = "home", trail = ["home"], spot = 0;
@@ -1025,6 +1226,7 @@ document.addEventListener("click", e => {
   if (bk){ e.preventDefault(); goBack(bk.dataset.back); return; }
   const g = e.target.closest("[data-go]");
   if (g){ e.preventDefault(); go(g.dataset.go);
+    if (g.dataset.to){ const t = document.getElementById(g.dataset.to); if (t) setTimeout(() => t.scrollIntoView({behavior:"smooth"}), 60); }
     if (g.dataset.lvl){ const t = document.getElementById("lvl-"+g.dataset.lvl); if (t) t.scrollIntoView(); }
     return; }
   const p = e.target.closest("[data-pick]");
@@ -1086,7 +1288,7 @@ $("#copyOil").addEventListener("click", async () => {
 });
 $("#askShawl").addEventListener("click", e => {
   e.preventDefault();
-  window.location.href = "mailto:" + SHOP_EMAIL + "?subject=" + encodeURIComponent("Prayer shawls and flags - Ben Lim Global");
+  window.location.href = "mailto:" + SHOP_EMAIL + "?subject=" + encodeURIComponent("Prayer shawl order ($50) - Ben Lim Global") + "&body=" + encodeURIComponent("PRAYER SHAWL ORDER - $50 each\n\nHow many:\nYour name:\nPhone:\nShipping address:\n");
 });
 $("#askCall").addEventListener("click", e => {
   e.preventDefault();
@@ -1095,7 +1297,7 @@ $("#askCall").addEventListener("click", e => {
 });
 $("#hubInterest").addEventListener("click", e => {
   e.preventDefault();
-  const names = {en:"English",es:"Spanish",zh:"Chinese",ru:"Russian"};
+  const names = {en:"English",es:"Spanish",my:"Burmese",zh:"Chinese",ru:"Russian"};
   const body = "HUB INTEREST - " + names[lang] + "\n\nName:\nCountry or city:\nWhat would you like to see in this hub?\n";
   window.location.href = "mailto:" + SHOP_EMAIL + "?subject=" + encodeURIComponent("Hub interest - " + names[lang]) + "&body=" + encodeURIComponent(body);
 });
@@ -1109,6 +1311,27 @@ const T2 = {
   ru:{cm_calls_h:"Личные звонки",cm_calls_p:"Личное время с доктором Беном входит в уровни партнёрства.",cm_ment_h:"Группы наставничества",cm_ment_p:"Растите вместе с другими в малой группе под руководством команды доктора Бена.",cm_circ_h:"Круги партнёров",cm_circ_p:"Партнёры встречаются и молятся вместе в кругу на Facebook.",cm_levels:"Смотреть уровни",cm_fb:"Открыть Facebook",fuego_p:"Сайт служения доктора Бена для Латинской Америки на испанском языке.",give_btn:"Пожертвовать",ln_h:"Учиться",ln_p:"Учение и материалы от доктора Бена. Смотрите, читайте и растите. Открыто для всех.",ln_yt_h:"Проповеди на YouTube",ln_yt_p:"Смотрите учение доктора Бена в любое время.",ln_deep:"Глубже",ln_deep_p:"Курсы и личное время с доктором Беном.",n_events:"События",rp_card_h:"21 день в Евангелии от Иоанна",rp_card_p:"Читайте по одной главе в день. Отмечайте каждый день и смотрите, как растёт ваш прогресс.",rp_card_btn:"Начать читать",rp_title:"21 день в Евангелии от Иоанна",rp_intro:"Читайте по одной главе Евангелия от Иоанна каждый день. Нажмите на день, когда закончите. Ваш прогресс хранится на этом телефоне.",rp_book:"От Иоанна",rp_day:"День {n}",rp_prog:"Пройдено дней: {a} из {b}",rp_next:"Дальше",rp_done:"Вы прошли все 21 день. Молодец!",rp_reset:"Начать заново",rp_reset_q:"Стереть прогресс и начать заново?",share_app:"Поделиться приложением",sh_text:"Читайте Евангелие от Иоанна вместе с Ben Lim Global.",sh_copied:"Ссылка скопирована. Вставьте её в сообщение.",hubs_badge:"Мировое сообщество",hubs_join:"Войти в центр",hubs_auto:"Не уверены? Язык вашего телефона",hubs_text:"Выберите язык и войдите в центр, созданный для вас: обучение, события и община.",oil_size:"Размер",oil_price:"Цена",oil_add:"Добавить в заявку",oil_form_h:"Заявка на заказ",oil_picked:"Выбрано: {oil}, {size}. Заполните свои данные ниже.",sz_small:"Малый",sz_med:"Средний",sz_large:"Большой",oil_soon:"Фото скоро появится"}
 };
 for (const l in T2) Object.assign(T[l], T2[l]);
+// New text for the globe homepage, Prophecy Now, Missions & Crusades, and Burmese (my).
+// Any text missing in a language falls back to English.
+const T3 = {
+  en:{"g_kick":"Global · Prophetic · Harvest","g_title":"One Global Family","g_tap":"Tap a circle to begin","g_sub":"Prophetic teaching, prayer, and the end-times harvest, for every nation and in your language.","o_lang":"Languages","o_prophecy":"Prophecy Now","o_missions":"Missions","o_partners":"Partners","o_learn":"Learn","o_events":"Events","lang_h":"Your Language","lang_p":"Tap your language. The whole app switches: teaching, events, and shop.","soon":"Soon","pn_today":"Scripture for today","pn_h":"Prophecy Now","pn_p":"A fresh prophetic word from Dr. Ben every week, and a scripture for every day.","pn_btn":"Open Prophecy Now","cr_title":"Missions & Crusades","cr_intro":"Be a part of changing nations. Be a part of the end-times harvest among the nations of the earth. Heaven touching earth: glory, fire, miracles, and the prophetic Word.","cr_link_btn":"See Missions & Crusades","cr_photos":"Photos and videos from the crusades are coming soon.","cr_trips":"Mission trips","ct_1":"Glory & Fire","ct_2":"The Nations","ct_3":"The Harvest","ms_card_h":"Missions & Crusades","ms_card_btn":"See Missions","pw_kick":"Word of the week","pw_amen":"Amen. I receive this word.","pw_amen_done":"Received. Come back tomorrow.","pw_streak":"{n} days in a row","pw_streak1":"Day one. Keep going!","pw_share":"Share today's scripture","pr_p":"Send your prayer request. The team will pray with you.","pw_placeholder":"Dr. Ben's prophetic word for this week will appear here. The team updates it every week.","shawl_h":"Prayer Shawls","shawl_p":"$50 each. Tap below to order, and the team will reply with payment and shipping.","shawl_btn":"Order a Prayer Shawl","cr_link_p":"Be a part of changing nations. Be a part of the end-times harvest among the nations of the earth. Heaven touching earth: glory, fire, miracles, and the prophetic Word."},
+  es:{"g_kick":"Global · Profético · Cosecha","g_title":"Una familia global","g_tap":"Toque un círculo para empezar","g_sub":"Enseñanza profética, oración y la cosecha del tiempo del fin, para cada nación y en su idioma.","o_lang":"Idiomas","o_missions":"Misiones","o_partners":"Socios","o_learn":"Aprender","o_events":"Eventos","lang_h":"Su idioma","lang_p":"Toque su idioma. Toda la app cambia: enseñanza, eventos y tienda.","soon":"Pronto","pn_today":"Escritura de hoy","pn_p":"Una palabra profética nueva del Dr. Ben cada semana, y una escritura para cada día.","pn_btn":"Abrir Prophecy Now","cr_title":"Misiones y Cruzadas","cr_intro":"Sea parte de cambiar naciones. Sea parte de la cosecha del tiempo del fin entre las naciones de la tierra. El cielo tocando la tierra: gloria, fuego, milagros y la Palabra profética.","cr_link_btn":"Ver Misiones y Cruzadas","cr_photos":"Pronto: fotos y videos de las cruzadas.","cr_trips":"Viajes misioneros","ct_1":"Gloria y fuego","ct_2":"Las naciones","ct_3":"La cosecha","ms_card_h":"Misiones y Cruzadas","ms_card_btn":"Ver misiones","pw_kick":"Palabra de la semana","pw_amen":"Amén. Recibo esta palabra.","pw_amen_done":"Recibida. Vuelva mañana.","pw_streak":"{n} días seguidos","pw_streak1":"Primer día. ¡Siga adelante!","pw_share":"Compartir la escritura de hoy","pr_p":"Envíe su petición de oración. El equipo orará con usted.","pw_placeholder":"Aquí aparecerá la palabra profética del Dr. Ben para esta semana. El equipo la actualiza cada semana.","shawl_h":"Mantos de oración","shawl_p":"$50 cada uno. Toque abajo para pedir, y el equipo le responderá con el pago y el envío.","shawl_btn":"Pedir un manto de oración","pn_h":"Prophecy Now","o_prophecy":"Prophecy Now","cr_link_p":"Sea parte de cambiar naciones. Sea parte de la cosecha del tiempo del fin entre las naciones de la tierra. El cielo tocando la tierra: gloria, fuego, milagros y la Palabra profética."},
+  zh:{"g_kick":"全球 · 先知 · 收割","g_title":"一个全球大家庭","g_tap":"点一个圆圈开始","g_sub":"先知性教导、祷告和末世大收割，面向万国，用您的语言。","o_lang":"语言","o_missions":"宣教","o_partners":"伙伴","o_learn":"学习","o_events":"活动","lang_h":"您的语言","lang_p":"点选您的语言，整个应用都会切换：教导、活动和商店。","soon":"即将推出","pn_today":"今日经文","pn_p":"Ben博士每周一篇新的先知性话语，每天一节经文。","pn_btn":"打开 Prophecy Now","cr_title":"宣教与布道大会","cr_intro":"参与改变列国。参与地上万国中的末世大收割。天堂触摸地上：荣耀、火、神迹和先知性的话语。","cr_link_btn":"查看宣教与布道大会","cr_photos":"布道大会的照片和视频即将上线。","cr_trips":"宣教之旅","ct_1":"荣耀与火","ct_2":"列国","ct_3":"收割","ms_card_h":"宣教与布道大会","ms_card_btn":"查看宣教","pw_kick":"本周话语","pw_amen":"阿们，我领受这话语。","pw_amen_done":"已领受。明天再来。","pw_streak":"连续{n}天","pw_streak1":"第一天，继续加油！","pw_share":"分享今日经文","pr_p":"发送您的代祷请求，团队会与您一同祷告。","pw_placeholder":"Ben博士本周的先知性话语将显示在这里。团队每周更新。","shawl_h":"祷告巾","shawl_p":"每条50美元。点下方订购，团队会回复您付款和寄送方式。","shawl_btn":"订购祷告巾","pn_h":"Prophecy Now","o_prophecy":"Prophecy Now","cr_link_p":"参与改变列国。参与地上万国中的末世大收割。天堂触摸地上：荣耀、火、神迹和先知性的话语。"},
+  ru:{"g_kick":"Мир · Пророчество · Жатва","g_title":"Одна мировая семья","g_tap":"Нажмите на круг, чтобы начать","g_sub":"Пророческое учение, молитва и жатва последнего времени для каждого народа и на вашем языке.","o_lang":"Языки","o_missions":"Миссии","o_partners":"Партнёры","o_learn":"Учиться","o_events":"События","lang_h":"Ваш язык","lang_p":"Выберите язык, и всё приложение переключится: учение, события и магазин.","soon":"Скоро","pn_today":"Писание на сегодня","pn_p":"Каждую неделю новое пророческое слово от доктора Бена и стих на каждый день.","pn_btn":"Открыть Prophecy Now","cr_title":"Миссии и евангелизации","cr_intro":"Станьте частью перемен в народах. Станьте частью жатвы последнего времени среди народов земли. Небеса касаются земли: слава, огонь, чудеса и пророческое Слово.","cr_link_btn":"Смотреть миссии","cr_photos":"Скоро здесь появятся фото и видео с евангелизаций.","cr_trips":"Миссионерские поездки","ct_1":"Слава и огонь","ct_2":"Народы","ct_3":"Жатва","ms_card_h":"Миссии и евангелизации","ms_card_btn":"Смотреть миссии","pw_kick":"Слово недели","pw_amen":"Аминь. Я принимаю это слово.","pw_amen_done":"Принято. Возвращайтесь завтра.","pw_streak":"Дней подряд: {n}","pw_streak1":"Первый день. Продолжайте!","pw_share":"Поделиться стихом дня","pr_p":"Отправьте молитвенную просьбу. Команда помолится вместе с вами.","pw_placeholder":"Здесь появится пророческое слово доктора Бена на эту неделю. Команда обновляет его каждую неделю.","shawl_h":"Молитвенные покрывала","shawl_p":"$50 за штуку. Нажмите ниже, чтобы заказать, и команда ответит насчёт оплаты и доставки.","shawl_btn":"Заказать покрывало","pn_h":"Prophecy Now","o_prophecy":"Prophecy Now","cr_link_p":"Станьте частью перемен в народах. Станьте частью жатвы последнего времени среди народов земли. Небеса касаются земли: слава, огонь, чудеса и пророческое Слово."},
+  my:{"g_kick":"ကမ္ဘာလုံးဆိုင်ရာ · ပရောဖက် · စပါးရိတ်သိမ်းခြင်း","g_title":"ကမ္ဘာလုံးဆိုင်ရာ မိသားစုတစ်ခု","g_tap":"စတင်ရန် စက်ဝိုင်းတစ်ခုကို နှိပ်ပါ","g_sub":"ပရောဖက်ပြုသော သွန်သင်ချက်၊ ဆုတောင်းခြင်းနှင့် နောက်ဆုံးကာလ စပါးရိတ်သိမ်းခြင်း၊ လူမျိုးတိုင်းအတွက် သင့်ဘာသာစကားဖြင့်။","o_lang":"ဘာသာစကား","o_missions":"သာသနာပြု","o_partners":"မိတ်ဖက်","o_learn":"လေ့လာ","o_events":"အစီအစဉ်","lang_h":"သင့်ဘာသာစကား","lang_p":"သင့်ဘာသာစကားကို နှိပ်ပါ။ အက်ပ်တစ်ခုလုံး ပြောင်းသွားပါမည်။","soon":"မကြာမီ","pn_today":"ယနေ့အတွက် ကျမ်းချက်","pn_p":"ဒေါက်တာဘင်ထံမှ အပတ်စဉ် ပရောဖက်ပြုချက်အသစ်နှင့် နေ့စဉ်ကျမ်းချက်။","pn_btn":"Prophecy Now ကိုဖွင့်ပါ","cr_title":"သာသနာပြုခြင်းနှင့် ဧဝံဂေလိ အစည်းအဝေးကြီးများ","cr_intro":"လူမျိုးများကို ပြောင်းလဲရာတွင် ပါဝင်ပါ။ မြေကြီးပေါ်ရှိ လူမျိုးများကြားတွင် နောက်ဆုံးကာလ စပါးရိတ်သိမ်းခြင်း၌ ပါဝင်ပါ။ ကောင်းကင်သည် မြေကြီးကို ထိတွေ့ခြင်း၊ ဘုန်းတော်၊ မီး၊ အံ့ဖွယ်အမှုများနှင့် ပရောဖက်ပြုသော နှုတ်ကပတ်တော်။","cr_link_btn":"ကြည့်ရှုရန်","cr_photos":"ဓာတ်ပုံများနှင့် ဗီဒီယိုများ မကြာမီ ရောက်ရှိလာပါမည်။","cr_trips":"သာသနာပြုခရီးစဉ်များ","ct_1":"ဘုန်းတော်နှင့် မီး","ct_2":"လူမျိုးများ","ct_3":"စပါးရိတ်သိမ်းခြင်း","ms_card_h":"သာသနာပြုခြင်းနှင့် ဧဝံဂေလိ အစည်းအဝေးကြီးများ","ms_card_btn":"ကြည့်ရှုရန်","pw_kick":"ယခုအပတ်၏ နှုတ်ကပတ်တော်","pw_amen":"အာမင်။ ဤနှုတ်ကပတ်တော်ကို လက်ခံပါသည်။","pw_amen_done":"လက်ခံပြီးပါပြီ။ မနက်ဖြန် ပြန်လာပါ။","pw_streak":"ဆက်တိုက် {n} ရက်","pw_streak1":"ပထမနေ့။ ဆက်လုပ်ပါ!","pw_share":"ယနေ့ကျမ်းချက်ကို မျှဝေပါ","pr_p":"သင့်ဆုတောင်းချက်ကို ပေးပို့ပါ။ အဖွဲ့သည် သင်နှင့်အတူ ဆုတောင်းပေးပါမည်။","pw_placeholder":"ဒေါက်တာဘင်၏ ယခုအပတ် ပရောဖက်ပြုချက်ကို ဤနေရာတွင် ဖော်ပြပါမည်။","shawl_h":"ဆုတောင်းပုဝါများ","shawl_p":"တစ်ထည်လျှင် $50။ မှာယူရန် အောက်တွင် နှိပ်ပါ။","shawl_btn":"ဆုတောင်းပုဝါ မှာယူရန်","n_home":"ပင်မ","n_learn":"လေ့လာ","n_events":"အစီအစဉ်","n_shop":"ဆိုင်","n_connect":"ဆက်သွယ်","n_hubs":"ဘာသာစကား","hubs_join":"ဝင်ရောက်ရန်","hp_title":"မြန်မာ Hub","hp_welcome":"Ben Lim Global ၏ မြန်မာ hub မှ ကြိုဆိုပါသည်။","inv_back":"နောက်သို့","open":"ဖွင့်ရန်","tagline":"ကမ္ဘာလုံးဆိုင်ရာ အံ့ဖွယ်အမှု ဓမ္မအမှုတော်","share_app":"ဤအက်ပ်ကို မျှဝေပါ","pt_btn":"မိတ်ဖက်ဖြစ်လာပါ","uh_h":"မိတ်ဖက်အဆင့်များ","vision_title":"ကျွန်ုပ်တို့၏ ရူပါရုံ","about_title":"ဒေါက်တာ ဘင်လင်း အကြောင်း","cr_apply":"ယခု လျှောက်ထားပါ","k_prayer_h":"ဆုတောင်းပေးရန် လိုအပ်ပါသလား","pn_h":"Prophecy Now","o_prophecy":"Prophecy Now","cr_link_p":"လူမျိုးများကို ပြောင်းလဲရာတွင် ပါဝင်ပါ။ မြေကြီးပေါ်ရှိ လူမျိုးများကြားတွင် နောက်ဆုံးကာလ စပါးရိတ်သိမ်းခြင်း၌ ပါဝင်ပါ။ ကောင်းကင်သည် မြေကြီးကို ထိတွေ့ခြင်း၊ ဘုန်းတော်၊ မီး၊ အံ့ဖွယ်အမှုများနှင့် ပရောဖက်ပြုသော နှုတ်ကပတ်တော်။"}
+};
+Object.assign(T3.en, {"x_missions":"Missions & Crusades","x_mentor":"Mentorship","x_about":"About Dr. Ben","buy_now":"Buy Now","ms_live":"Live from benlimglobal.com","in_english":"(in English)","cd_h":"Application received","cd_ref":"Your reference:","cd_back":"Back to Missions","cd_again":"Send another"});
+Object.assign(T3.es, {"x_missions":"Misiones y Cruzadas","x_mentor":"Mentoría","x_about":"Sobre el Dr. Ben","buy_now":"Comprar","ms_live":"En vivo desde benlimglobal.com","in_english":"(en inglés)","cd_h":"Solicitud recibida","cd_ref":"Su referencia:","cd_back":"Volver a Misiones","cd_again":"Enviar otra"});
+Object.assign(T3.zh, {"x_missions":"宣教与布道大会","x_mentor":"门徒培训","x_about":"关于Ben博士","buy_now":"立即购买","ms_live":"实时来自 benlimglobal.com","in_english":"（英文）","cd_h":"申请已收到","cd_ref":"您的编号：","cd_back":"返回宣教","cd_again":"再提交一份"});
+Object.assign(T3.ru, {"x_missions":"Миссии и евангелизации","x_mentor":"Наставничество","x_about":"О докторе Бене","buy_now":"Купить","ms_live":"Обновляется с benlimglobal.com","in_english":"(на английском)","cd_h":"Заявка получена","cd_ref":"Ваш номер:","cd_back":"Назад к миссиям","cd_again":"Отправить ещё"});
+Object.assign(T3.my, {"x_missions":"သာသနာပြုခြင်း","x_mentor":"လမ်းညွှန်ပေးခြင်း","x_about":"ဒေါက်တာဘင် အကြောင်း","buy_now":"ယခုဝယ်ယူပါ","ms_live":"benlimglobal.com မှ တိုက်ရိုက်","in_english":"(အင်္ဂလိပ်ဘာသာဖြင့်)","cd_h":"လျှောက်လွှာ လက်ခံရရှိပါပြီ","cd_ref":"သင့်ရည်ညွှန်းနံပါတ်:","cd_back":"သာသနာပြုသို့ ပြန်သွားရန်","cd_again":"နောက်တစ်ခု ပို့ရန်"});
+Object.assign(T3.en, {"g_kick":"Learn · Connect · Reach the Nations","g_title":"Global Education & Connection","g_sub":"Learn prophetic teaching, connect with believers in your own language, and join the end-times harvest across the nations."});
+Object.assign(T3.es, {"g_kick":"Aprender · Conectar · Alcanzar las naciones","g_title":"Educación y conexión global","g_sub":"Aprenda enseñanza profética, conéctese con creyentes en su propio idioma y únase a la cosecha del tiempo del fin en las naciones."});
+Object.assign(T3.zh, {"g_kick":"学习 · 连接 · 触及列国","g_title":"全球教育与连接","g_sub":"学习先知性教导，用您自己的语言与信徒连接，一同参与列国中的末世大收割。"});
+Object.assign(T3.ru, {"g_kick":"Учиться · Общаться · Достигать народы","g_title":"Глобальное обучение и общение","g_sub":"Изучайте пророческое учение, общайтесь с верующими на своём языке и участвуйте в жатве последнего времени среди народов."});
+Object.assign(T3.my, {"g_kick":"လေ့လာ · ချိတ်ဆက် · လူမျိုးများထံ ရောက်ရှိ","g_title":"ကမ္ဘာလုံးဆိုင်ရာ ပညာရေးနှင့် ချိတ်ဆက်မှု","g_sub":"ပရောဖက်ပြုသော သွန်သင်ချက်ကို လေ့လာပါ၊ သင့်ဘာသာစကားဖြင့် ယုံကြည်သူများနှင့် ချိတ်ဆက်ပါ၊ လူမျိုးများကြားရှိ နောက်ဆုံးကာလ စပါးရိတ်သိမ်းခြင်း၌ ပါဝင်ပါ။"});
+for (const l in T3) Object.assign(T[l], T3[l]);
+for (const l in T) for (const k in T.en) if (!(k in T[l])) T[l][k] = T.en[k];  // fill gaps with English
 
 // ---- 21-day reading plan (progress is saved on the phone) ----
 const RP_DAYS = 21, RP_KEY = "rp21";
@@ -1168,13 +1391,81 @@ $("#rpReset").addEventListener("click", () => {
 // ---- Share ----
 async function shareApp(){
   const url = location.href.split("#")[0], text = T[lang].sh_text;
-  try { if (navigator.share){ await navigator.share({title:"Ben Lim Global", text, url}); return; } }
+  try { if (navigator.share){ await navigator.share({title:"Glory App", text, url}); return; } }
   catch(e){ if (e && e.name === "AbortError") return; }
   try { await navigator.clipboard.writeText(text + " " + url); alert(T[lang].sh_copied); }
   catch(e){ prompt(T[lang].sh_copied, text + " " + url); }
 }
 $("#shareApp").addEventListener("click", shareApp);
 $("#rpShare").addEventListener("click", shareApp);
+// ---- Prophecy Now ----
+// WORD OF THE WEEK: paste Dr. Ben's word here each week. Leave text empty to show the "coming" message.
+// Add other languages as extra keys, for example text: {en:"...", es:"..."}.
+const WORD = {
+  title: {en:"Word of the Week"},
+  text: {en:""},
+  from: "Dr. Ben Lim"
+};
+// One scripture per day, in order (King James Version)
+const VERSES = [
+  ["Joel 2:28","I will pour out my spirit upon all flesh; and your sons and your daughters shall prophesy, your old men shall dream dreams, your young men shall see visions."],
+  ["Habakkuk 2:14","For the earth shall be filled with the knowledge of the glory of the LORD, as the waters cover the sea."],
+  ["Matthew 24:14","And this gospel of the kingdom shall be preached in all the world for a witness unto all nations; and then shall the end come."],
+  ["Isaiah 60:1","Arise, shine; for thy light is come, and the glory of the LORD is risen upon thee."],
+  ["Psalm 2:8","Ask of me, and I shall give thee the heathen for thine inheritance, and the uttermost parts of the earth for thy possession."],
+  ["Amos 3:7","Surely the Lord GOD will do nothing, but he revealeth his secret unto his servants the prophets."],
+  ["John 4:35","Lift up your eyes, and look on the fields; for they are white already to harvest."],
+  ["Acts 1:8","But ye shall receive power, after that the Holy Ghost is come upon you: and ye shall be witnesses unto me... unto the uttermost part of the earth."],
+  ["2 Chronicles 20:20","Believe in the LORD your God, so shall ye be established; believe his prophets, so shall ye prosper."],
+  ["Isaiah 43:19","Behold, I will do a new thing; now it shall spring forth; shall ye not know it?"],
+  ["Psalm 96:3","Declare his glory among the heathen, his wonders among all people."],
+  ["Jeremiah 29:11","For I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil, to give you an expected end."],
+  ["Mark 16:17","And these signs shall follow them that believe; In my name shall they cast out devils; they shall speak with new tongues."],
+  ["Revelation 7:9","A great multitude, which no man could number, of all nations, and kindreds, and people, and tongues, stood before the throne, and before the Lamb."]
+];
+const PW_KEY = "benlim-amen";
+const dayKey = d => d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+function todayVerse(){
+  const now = new Date(), start = new Date(now.getFullYear(), 0, 0);
+  return VERSES[Math.floor((now - start) / 864e5) % VERSES.length];
+}
+function pwLoad(){ try { return JSON.parse(localStorage.getItem(PW_KEY)) || {}; } catch(e){ return {}; } }
+function renderProphecy(){
+  const t = T[lang], pick = o => (o && (o[lang] || o.en)) || "";
+  $("#pwTitle").textContent = pick(WORD.title);
+  $("#pwText").textContent = pick(WORD.text) || t.pw_placeholder || T.en.pw_placeholder;
+  $("#pwFrom").textContent = WORD.from;
+  const [ref, txt] = todayVerse(), v = "“" + txt + "” — " + ref;
+  $("#homeVerse").textContent = v; $("#pageVerse").textContent = v;
+  const st = pwLoad(), today = dayKey(new Date()), y = new Date(); y.setDate(y.getDate() - 1);
+  const n = st.last === today || st.last === dayKey(y) ? st.n || 0 : 0;
+  const done = st.last === today, b = $("#pwAmen");
+  b.disabled = done; b.textContent = done ? t.pw_amen_done || T.en.pw_amen_done : t.pw_amen || T.en.pw_amen;
+  const sk = $("#pwStreak"); sk.hidden = !n;
+  sk.querySelector("span").textContent = n === 1 ? (t.pw_streak1 || T.en.pw_streak1) : (t.pw_streak || T.en.pw_streak).replace("{n}", n);
+}
+$("#pwAmen").addEventListener("click", e => {
+  const st = pwLoad(), today = dayKey(new Date()), y = new Date(); y.setDate(y.getDate() - 1);
+  if (st.last === today) return;
+  const n = st.last === dayKey(y) ? (st.n || 0) + 1 : 1;
+  try { localStorage.setItem(PW_KEY, JSON.stringify({last: today, n})); } catch(err){}
+  const r = e.currentTarget.getBoundingClientRect();
+  if (window.burst) burst(r.left + r.width / 2, r.top + r.height / 2, 26, true);
+  renderProphecy();
+});
+$("#pwShare").addEventListener("click", async () => {
+  const [ref, txt] = todayVerse(), text = "“" + txt + "” — " + ref + "\n\nBen Lim Global", url = location.href.split("#")[0];
+  try { if (navigator.share){ await navigator.share({title:"Glory App", text, url}); return; } }
+  catch(e){ if (e && e.name === "AbortError") return; }
+  try { await navigator.clipboard.writeText(text + " " + url); alert(T[lang].sh_copied); }
+  catch(e){ prompt(T[lang].sh_copied, text + " " + url); }
+});
+// Language chips on the homepage use the flags from the Languages page
+$$("[data-flag]").forEach(f => {
+  const src = $('#hubs [data-pick="' + f.dataset.flag + '"] .fl');
+  if (src) f.innerHTML = src.innerHTML;
+});
+renderProphecy();
 // ---- Event RSVP (opens an email to the team with the event filled in) ----
 document.addEventListener("click", e => {
   const a = e.target.closest(".rsvpEv");
@@ -1214,18 +1505,22 @@ $("#crusadeForm").addEventListener("submit", async e => {
   const what = f.elements["Mission or crusade applying for"].value.trim();
   btn.disabled = true; msg.textContent = T[lang].ca_sending;
   try {
-    const data = Object.assign({_subject: "Mission application - " + what, _template: "table", _captcha: "false", _replyto: f.elements["Email"].value.trim()}, crusadeFields());
+    const ref = "MA-" + Date.now().toString(36).toUpperCase();
+    const data = Object.assign({_ref: ref, _subject: "Mission application " + ref + " - " + what, _template: "table", _captcha: "false", _replyto: f.elements["Email"].value.trim()}, crusadeFields());
     const r = await fetch("https://formsubmit.co/ajax/" + CRUSADE_EMAIL, {method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"}, body: JSON.stringify(data)});
     const j = await r.json();
     if (!r.ok || String(j.success) !== "true") throw new Error("not sent");
     f.reset(); $$(".touched", f).forEach(i => i.classList.remove("touched"));
-    msg.textContent = T[lang].ca_sent; window.scrollTo({top:0});
+    msg.textContent = "";
+    $("#crusadeRef").textContent = data._ref;
+    f.hidden = true; $("#crusadeDone").hidden = false; window.scrollTo({top:0});
   } catch(err){
     msg.textContent = T[lang].ca_fail;
     window.location.href = "mailto:" + CRUSADE_EMAIL + "?subject=" + encodeURIComponent("Mission application - " + what) + "&body=" + encodeURIComponent(crusadeText());
   }
   btn.disabled = false;
 });
+$("#crusadeAgain").addEventListener("click", () => { $("#crusadeDone").hidden = true; $("#crusadeForm").hidden = false; });
 // ---- Event RSVP (opens an email to the team with the answers filled in) ----
 const APPLY_EMAIL = "hello@benlimglobal.com"; // change this to where event applications should go
 function applyText(){
@@ -1300,7 +1595,7 @@ try {
 // ---- Languages page: tap burst and "use my phone's language" ----
 $("#hubAuto").addEventListener("click", () => {
   const l = (navigator.language || "en").slice(0, 2).toLowerCase();
-  setLang(["en","es","zh","ru"].includes(l) ? l : "en");
+  setLang(["en","es","my","zh","ru"].includes(l) ? l : "en");
   go("hubpage");
 });
 document.addEventListener("click", e => {
