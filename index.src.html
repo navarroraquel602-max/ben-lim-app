@@ -594,6 +594,41 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
 @media (hover:hover){.mitem:hover{transform:translateY(-3px);box-shadow:0 12px 24px -10px rgba(0,0,0,.35)}}
 .mitem:active{transform:scale(.97)}
 @media (min-width:700px){.mgrid{grid-template-columns:repeat(3,1fr)}}
+/* ---- Reading plan page ---- */
+.rphero{display:flex;gap:18px;align-items:center;border-radius:22px;padding:20px 18px;margin:4px 0 14px;color:#fff;background:radial-gradient(circle at 0% 0%,rgba(224,162,52,.5),transparent 55%),linear-gradient(150deg,#0d0b08,#2a1f0b 70%,#4a3510)}
+.rphero h2{color:#fff;font-size:26px;margin:4px 0 4px}
+.rphero p{color:#e8dfcc;margin:0;font-size:14px}
+.rp-prog{margin-top:8px;font-weight:700;color:#f3dca4;font-size:14px}
+.rpring{position:relative;flex:none;width:112px;height:112px}
+.rpring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.rpring circle{fill:none;stroke:rgba(255,255,255,.14);stroke-width:9}
+.rpring .rg{stroke:#e0a234;stroke-linecap:round;stroke-dasharray:0 100;transition:stroke-dasharray .8s cubic-bezier(.3,1.2,.5,1);filter:drop-shadow(0 0 6px rgba(224,162,52,.6))}
+.rpring span{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.rpring b{font:600 36px/1 Oswald,system-ui,sans-serif}
+.rpring small{font-size:12px;color:#d8d2c4}
+.rpnext{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#fff;border:2px solid #e0a234;border-radius:18px;padding:14px 16px;margin:0 0 12px;box-shadow:0 10px 24px -12px rgba(224,162,52,.6)}
+.rpnext-k{width:100%;font:700 11px Lato,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8a5d10}
+.rpnext-d{flex:1;min-width:0}
+.rpnext-d b{display:block;font:600 26px/1.1 Oswald,system-ui,sans-serif;text-transform:uppercase}
+.rpnext-d span{color:var(--muted)}
+.rpnext .btn{margin:0}
+.rpnext.all{background:linear-gradient(135deg,#e0a234,#f3dca4);border-color:#c88a1d}
+.rpnext.all .rpnext-d b{font-size:20px;text-transform:none}
+.rpgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:10px 0 16px}
+.rptile{aspect-ratio:1;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;cursor:pointer;padding:0;color:var(--text);transition:transform .15s ease,background .2s ease,border-color .2s ease}
+.rptile b{font:600 17px/1 Oswald,system-ui,sans-serif}
+.rptile small{font-size:8.5px;letter-spacing:.04em;color:var(--muted);text-transform:uppercase}
+.rptile.done{background:radial-gradient(circle at 35% 30%,#f3dca4,#e0a234 60%,#c88a1d);border-color:#c88a1d;color:#111}
+.rptile.done small{color:#111;font-size:11px;font-weight:700}
+.rptile.next{border:2px solid #e0a234;box-shadow:0 0 0 4px rgba(224,162,52,.2)}
+.rptile:active{transform:scale(.9)}
+.rp-actions{display:flex;gap:8px;flex-wrap:wrap}
+@media (prefers-reduced-motion:no-preference){
+  .rptile.next{animation:nextPulse 2s ease-in-out infinite}
+  .rptile.pop{animation:rpPop .5s cubic-bezier(.3,1.6,.5,1)}
+}
+@media (min-width:700px){#reading{max-width:760px;margin:0 auto}.rpgrid{gap:12px}.rptile b{font-size:22px}}
+@media (max-width:360px){.rphero{flex-direction:column;text-align:center}.rpgrid{gap:6px}.rptile small{display:none}}
 /* Burmese: letter-spacing breaks the script, and words run longer */
 html[lang=my] *{letter-spacing:0!important}
 html[lang=my] body{line-height:1.7}
@@ -1198,15 +1233,19 @@ html[lang=my] .onode i{font-size:8px}
   <!-- READING PLAN -->
   <section id="reading">
     <p><a class="btn ghost" href="#" data-back="learn" data-t="inv_back"></a></p>
-    <h2 data-t="rp_title"></h2>
-    <p data-t="rp_intro"></p>
-    <div class="card">
-      <div id="rpProg" class="rp-msg"></div>
-      <div class="rp-bar" aria-hidden="true"><i id="rpBar"></i></div>
-      <p id="rpDone" class="rp-msg" hidden></p>
+    <div class="rphero">
+      <div class="rpring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52"/><circle class="rg" id="rpRingBig" cx="60" cy="60" r="52" pathLength="100"/></svg><span><b id="rpCount">0</b><small>/ 21</small></span></div>
+      <div class="rphero-t">
+        <span class="gkick" data-t="watch_title"></span>
+        <h2 data-t="rp_title"></h2>
+        <p data-t="rp_intro"></p>
+        <div id="rpProg" class="rp-prog"></div>
+      </div>
     </div>
-    <div id="rpList" class="rp-list"></div>
-    <p><button class="btn" type="button" id="rpShare" data-t="share_app"></button>
+    <div class="rpnext" id="rpNext" aria-live="polite"></div>
+    <p class="note" data-t="rp_tap"></p>
+    <div id="rpList" class="rpgrid" role="group"></div>
+    <p class="rp-actions"><button class="btn" type="button" id="rpShare" data-t="share_app"></button>
        <button class="btn ghost" type="button" id="rpReset" data-t="rp_reset"></button></p>
   </section>
 
@@ -1502,6 +1541,11 @@ Object.assign(T3.es, {"sh_shawl_p": "Un manto de oración blanco con franjas roj
 Object.assign(T3.zh, {"sh_shawl_p": "白色祷告巾，配红色和金色条纹，附配套收纳袋。"});
 Object.assign(T3.ru, {"sh_shawl_p": "Белое молитвенное покрывало с красными и золотыми полосами и сумкой в комплекте."});
 Object.assign(T3.my, {"sh_shawl_p": "အနီနှင့် ရွှေရောင် အစင်းများပါသော အဖြူရောင် ဆုတောင်းပုဝါ၊ လိုက်ဖက်သော အိတ်ပါဝင်သည်။"});
+Object.assign(T3.en, {"rp_mark":"Mark as read","rp_tap":"Tap any day to check it off, or tap again to undo."});
+Object.assign(T3.es, {"rp_mark":"Marcar como leído","rp_tap":"Toque un día para marcarlo, o tóquelo de nuevo para deshacer."});
+Object.assign(T3.zh, {"rp_mark":"标记为已读","rp_tap":"点选任一天即可打勾，再点一次可取消。"});
+Object.assign(T3.ru, {"rp_mark":"Отметить прочитанным","rp_tap":"Нажмите на день, чтобы отметить его, или нажмите снова, чтобы отменить."});
+Object.assign(T3.my, {"rp_mark":"ဖတ်ပြီးဟု မှတ်ရန်","rp_tap":"အမှတ်ခြစ်ရန် နေ့တစ်နေ့ကို နှိပ်ပါ၊ ပြန်ဖျက်ရန် ထပ်နှိပ်ပါ။"});
 for (const l in T3) Object.assign(T[l], T3[l]);
 for (const l in T) for (const k in T.en) if (!(k in T[l])) T[l][k] = T.en[k];  // fill gaps with English
 
@@ -1519,48 +1563,47 @@ function rpRing(){
   if (ring) ring.style.strokeDasharray = Math.round(n / RP_DAYS * 100) + " 100";
 }
 function rpSave(a){ try { localStorage.setItem(RP_KEY, JSON.stringify(a)); } catch(e){} rpRing(); }
-function renderPlan(){
-  const t = T[lang], done = rpLoad();
-  const box = $("#rpList");
-  if (!box) return;
-  box.textContent = "";
-  let next = -1;
-  for (let d = 1; d <= RP_DAYS; d++){
-    const isDone = !!done[d-1];
-    if (!isDone && next < 0) next = d;
-    const lab = document.createElement("label");
-    lab.className = "rpday" + (isDone ? " done" : "") + (next === d ? " next" : "") + (rpPopDay === d ? " pop" : "");
-    const cb = document.createElement("input");
-    cb.type = "checkbox"; cb.checked = isDone;
-    cb.addEventListener("change", () => {
-      const a = rpLoad(); a[d-1] = cb.checked; rpSave(a);
-      if (cb.checked){
-        rpPopDay = d;
-        const r = cb.getBoundingClientRect();
-        const all = a.slice(0, RP_DAYS).filter(Boolean).length === RP_DAYS;
-        burst(r.left + r.width / 2, r.top + r.height / 2, 16);
-        if (all) setTimeout(() => burst(innerWidth / 2, innerHeight / 3, 80, true), 250);
-        try { navigator.vibrate && navigator.vibrate(all ? [30,60,30,60,60] : 25); } catch(e){}
-      }
-      renderPlan();
-    });
-    const txt = document.createElement("span");
-    txt.className = "t";
-    txt.textContent = t.rp_day.replace("{n}", d);
-    const sm = document.createElement("small");
-    sm.textContent = t.rp_book + " " + d;
-    txt.appendChild(sm);
-    lab.append(cb, txt);
-    if (next === d){ const em = document.createElement("em"); em.textContent = t.rp_next; lab.appendChild(em); }
-    box.appendChild(lab);
+function rpMark(d, on, el){
+  const a = rpLoad(); a[d-1] = on; rpSave(a);
+  if (on){
+    rpPopDay = d;
+    const all = a.slice(0, RP_DAYS).filter(Boolean).length === RP_DAYS;
+    if (el){ const r = el.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, 18); }
+    if (all) setTimeout(() => burst(innerWidth / 2, innerHeight / 3, 80, true), 250);
+    try { navigator.vibrate && navigator.vibrate(all ? [30,60,30,60,60] : 25); } catch(e){}
   }
+  renderPlan();
+}
+function renderPlan(){
+  const t = T[lang], done = rpLoad(), box = $("#rpList");
+  if (!box) return;
   const n = done.slice(0, RP_DAYS).filter(Boolean).length;
+  let next = -1;
+  for (let d = 1; d <= RP_DAYS; d++) if (!done[d-1]){ next = d; break; }
+  box.innerHTML = "";
+  for (let d = 1; d <= RP_DAYS; d++){
+    const isDone = !!done[d-1], b = document.createElement("button");
+    b.type = "button";
+    b.className = "rptile" + (isDone ? " done" : "") + (next === d ? " next" : "") + (rpPopDay === d ? " pop" : "");
+    b.setAttribute("aria-pressed", isDone);
+    b.setAttribute("aria-label", t.rp_day.replace("{n}", d) + ", " + t.rp_book + " " + d);
+    b.innerHTML = '<b>' + d + '</b><small>' + (isDone ? "✓" : t.rp_book) + '</small>';
+    b.addEventListener("click", () => rpMark(d, !isDone, b));
+    box.appendChild(b);
+  }
+  $("#rpCount").textContent = n;
+  $("#rpRingBig").style.strokeDasharray = Math.round(n / RP_DAYS * 100) + " 100";
   $("#rpProg").textContent = t.rp_prog.replace("{a}", n).replace("{b}", RP_DAYS);
-  $("#rpBar").style.width = Math.round(n / RP_DAYS * 100) + "%";
+  const nx = $("#rpNext");
+  if (next > 0){
+    nx.className = "rpnext";
+    nx.innerHTML = '<span class="rpnext-k">' + t.rp_next + '</span><div class="rpnext-d"><b>' + t.rp_day.replace("{n}", next) + '</b><span>' + t.rp_book + ' ' + next + '</span></div><button class="btn" type="button" id="rpMarkBtn">' + t.rp_mark + '</button>';
+    $("#rpMarkBtn").addEventListener("click", e => rpMark(next, true, e.currentTarget));
+  } else {
+    nx.className = "rpnext all";
+    nx.innerHTML = '<span class="rpnext-k">21 / 21</span><div class="rpnext-d"><b>' + t.rp_done + '</b></div>';
+  }
   rpPopDay = 0;
-  const msg = $("#rpDone");
-  msg.hidden = n < RP_DAYS;
-  msg.textContent = n < RP_DAYS ? "" : t.rp_done;
 }
 $("#rpReset").addEventListener("click", () => {
   if (confirm(T[lang].rp_reset_q)){ rpSave([]); renderPlan(); }
