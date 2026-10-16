@@ -12,7 +12,8 @@ No framework, no build tools to install, and no paid services.
 | File | What it is |
 |---|---|
 | `index.src.html` | **The file you edit.** All pages, styles, text in every language, and app logic. |
-| `build.py` | Turns `index.src.html` into `index.html` with the images built in. Run `python3 build.py`. |
+| `build.py` | Turns `index.src.html` into `index.html` (Black & Gold edition, images built in) **and** `silver.html` (Black, Silver & White edition). Run `python3 build.py`. |
+| `theme_silver.py` | Recolors every gold/fire color to silver for `silver.html`; flags, social-network colors and product photos stay true, crowd photos turn black and white. `manifest-silver.json` lets the silver edition be added to a home screen on its own. |
 | `index.html` | What visitors load. Generated, so never edit it by hand. |
 | `sw.js` | Lets the app work offline. Change the cache name (`benlim-v61` → `benlim-v62`) each time you publish. |
 | `manifest.json` | App name and icon for "Add to Home Screen". |
