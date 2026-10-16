@@ -46,6 +46,13 @@ If the site can't be reached, the app shows the last copy saved on the phone. We
 
 ## Text and languages
 
+- **Interface text:** the `T`, `T2`, `T3` tables in `index.src.html`.
+- **Text written in the page itself** (forms, legal agreements, course names): `i18n/en.json` plus `es/zh/ru/my.json`, matched by position. To add a line, add it to every file at the same spot.
+- **Website content** (events, mission trips, Prophecy Library titles and previews): `i18n/content.json`, keyed by the item's web address. New items posted on the website show in English, labelled "(in English)", until a translation is added there. The full text of a prophetic word opens through Google Translate in the reader's language.
+- **Legal note:** the crusade application's agreements are translated so applicants can understand them; the ministry should confirm whether the English version is the binding one.
+
+### Interface tables
+
 All on-screen text lives in the `T`, `T2` and `T3` tables in `index.src.html`. The languages are `en`, `es`, `my` (Burmese), `zh` and `ru`. Any text missing in a language falls back to English. **Burmese was machine-written and needs review by a native speaker.**
 
 ## Things that need the ministry

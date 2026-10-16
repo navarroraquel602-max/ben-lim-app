@@ -1547,6 +1547,7 @@ function setLang(l){
   if (window.renderCart) renderCart();
   if (window.renderPartnerArea) renderPartnerArea();
   if (window.renderMusic) renderMusic();
+  if (window.translatePage) translatePage();
   if (window.splitGlow) splitGlow();
 }
 // Page history: every page visited, and where we are in it (like a web browser)
@@ -1736,6 +1737,11 @@ Object.assign(T3.es, {"sh_app":"Glory App de Ben Lim Global: enseñanza proféti
 Object.assign(T3.zh, {"sh_app":"Ben Lim Global 的 Glory App：先知性教导、宣教与列国，用您的语言。"});
 Object.assign(T3.ru, {"sh_app":"Glory App от Ben Lim Global: пророческое учение, миссии и народы — на вашем языке."});
 Object.assign(T3.my, {"sh_app":"Ben Lim Global ၏ Glory App: ပရောဖက်ပြုသော သွန်သင်ချက်၊ သာသနာပြုခြင်းနှင့် လူမျိုးများ — သင့်ဘာသာစကားဖြင့်။"});
+Object.assign(T3.en, {"pl_full_tr":"Read the full word"});
+Object.assign(T3.es, {"pl_full_tr":"Leer la palabra completa en español","pl_tr_note":"La palabra completa se abre traducida automáticamente por Google Translate desde el original en inglés."});
+Object.assign(T3.zh, {"pl_full_tr":"阅读完整中文话语","pl_tr_note":"完整话语将通过 Google 翻译从英文原文自动翻译打开。"});
+Object.assign(T3.ru, {"pl_full_tr":"Читать полностью на русском","pl_tr_note":"Полный текст откроется в автоматическом переводе Google Translate с английского оригинала."});
+Object.assign(T3.my, {"pl_full_tr":"မြန်မာဘာသာဖြင့် အပြည့်အစုံ ဖတ်ရန်","pl_tr_note":"အပြည့်အစုံကို အင်္ဂလိပ်မူရင်းမှ Google Translate ဖြင့် အလိုအလျောက် ဘာသာပြန်၍ ဖွင့်ပါမည်။"});
 for (const l in T3) Object.assign(T[l], T3[l]);
 for (const l in T) for (const k in T.en) if (!(k in T[l])) T[l][k] = T.en[k];  // fill gaps with English
 
@@ -1889,10 +1895,10 @@ function renderMissions(){
   if (!missionsLive || !missionsLive.length) return;
   const t = T[lang], esc = x => x.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   $$('[data-live="tiles"]').forEach(box => {
-    box.innerHTML = missionsLive.slice(0, 3).map(m => '<a href="' + esc(m.link) + '" target="_blank" rel="noopener">' + (m.img ? '<img src="' + esc(m.img) + '" alt="" loading="lazy">' : '') + '<span>' + esc(m.title) + '</span></a>').join("");
+    box.innerHTML = missionsLive.slice(0, 3).map(m => '<a href="' + esc(m.link) + '" target="_blank" rel="noopener">' + (m.img ? '<img src="' + esc(m.img) + '" alt="" loading="lazy">' : '') + '<span>' + esc(ct(m,'title')) + '</span></a>').join("");
   });
-  $$('[data-live="src"]').forEach(p => { p.innerHTML = '<b>●</b> ' + esc(t.ms_live) + (lang !== "en" ? " " + esc(t.in_english) : ""); });
-  $("#missionList").innerHTML = missionsLive.map(m => '<div class="card mtrip">' + (m.img ? '<img src="' + esc(m.img) + '" alt="" loading="lazy">' : '') + '<div><h3>' + esc(m.title) + '</h3>' + (m.text ? '<p>' + esc(m.text) + '</p>' : '') + '<a class="btn" href="' + esc(m.link) + '" target="_blank" rel="noopener">' + esc(t.ms_more) + '</a></div></div>').join("");
+  $$('[data-live="src"]').forEach(p => { p.innerHTML = '<b>●</b> ' + esc(t.ms_live) + (!ctAll(missionsLive) ? " " + esc(t.in_english) : ""); });
+  $("#missionList").innerHTML = missionsLive.map(m => '<div class="card mtrip">' + (m.img ? '<img src="' + esc(m.img) + '" alt="" loading="lazy">' : '') + '<div><h3>' + esc(ct(m,'title')) + '</h3>' + (m.text ? '<p>' + esc(ct(m,'text')) + '</p>' : '') + '<a class="btn" href="' + esc(m.link) + '" target="_blank" rel="noopener">' + esc(t.ms_more) + '</a></div></div>').join("");
 }
 function useMissions(list){ missionsLive = list; renderMissions(); }
 try { const c = JSON.parse(localStorage.getItem(MS_KEY)); if (c && c.length) useMissions(c); } catch(e){}
@@ -1930,16 +1936,16 @@ function renderEvents(){
   const mon = d => { try { return new Date(d + "T12:00:00").toLocaleDateString(lang === "my" ? "my-MM" : lang, {month:"short"}); } catch(x){ return ""; } };
   const featured = list.find(e => e.start) || list[0], rest = list.filter(e => e !== featured);
   const feat = e => '<a class="evx" href="' + evEsc(e.link) + '" target="_blank" rel="noopener">' + (e.img ? '<img src="' + evEsc(e.img) + '" alt="">' : '') +
-    '<div class="evx-in"><span class="evx-k">' + evEsc(t.ev_next) + '</span><h3>' + evEsc(e.title) + '</h3>' + (e.start ? '<div class="evx-d">' + evEsc(evWhen(e)) + '</div>' : '') +
+    '<div class="evx-in"><span class="evx-k">' + evEsc(t.ev_next) + '</span><h3>' + evEsc(ct(e,'title')) + '</h3>' + (e.start ? '<div class="evx-d">' + evEsc(evWhen(e)) + '</div>' : '') +
     (e.start ? '<div class="cd" data-start="' + e.start + '" data-end="' + (e.end || e.start) + '"></div>' : '') + '</div></a>';
   const item = e => '<a class="tli" href="' + evEsc(e.link) + '" target="_blank" rel="noopener">' +
     (e.start ? '<div class="tld"><b>' + Number(e.start.slice(8, 10)) + '</b><small>' + evEsc(mon(e.start)) + '</small></div>' : '<div class="tld new"><small>' + evEsc(t.ev_new) + '</small></div>') +
-    '<div class="tlc">' + (e.img ? '<img src="' + evEsc(e.img) + '" alt="" loading="lazy">' : '') + '<div>' + (e.start ? '<div class="tlw">' + evEsc(evWhen(e)) + '</div>' : '') + '<h3>' + evEsc(e.title) + '</h3>' + (e.text ? '<p>' + evEsc(e.text) + '</p>' : '') + '</div></div></a>';
+    '<div class="tlc">' + (e.img ? '<img src="' + evEsc(e.img) + '" alt="" loading="lazy">' : '') + '<div>' + (e.start ? '<div class="tlw">' + evEsc(evWhen(e)) + '</div>' : '') + '<h3>' + evEsc(ct(e,'title')) + '</h3>' + (e.text ? '<p>' + evEsc(ct(e,'text')) + '</p>' : '') + '</div></div></a>';
   $$('[data-live="events"]').forEach(box => {
     box.innerHTML = list.length ? feat(featured) + (rest.length ? '<div class="tl">' + rest.map(item).join("") + '</div>' : '')
       : '<div class="card"><p>' + evEsc(t.ev_none) + '</p><a class="btn" href="https://benlimglobal.com/events/" target="_blank" rel="noopener">' + evEsc(t.open) + '</a></div>';
   });
-  $$('[data-live="evsrc"]').forEach(p => { p.innerHTML = '<b>●</b> ' + evEsc(t.ev_live) + (lang !== "en" ? " " + evEsc(t.in_english) : ""); });
+  $$('[data-live="evsrc"]').forEach(p => { p.innerHTML = '<b>●</b> ' + evEsc(t.ev_live) + (!ctAll(list) ? " " + evEsc(t.in_english) : ""); });
   tickCountdown();
 }
 function tickCountdown(){
@@ -2188,6 +2194,30 @@ document.addEventListener("pointerdown", e => {
     card.addEventListener("pointerleave", () => { card.style.transform = ""; });
   });
 })();
+// ---- Website content translations (events, missions, prophecy library): i18n/content.json ----
+const CT = /*CT*/{};
+const ct = (o, f) => { const x = lang !== "en" && o && CT[o.link] && CT[o.link][lang]; return (x && x[f]) || (o && o[f]) || ""; };
+const ctAll = list => lang === "en" || (list || []).every(o => CT[o.link] && CT[o.link][lang]);
+const gTrans = url => "https://translate.google.com/translate?sl=en&tl=" + ({zh:"zh-CN"}[lang] || lang) + "&u=" + encodeURIComponent(url);
+// ---- Page text translations (forms, course names): i18n/*.json, merged by build.py ----
+const FT = /*FT*/{};
+const FT_ROOTS = "#crusadeApp, #invite, #apply, #osheet, .courses";
+function translatePage(){
+  const map = lang === "en" ? null : FT[lang];
+  document.querySelectorAll(FT_ROOTS).forEach(root => {
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let n;
+    while ((n = w.nextNode())){
+      if (n.parentElement.closest("[data-t]")) continue;
+      if (n.__en === undefined){ const t = n.textContent.replace(/\s+/g, " ").trim(); if (!t || !(t in (FT.es || {}))) continue; n.__en = n.textContent; n.__key = t; }
+      const tr = map && map[n.__key];
+      n.textContent = tr ? n.__en.replace(n.__key.trim() === n.__en.trim() ? n.__en.trim() : n.__key, tr).replace(/^\s*/, m => m) : n.__en;
+    }
+    root.querySelectorAll("[placeholder]").forEach(e => {
+      if (e.__en === undefined) e.__en = e.getAttribute("placeholder");
+      const tr = map && map["PH:" + e.__en]; e.setAttribute("placeholder", tr || e.__en);
+    });
+  });
+}
 // ---- Prophecy library ----
 // Words come live from the blog on benlimglobal.com (newest first). To add a word that is not on the
 // blog, put it in PROPHECY_EXTRA: {date:"2026-10-20", title:"...", text:"...", video:"https://youtube.com/..."}
@@ -2204,17 +2234,21 @@ function renderLibrary(){
   $("#plYears").innerHTML = ["all"].concat(years).map(y => '<button class="pchip' + (y === plYear ? " on" : "") + '" type="button" data-y="' + y + '">' + (y === "all" ? plEsc(t.pl_all) : y) + '</button>').join("");
   if (!plItems.length) return;
   const q = plQuery.toLowerCase();
-  const list = plItems.filter(p => (plYear === "all" || p.date.startsWith(plYear)) && (!q || (p.title + " " + p.text).toLowerCase().includes(q)));
-  box.innerHTML = list.length ? list.map(p => '<div class="card pitem" data-id="' + plEsc(p.id) + '"><button type="button" aria-expanded="false"><div class="pd">' + plEsc(plDate(p.date)) + (p.video ? '<span class="ptag">' + plEsc(t.pl_video) + '</span>' : '') + '</div><h3>' + plEsc(p.title) + '</h3><p class="px">' + plEsc(p.text) + '</p></button><div class="pbody"></div></div>').join("") : '<p class="pempty">' + plEsc(t.pl_none) + '</p>';
-  $("#plSrc").innerHTML = '<b>●</b> ' + plEsc(t.pl_src) + (lang !== "en" ? " " + plEsc(t.in_english) : "");
+  const list = plItems.filter(p => (plYear === "all" || p.date.startsWith(plYear)) && (!q || (p.title + " " + p.text + " " + ct(p,"title") + " " + ct(p,"text")).toLowerCase().includes(q)));
+  box.innerHTML = list.length ? list.map(p => '<div class="card pitem" data-id="' + plEsc(p.id) + '"><button type="button" aria-expanded="false"><div class="pd">' + plEsc(plDate(p.date)) + (p.video ? '<span class="ptag">' + plEsc(t.pl_video) + '</span>' : '') + '</div><h3>' + plEsc(ct(p,'title')) + '</h3><p class="px">' + plEsc(ct(p,'text')) + '</p></button><div class="pbody"></div></div>').join("") : '<p class="pempty">' + plEsc(t.pl_none) + '</p>';
+  $("#plSrc").innerHTML = '<b>●</b> ' + plEsc(t.pl_src);
   const latest = plItems[0], hl = $("#homeLatest");
-  hl.hidden = false; hl.innerHTML = '<span class="vref">' + plEsc(t.pl_latest) + '</span><br><b style="color:#fff">' + plEsc(latest.title) + '</b>';
+  hl.hidden = false; hl.innerHTML = '<span class="vref">' + plEsc(t.pl_latest) + '</span><br><b style="color:#fff">' + plEsc(ct(latest,'title')) + '</b>';
 }
 async function openWord(card){
   const p = plItems.find(x => String(x.id) === card.dataset.id), body = card.querySelector(".pbody"), t = T[lang];
   const open = card.classList.toggle("open");
   card.querySelector("button").setAttribute("aria-expanded", open);
-  if (!open || body.dataset.done) return;
+  if (!open || body.dataset.done === lang) return;
+  if (lang !== "en" && p.link){
+    body.innerHTML = '<p>' + plEsc(ct(p, "text")) + '</p><p><a class="btn" href="' + plEsc(gTrans(p.link)) + '" target="_blank" rel="noopener">' + plEsc(t.pl_full_tr) + '</a></p><p class="note">' + plEsc(t.pl_tr_note) + '</p>';
+    body.dataset.done = lang; return;
+  }
   body.innerHTML = '<p class="note">' + plEsc(t.pl_loading) + '</p>';
   let paras = [];
   if (p.full) paras = p.full;
@@ -2229,7 +2263,7 @@ async function openWord(card){
   body.innerHTML = paras.map(x => "<p>" + plEsc(x) + "</p>").join("") +
     (p.video ? '<p><a class="btn" href="' + plEsc(p.video) + '" target="_blank" rel="noopener">' + plEsc(t.pl_watch) + '</a></p>' : '') +
     (p.link ? '<p><a class="btn ghost" href="' + plEsc(p.link) + '" target="_blank" rel="noopener">' + plEsc(t.pl_site) + '</a></p>' : '');
-  body.dataset.done = 1;
+  body.dataset.done = lang;
 }
 document.addEventListener("click", e => {
   const y = e.target.closest("#plYears .pchip"); if (y){ plYear = y.dataset.y; renderLibrary(); return; }
