@@ -55,6 +55,7 @@ header .topNav{background:#fff!important;border-color:#d9d9d9!important;color:#1
 """
 
 def make(src):
+    src = re.sub(r'<style id="goldDark">.*?</style>\n', "", src, flags=re.S)   # silver edition stays white
     # recolor only <style> and <script> blocks (inline SVG flags in the page body stay true)
     out = re.sub(r"(<style>)(.*?)(</style>)", lambda m: m.group(1) + recolor(m.group(2)) + m.group(3), src, flags=re.S)
     out = re.sub(r"(<script>)(.*?)(</script>)", lambda m: m.group(1) + recolor(m.group(2)) + m.group(3), out, flags=re.S)
