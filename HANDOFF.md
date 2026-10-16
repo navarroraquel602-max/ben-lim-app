@@ -51,11 +51,40 @@ All on-screen text lives in the `T`, `T2` and `T3` tables in `index.src.html`. T
 | Item | Who | Notes |
 |---|---|---|
 | Activate the crusade application | Whoever reads missions@benlimglobal.com | FormSubmit sends a one-time "Activate form" email after the first submission. Until someone clicks it, applicants are sent to their own email app instead. |
-| Square links for oils and prayer shawl | Whoever manages the ministry's Square account | One payment link per item and size. Then put the links on the shop buttons. The Power of Honor book already uses `square.link/u/qzlQBPJM`. |
+| Switch on oil and prayer shawl order requests | Ministry approval, then the developer | See "Merchandise order requests" below. |
 | Crowd and crusade photos/videos | Ministry | For the welcome area and Missions & Crusades. |
 | Weekly prophecy word | Ministry | Easiest: publish it as a blog post on benlimglobal.com, and the app picks it up. Or fill in `WORD` / `PROPHECY_EXTRA` in `index.src.html`. |
 | Links for Ben Lim Asia and Ben Lim Myanmar | Ministry | Only benlimfuego.com was found. |
 | Review the privacy policy | Ministry (ideally its lawyer) | `privacy.html`. Fill in the effective date and how long applications are kept. |
+
+## Merchandise order requests (Square invoices)
+
+The Shop's oils and prayer shawl use an **invoice request**, not a checkout:
+1. The customer picks items and quantities.
+2. They tap **Request Invoice** and fill in the order sheet.
+3. The ministry receives an email.
+4. Staff create and send a **Square invoice** from the ministry's own Square account.
+5. The customer pays Square directly.
+
+The app never handles payments or card details. Payment confirmation, fulfillment, shipping, refunds and customer service stay with the ministry.
+
+**It is switched off until the ministry approves the order inbox.** While off, the order sheet says so and only offers "Copy order details". Nothing is sent.
+
+To switch it on:
+1. The ministry approves the inbox. The proposed inbox from prior correspondence is `benlimgloballlc@gmail.com`.
+2. In `index.src.html`, set `ORDER_ENDPOINT = "https://formsubmit.co/ajax/<approved inbox>"`.
+3. Run `python3 build.py`, bump `sw.js`, and publish.
+4. Submit one clearly labelled test order. FormSubmit emails the inbox an **Activate** link, and someone must click it. Then submit a second test and confirm it arrives.
+5. *(Optional)* FormSubmit can replace the visible address with a random alias. After activation, use the alias in `ORDER_ENDPOINT`.
+
+**What it does:**
+- **No secret keys.** FormSubmit needs no password or API key, so nothing secret is in the app.
+- **Spam:** a hidden trap field, plus a minimum fill time.
+- **Duplicates:** each order has a reference (`MO-…`) shown to the customer and in the email subject. The Send button locks while sending, and a retry after a failure reuses the same reference.
+- **Confirmation:** the customer sees it only after FormSubmit confirms delivery.
+- **Privacy:** nothing about the order is stored on the phone, and nothing goes in a web address.
+
+**Prices.** Confirmed by the ministry: Oil of Grace Small $15 / Large $45, Prayer Shawl $50. **Still to confirm:** the Medium size ($30), the Bridegroom Oil prices, and the shawl's exact product name and photo. These are in `OIL_SIZES` and `SHAWL` in `index.src.html`.
 
 ## Moving the project to the ministry
 

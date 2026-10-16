@@ -540,6 +540,45 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
 .evhead::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.85),rgba(0,0,0,.1))}
 .evhead h2{position:absolute;left:18px;bottom:14px;z-index:1;margin:0;color:#fff;font-size:30px;line-height:1.05;max-width:60%}
 @media (min-width:700px){.evhead{height:200px}}
+/* ---- Shop: quantities, order bar, order sheet ---- */
+.buy{display:flex;gap:8px;align-items:center}
+.buy .oadd{flex:1}
+.qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden;flex:none}
+.qty button{width:38px;height:44px;border:0;background:none;font:600 20px Lato,system-ui,sans-serif;color:#111;cursor:pointer}
+.qty button:active{background:#fbf1d6}
+.qty output{min-width:26px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+.shawl-art svg{width:150px;height:auto;filter:drop-shadow(0 12px 12px rgba(0,0,0,.18))}
+.obar{position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:9;display:flex;align-items:center;gap:10px;justify-content:space-between;background:#111;color:#fff;border:1px solid rgba(224,162,52,.6);border-radius:16px;padding:10px 10px 10px 16px;box-shadow:0 14px 30px -10px rgba(0,0,0,.55);font-weight:700;animation:pgIn .3s ease}
+.obar .btn{padding:10px 14px;font-size:13px;margin:0}
+.osheet{border:0;padding:0;width:100%;max-width:560px;max-height:92vh;margin:auto auto 0;border-radius:22px 22px 0 0;background:var(--bg);color:var(--text);box-shadow:0 -10px 40px rgba(0,0,0,.35)}
+.osheet::backdrop{background:rgba(0,0,0,.55)}
+@media (min-width:700px){.osheet{margin:auto;border-radius:22px}}
+.osheet form,.os-done{padding:18px 16px 22px;overflow:auto}
+.os-head{display:flex;align-items:center;justify-content:space-between;position:sticky;top:-18px;background:var(--bg);padding:6px 0;z-index:1}
+.os-head h3{margin:0;font:600 22px Oswald,system-ui,sans-serif;text-transform:uppercase}
+.os-x{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:22px;cursor:pointer}
+.os-items{margin:8px 0}
+.os-it{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.os-it .nm{flex:1;min-width:0;font-weight:700;font-size:14px}
+.os-it .nm small{display:block;font-weight:400;color:var(--muted)}
+.os-it .ln{font-weight:700;font-variant-numeric:tabular-nums;min-width:62px;text-align:right}
+.os-it .rm{border:0;background:none;color:#a33;font-size:13px;cursor:pointer;padding:6px}
+.os-empty{color:var(--muted);padding:10px 0}
+.os-sub{display:flex;justify-content:space-between;align-items:baseline;margin:10px 0 2px;font-weight:700}
+.os-sub b{font:600 24px Oswald,system-ui,sans-serif}
+.os-f{border:0;padding:0;margin:8px 0}
+.os-f label{display:block;font-weight:bold;font-size:13px;margin:10px 0 0}
+.os-f input,.os-f textarea{width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:16px Lato,system-ui,sans-serif;color:var(--text);margin-top:5px}
+.os-f input.touched:invalid{border-color:#c0392b}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+.os-notice{background:#fbf1d6;border:1px solid rgba(224,162,52,.6);border-radius:12px;padding:12px;font-size:14px;line-height:1.45;margin:10px 0}
+.os-consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:10px 0}
+.os-consent input{width:22px;height:22px;flex:none;accent-color:#e0a234;margin-top:1px}
+.os-off{background:#f4f4f4;border:1px dashed #bbb;border-radius:12px;padding:12px;font-size:14px;margin:10px 0}
+.os-actions .btn[disabled]{opacity:.6;cursor:wait}
+.os-done{text-align:center}
+.os-done svg{width:52px;height:52px;color:#2e7d32}
 /* Burmese: letter-spacing breaks the script, and words run longer */
 html[lang=my] *{letter-spacing:0!important}
 html[lang=my] body{line-height:1.7}
@@ -728,7 +767,7 @@ html[lang=my] .onode i{font-size:8px}
         <h3 data-t="oil_grace_h"></h3><p data-t="oil_grace_p"></p>
         <label class="osz"><span data-t="oil_size"></span><select class="oSize"></select></label>
         <div class="oprice"><span data-t="oil_price"></span><b class="opv">$15.00</b></div>
-        <button class="btn oadd" type="button" data-t="oil_add"></button>
+        <div class="buy"><div class="qty" role="group" aria-label="Quantity"><button type="button" class="qm" aria-label="Decrease quantity">−</button><output class="qv" aria-live="polite">1</output><button type="button" class="qp" aria-label="Increase quantity">+</button></div><button class="btn oadd" type="button" data-t="sh_add"></button></div>
       </div>
       <div class="card oil-card" data-oil="Bridegroom Oil" data-id="B" data-c1="#a8404c" data-c2="#521019" data-l1="BRIDEGROOM" data-l2="OIL">
         <div class="bottle"><div class="bw"></div></div>
@@ -736,25 +775,17 @@ html[lang=my] .onode i{font-size:8px}
         <h3 data-t="oil_bride_h"></h3><p data-t="oil_bride_p"></p>
         <label class="osz"><span data-t="oil_size"></span><select class="oSize"></select></label>
         <div class="oprice"><span data-t="oil_price"></span><b class="opv">$15.00</b></div>
-        <button class="btn oadd" type="button" data-t="oil_add"></button>
+        <div class="buy"><div class="qty" role="group" aria-label="Quantity"><button type="button" class="qm" aria-label="Decrease quantity">−</button><output class="qv" aria-live="polite">1</output><button type="button" class="qp" aria-label="Increase quantity">+</button></div><button class="btn oadd" type="button" data-t="sh_add"></button></div>
+      </div>
+      <div class="card oil-card shawl-card" data-shawl="1">
+        <div class="bottle"><div class="bw shawl-art"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="shw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="#efe3c6"/></linearGradient></defs><path d="M14 30c18-8 74-8 92 0l-6 66c-26 8-54 8-80 0Z" fill="url(#shw)" stroke="#c9b27a" stroke-width="1.5"/><path d="M20 44h80M21 54h78M24 80h72M25 88h70" stroke="#1d3f8f" stroke-width="3"/><path d="M20 98v10M30 99v10M40 100v10M50 100v10M60 100v10M70 100v10M80 100v10M90 99v10M100 98v10" stroke="#c9b27a" stroke-width="1.4"/><path d="M52 18h16v14H52z" fill="#1d3f8f"/></svg></div></div>
+        <div class="bsoon" data-t="oil_soon"></div>
+        <h3 data-t="shawl_h"></h3><p data-t="sh_shawl_p"></p>
+        <div class="oprice"><span data-t="oil_price"></span><b class="opv">$50.00</b></div>
+        <div class="buy"><div class="qty" role="group" aria-label="Quantity"><button type="button" class="qm" aria-label="Decrease quantity">−</button><output class="qv" aria-live="polite">1</output><button type="button" class="qp" aria-label="Increase quantity">+</button></div><button class="btn oadd" type="button" data-t="sh_add"></button></div>
       </div>
     </div>
-    <p data-t="oil_how"></p>
-    <div class="card" id="oilFormCard"><h3 data-t="oil_form_h"></h3><p id="oilPick" class="note oilpick" role="status"></p>
-    <form id="oilForm" novalidate>
-      <label>Oil *<select name="Oil" required><option>Oil of Grace</option><option>Bridegroom Oil</option></select></label>
-      <label>Size *<select name="Size" required><option>Small ($15)</option><option>Medium ($30)</option><option>Large ($45)</option></select></label>
-      <label>How many *<input name="Quantity" type="number" min="1" value="1" inputmode="numeric" required></label>
-      <label>Your name *<input name="Name" placeholder="First &amp; last name" required></label>
-      <label>Email *<input name="Email" type="email" required></label>
-      <label>Phone<input name="Phone" type="tel" placeholder="(000) 000-0000"></label>
-      <label>Shipping address *<textarea name="Shipping address" rows="3" required></textarea></label>
-      <p class="note" data-t="oil_note"></p>
-      <p><button class="btn" type="submit" data-t="inv_send"></button>
-         <button class="btn ghost" type="button" id="copyOil" data-t="inv_copy"></button></p>
-      <p id="oilMsg" class="note"></p>
-    </form></div>
-
+    <p class="note" data-t="sh_how"></p>
     <h3 data-t="books_title"></h3>
     <div class="card book"><img src="books/prophetic-frenzy.jpg" alt="Prophetic Frenzy cover"><div>
       <h3>Prophetic Frenzy</h3><p data-t="b_frenzy"></p>
@@ -773,9 +804,41 @@ html[lang=my] .onode i{font-size:8px}
     <h3 data-t="more_h"></h3>
     <div class="card"><p data-t="more_p"></p>
       <a class="btn" href="https://benlimglobal.com/shop/" target="_blank" rel="noopener" data-t="open"></a></div>
-    <div class="card"><h3 data-t="shawl_h"></h3><p data-t="shawl_p"></p>
-      <a class="btn" id="askShawl" href="#" data-t="shawl_btn"></a></div>
   </section>
+
+  <!-- MERCHANDISE ORDER REQUEST (invoice request, not a checkout). Config: ORDER_ENDPOINT in the script. -->
+  <div class="obar" id="obar" hidden><span id="obarTxt"></span><button class="btn" type="button" id="obarBtn" data-t="sh_req"></button></div>
+  <dialog class="osheet" id="osheet" aria-labelledby="osTitle">
+    <form id="orderForm" method="dialog" novalidate>
+      <div class="os-head"><h3 id="osTitle" data-t="sh_req"></h3><button type="button" class="os-x" id="osClose" aria-label="Close">×</button></div>
+      <div id="osItems" class="os-items"></div>
+      <div class="os-sub"><span data-t="sh_subtotal"></span><b id="osSubtotal">$0.00</b></div>
+      <p class="note" data-t="sh_ship"></p>
+      <fieldset class="os-f">
+        <label>Full name *<input name="name" autocomplete="name" required maxlength="80"></label>
+        <label>Email *<input name="email" type="email" autocomplete="email" required maxlength="120"></label>
+        <label>Phone (optional)<input name="phone" type="tel" autocomplete="tel" maxlength="30"></label>
+        <label>Shipping address *<input name="address" autocomplete="street-address" required maxlength="160"></label>
+        <span class="row2"><label>City *<input name="city" autocomplete="address-level2" required maxlength="60"></label><label>State / Province *<input name="state" autocomplete="address-level1" required maxlength="60"></label></span>
+        <span class="row2"><label>Postal code *<input name="postal" autocomplete="postal-code" required maxlength="20"></label><label>Country *<input name="country" autocomplete="country-name" required maxlength="60" value="United States"></label></span>
+        <label>Order notes (optional)<textarea name="notes" rows="2" maxlength="500"></textarea></label>
+        <label class="hp" aria-hidden="true">Leave this empty<input name="_honey" tabindex="-1" autocomplete="off"></label>
+      </fieldset>
+      <p class="note" data-t="oil_note"></p>
+      <div class="os-notice" data-t="sh_notice"></div>
+      <label class="os-consent"><input type="checkbox" name="consent" required> <span><span data-t="sh_consent"></span> <a href="privacy.html" target="_blank" rel="noopener" data-t="f_privacy"></a></span></label>
+      <div class="os-off" id="osOff" hidden data-t="sh_off"></div>
+      <p class="os-actions"><button class="btn" type="submit" id="osSend" data-t="sh_send"></button>
+        <button class="btn ghost" type="button" id="osCopy" hidden data-t="sh_copy"></button></p>
+      <p class="note" id="osMsg" role="status" aria-live="polite"></p>
+    </form>
+    <div class="os-done" id="osDone" hidden role="status">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="m7.5 12.5 3 3 6-6.5"/></svg>
+      <h3 data-t="sh_done_h"></h3><p data-t="sh_done_p"></p>
+      <p class="note"><span data-t="cd_ref"></span> <b id="osRef"></b></p>
+      <p><button class="btn" type="button" id="osDoneClose" data-t="sh_done_btn"></button></p>
+    </div>
+  </dialog>
 
   <section id="partners">
     <p><a class="btn ghost" href="#" data-back="home" data-t="inv_back"></a></p>
@@ -1246,6 +1309,7 @@ function setLang(l){
   if (window.renderLibrary) renderLibrary();
   if (window.renderEvents) renderEvents();
   if (window.rpRing) rpRing();
+  if (window.renderCart) renderCart();
   if (window.renderPartnerArea) renderPartnerArea();
 }
 // Page history: every page visited, and where we are in it (like a web browser)
@@ -1260,6 +1324,7 @@ function show(id){
   $("#topBack").disabled = id === tabs[0];
   $$("section").forEach(s => s.classList.toggle("active", s.id === id));
   $$("nav button").forEach(b => b.classList.toggle("on", b.dataset.go === id));
+  if (window.renderCart) renderCart();
   window.scrollTo({top:0});
 }
 function go(id){
@@ -1333,33 +1398,7 @@ $("#copyBook").addEventListener("click", async () => {
 });
 
 // ---- Oil request ----
-const SHOP_EMAIL = "hello@benlimglobal.com"; // change this to where oil requests should go
-function oilText(){
-  const f = $("#oilForm"), out = [];
-  for (const el of f.elements){
-    if (!el.name || !el.value.trim()) continue;
-    out.push(el.name + ": " + el.value.trim());
-  }
-  return "OIL REQUEST - Ben Lim Global\n\n" + out.join("\n");
-}
-$("#oilForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const f = e.target;
-  $$("input,textarea", f).forEach(i => i.classList.add("touched"));
-  if (!f.checkValidity()){ f.reportValidity(); return; }
-  window.location.href = "mailto:" + SHOP_EMAIL + "?subject=" + encodeURIComponent("Oil request - Ben Lim Global") + "&body=" + encodeURIComponent(oilText());
-  $("#oilMsg").textContent = T[lang].inv_sent;
-});
-$("#copyOil").addEventListener("click", async () => {
-  const f = $("#oilForm");
-  if (!f.checkValidity()){ $$("input,textarea", f).forEach(i => i.classList.add("touched")); f.reportValidity(); return; }
-  try { await navigator.clipboard.writeText(oilText()); $("#oilMsg").textContent = T[lang].inv_copied; }
-  catch(err){ $("#oilMsg").textContent = oilText(); }
-});
-$("#askShawl").addEventListener("click", e => {
-  e.preventDefault();
-  window.location.href = "mailto:" + SHOP_EMAIL + "?subject=" + encodeURIComponent("Prayer shawl order ($50) - Ben Lim Global") + "&body=" + encodeURIComponent("PRAYER SHAWL ORDER - $50 each\n\nHow many:\nYour name:\nPhone:\nShipping address:\n");
-});
+const SHOP_EMAIL = "hello@benlimglobal.com"; // call requests and hub notes
 $("#askCall").addEventListener("click", e => {
   e.preventDefault();
   const body = "REQUEST FOR A CALL OR MEETING WITH DR. BEN LIM\n\nName:\nPhone:\nWhich one are you interested in? (30-minute call, personal meeting, coaching):\nBest days and times (include your time zone):\n";
@@ -1425,6 +1464,16 @@ Object.assign(T3.es, {"ev_next":"Próximo","ev_now":"Sucediendo ahora","ev_new":
 Object.assign(T3.zh, {"ev_next":"即将举行","ev_now":"正在进行","ev_new":"新","cd_d":"天","cd_h":"时","cd_m":"分","cd_s":"秒"});
 Object.assign(T3.ru, {"ev_next":"Ближайшее","ev_now":"Идёт сейчас","ev_new":"Новое","cd_d":"дн","cd_h":"ч","cd_m":"мин","cd_s":"сек"});
 Object.assign(T3.my, {"ev_next":"နောက်လာမည်","ev_now":"ယခု ကျင်းပနေသည်","ev_new":"အသစ်","cd_d":"ရက်","cd_h":"နာရီ","cd_m":"မိနစ်","cd_s":"စက္ကန့်"});
+Object.assign(T3.en, {"sh_add":"Add","sh_req":"Request Invoice","sh_bar":"{n} item(s) · est. {t}","sh_each":"each","sh_subtotal":"Estimated merchandise subtotal","sh_ship":"Shipping and your final total will be included in the ministry's Square invoice.","sh_how":"Oils and prayer shawls: add what you want, then tap Request Invoice. Ben Lim Global will email you a Square invoice to pay. Books and CDs are bought on the ministry's websites.","sh_shawl_p":"A prayer shawl from Ben Lim Global.","sh_notice":"Your order request will be sent to Ben Lim Global. The ministry will email you a Square invoice with the final total. Your order is not paid or confirmed until the ministry processes it.","sh_consent":"I agree that my order and shipping details will be sent to Ben Lim Global to prepare my invoice.","sh_off":"Online order requests will open as soon as the ministry approves its order inbox. Nothing has been sent. You can copy your order details and email them to hello@benlimglobal.com.","sh_send":"Send Order Request","sh_copy":"Copy Order Details","sh_copied":"Order details copied. Paste them into an email to hello@benlimglobal.com.","sh_empty":"Your order is empty. Add an item first.","sh_fail":"Your request could not be sent. Nothing was submitted. Please check your connection and try again.","sh_dupe":"This request was already sent.","sh_done_h":"Order request sent","sh_done_p":"Thank you. Ben Lim Global will email you a Square invoice with the final total. Your order is not paid or confirmed until the ministry processes it.","sh_done_btn":"Done"});
+Object.assign(T3.es, {"sh_add":"Agregar","sh_req":"Solicitar factura","sh_bar":"{n} artículo(s) · aprox. {t}","sh_each":"c/u","sh_subtotal":"Subtotal estimado de productos","sh_ship":"El envío y el total final se incluirán en la factura de Square del ministerio.","sh_how":"Aceites y mantos de oración: agregue lo que desea y toque Solicitar factura. Ben Lim Global le enviará por correo una factura de Square para pagar. Los libros y CD se compran en los sitios del ministerio.","sh_shawl_p":"Un manto de oración de Ben Lim Global.","sh_notice":"Su solicitud de pedido se enviará a Ben Lim Global. El ministerio le enviará por correo una factura de Square con el total final. Su pedido no está pagado ni confirmado hasta que el ministerio lo procese.","sh_consent":"Acepto que los datos de mi pedido y envío se envíen a Ben Lim Global para preparar mi factura.","sh_off":"Las solicitudes en línea se abrirán cuando el ministerio apruebe su correo de pedidos. No se ha enviado nada. Puede copiar los datos de su pedido y enviarlos a hello@benlimglobal.com.","sh_send":"Enviar solicitud","sh_copy":"Copiar datos del pedido","sh_copied":"Datos copiados. Péguelos en un correo a hello@benlimglobal.com.","sh_empty":"Su pedido está vacío. Agregue un artículo primero.","sh_fail":"No se pudo enviar su solicitud. No se envió nada. Revise su conexión e intente de nuevo.","sh_dupe":"Esta solicitud ya fue enviada.","sh_done_h":"Solicitud enviada","sh_done_p":"Gracias. Ben Lim Global le enviará por correo una factura de Square con el total final. Su pedido no está pagado ni confirmado hasta que el ministerio lo procese.","sh_done_btn":"Listo"});
+Object.assign(T3.zh, {"sh_add":"加入","sh_req":"申请发票","sh_bar":"{n} 件 · 约 {t}","sh_each":"每件","sh_subtotal":"商品预估小计","sh_ship":"运费和最终总额将包含在事工发送的 Square 发票中。","sh_how":"膏油和祷告巾：加入想要的商品，然后点“申请发票”。Ben Lim Global 会通过电子邮件发送 Square 发票供您付款。书籍和 CD 请在事工网站购买。","sh_shawl_p":"来自 Ben Lim Global 的祷告巾。","sh_notice":"您的订购申请将发送给 Ben Lim Global。事工会通过电子邮件发送含最终总额的 Square 发票。在事工处理之前，您的订单尚未付款或确认。","sh_consent":"我同意将我的订单和寄送资料发送给 Ben Lim Global 以准备发票。","sh_off":"事工批准订单邮箱后，即可在线提交申请。目前尚未发送任何内容。您可以复制订单资料并发送至 hello@benlimglobal.com。","sh_send":"发送订购申请","sh_copy":"复制订单资料","sh_copied":"已复制订单资料。请粘贴到发给 hello@benlimglobal.com 的邮件中。","sh_empty":"您的订单是空的。请先加入商品。","sh_fail":"申请未能发送，未提交任何内容。请检查网络后重试。","sh_dupe":"此申请已发送。","sh_done_h":"订购申请已发送","sh_done_p":"谢谢。Ben Lim Global 会通过电子邮件发送含最终总额的 Square 发票。在事工处理之前，您的订单尚未付款或确认。","sh_done_btn":"完成"});
+Object.assign(T3.ru, {"sh_add":"Добавить","sh_req":"Запросить счёт","sh_bar":"{n} шт. · ок. {t}","sh_each":"за шт.","sh_subtotal":"Примерная стоимость товаров","sh_ship":"Доставка и итоговая сумма будут указаны в счёте Square от служения.","sh_how":"Масла и молитвенные покрывала: добавьте нужное и нажмите «Запросить счёт». Ben Lim Global пришлёт вам счёт Square по e-mail. Книги и CD покупаются на сайтах служения.","sh_shawl_p":"Молитвенное покрывало от Ben Lim Global.","sh_notice":"Ваш запрос будет отправлен в Ben Lim Global. Служение пришлёт вам по e-mail счёт Square с итоговой суммой. Заказ не оплачен и не подтверждён, пока служение его не обработает.","sh_consent":"Я согласен(на), что данные моего заказа и доставки будут отправлены в Ben Lim Global для подготовки счёта.","sh_off":"Онлайн-запросы откроются, как только служение утвердит почту для заказов. Ничего не отправлено. Вы можете скопировать данные заказа и отправить их на hello@benlimglobal.com.","sh_send":"Отправить запрос","sh_copy":"Скопировать данные","sh_copied":"Данные скопированы. Вставьте их в письмо на hello@benlimglobal.com.","sh_empty":"Заказ пуст. Сначала добавьте товар.","sh_fail":"Не удалось отправить запрос. Ничего не отправлено. Проверьте связь и попробуйте снова.","sh_dupe":"Этот запрос уже отправлен.","sh_done_h":"Запрос отправлен","sh_done_p":"Спасибо. Ben Lim Global пришлёт вам по e-mail счёт Square с итоговой суммой. Заказ не оплачен и не подтверждён, пока служение его не обработает.","sh_done_btn":"Готово"});
+Object.assign(T3.my, {"sh_add":"ထည့်ရန်","sh_req":"ငွေတောင်းခံလွှာ တောင်းရန်","sh_bar":"{n} ခု · ခန့်မှန်း {t}","sh_each":"တစ်ခုလျှင်","sh_subtotal":"ပစ္စည်း ခန့်မှန်း စုစုပေါင်း","sh_ship":"ပို့ဆောင်ခနှင့် နောက်ဆုံး စုစုပေါင်းကို ဓမ္မအမှုတော်၏ Square ငွေတောင်းခံလွှာတွင် ထည့်သွင်းပါမည်။","sh_how":"ဆီများနှင့် ဆုတောင်းပုဝါများ: လိုချင်သည်ကို ထည့်ပြီး ငွေတောင်းခံလွှာ တောင်းရန် ကို နှိပ်ပါ။ Ben Lim Global က Square ငွေတောင်းခံလွှာကို အီးမေးလ်ဖြင့် ပို့ပါမည်။ စာအုပ်နှင့် CD များကို ဓမ္မအမှုတော် ဝက်ဘ်ဆိုက်တွင် ဝယ်ပါ။","sh_shawl_p":"Ben Lim Global ထံမှ ဆုတောင်းပုဝါ။","sh_notice":"သင့်မှာယူမှု တောင်းဆိုချက်ကို Ben Lim Global ထံ ပို့ပါမည်။ ဓမ္မအမှုတော်က နောက်ဆုံး စုစုပေါင်းပါသော Square ငွေတောင်းခံလွှာကို အီးမေးလ်ဖြင့် ပို့ပါမည်။ ဓမ္မအမှုတော်က မဆောင်ရွက်မချင်း သင့်မှာယူမှုကို ငွေပေးချေပြီး သို့မဟုတ် အတည်ပြုပြီးဟု မမှတ်ယူပါ။","sh_consent":"ငွေတောင်းခံလွှာ ပြင်ဆင်ရန် ကျွန်ုပ်၏ မှာယူမှုနှင့် ပို့ဆောင်ရေး အချက်အလက်များကို Ben Lim Global ထံ ပို့ရန် သဘောတူပါသည်။","sh_off":"ဓမ္မအမှုတော်က မှာယူမှု အီးမေးလ်ကို အတည်ပြုသည်နှင့် အွန်လိုင်း တောင်းဆိုမှုများ ဖွင့်ပါမည်။ ဘာမှ မပို့ရသေးပါ။ မှာယူမှု အချက်အလက်ကို ကူးယူပြီး hello@benlimglobal.com သို့ အီးမေးလ် ပို့နိုင်ပါသည်။","sh_send":"တောင်းဆိုချက် ပို့ရန်","sh_copy":"မှာယူမှု အချက်အလက် ကူးယူရန်","sh_copied":"ကူးယူပြီးပါပြီ။ hello@benlimglobal.com သို့ အီးမေးလ်ထဲ ကူးထည့်ပါ။","sh_empty":"သင့်မှာယူမှု ဗလာဖြစ်နေသည်။ ပစ္စည်းတစ်ခု အရင်ထည့်ပါ။","sh_fail":"တောင်းဆိုချက် မပို့နိုင်ပါ။ ဘာမှ မပို့ရသေးပါ။ အင်တာနက်ကို စစ်ပြီး ထပ်ကြိုးစားပါ။","sh_dupe":"ဤတောင်းဆိုချက်ကို ပို့ပြီးပါပြီ။","sh_done_h":"တောင်းဆိုချက် ပို့ပြီးပါပြီ","sh_done_p":"ကျေးဇူးတင်ပါသည်။ Ben Lim Global က နောက်ဆုံး စုစုပေါင်းပါသော Square ငွေတောင်းခံလွှာကို အီးမေးလ်ဖြင့် ပို့ပါမည်။ ဓမ္မအမှုတော်က မဆောင်ရွက်မချင်း သင့်မှာယူမှုကို ငွေပေးချေပြီး သို့မဟုတ် အတည်ပြုပြီးဟု မမှတ်ယူပါ။","sh_done_btn":"ပြီးပြီ"});
+Object.assign(T3.en, {"shawl_h": "Prayer Shawl"});
+Object.assign(T3.es, {"shawl_h": "Manto de oración"});
+Object.assign(T3.zh, {"shawl_h": "祷告巾"});
+Object.assign(T3.ru, {"shawl_h": "Молитвенное покрывало"});
+Object.assign(T3.my, {"shawl_h": "ဆုတောင်းပုဝါ"});
 for (const l in T3) Object.assign(T[l], T3[l]);
 for (const l in T) for (const k in T.en) if (!(k in T[l])) T[l][k] = T.en[k];  // fill gaps with English
 
@@ -2067,7 +2116,7 @@ function oilUpdate(card, animate){
   }
 }
 function renderShop(){
-  $$(".oil-card").forEach(card => {
+  $$(".oil-card:not(.shawl-card)").forEach(card => {
     const sel = $(".oSize", card), keep = sel.selectedIndex >= 0 ? sel.selectedIndex : 0;
     sel.textContent = "";
     OIL_SIZES.forEach((z, i) => {
@@ -2079,19 +2128,117 @@ function renderShop(){
     oilUpdate(card, false);
   });
 }
-$$(".oil-card").forEach(card => {
-  $(".oSize", card).addEventListener("change", () => oilUpdate(card, true));
-  $(".oadd", card).addEventListener("click", e => {
-    const f = $("#oilForm"), z = OIL_SIZES[$(".oSize", card).selectedIndex] || OIL_SIZES[0];
-    f.elements["Oil"].value = card.dataset.oil;
-    f.elements["Size"].value = z.v;
-    $("#oilPick").textContent = T[lang].oil_picked.replace("{oil}", card.dataset.oil).replace("{size}", z.v);
-    const fc = $("#oilFormCard");
-    fc.scrollIntoView({behavior:"smooth", block:"start"});
-    fc.classList.remove("flash"); void fc.offsetWidth; fc.classList.add("flash");
-    const r = e.currentTarget.getBoundingClientRect();
-    burst(r.left + r.width / 2, r.top + r.height / 2, 16);
-  });
+$$(".oil-card:not(.shawl-card)").forEach(card => $(".oSize", card).addEventListener("change", () => oilUpdate(card, true)));
+// ---- Merchandise order requests (Square invoice request, NOT a checkout) ----
+// ORDER_ENDPOINT stays empty until the ministry approves the inbox. When approved, set it to
+// "https://formsubmit.co/ajax/<approved inbox>" (FormSubmit: no password or API key, nothing secret in the app),
+// submit one test, and have the inbox owner click FormSubmit's one-time activation email.
+// Proposed inbox from prior correspondence (NOT active): benlimgloballlc@gmail.com
+const ORDER_ENDPOINT = "";
+// Prices. Confirmed by the ministry: Oil of Grace Small $15 / Large $45, Prayer Shawl $50.
+// Still to confirm: the Medium size ($30), Bridegroom Oil prices, and the shawl's exact product name.
+const SHAWL = {key: "S", name: "Prayer Shawl", price: 50};
+const cart = new Map();   // key -> {name, size, price, qty}; products only, kept in memory
+const money = n => "$" + n.toFixed(2);
+const sizeEN = ["Small", "Medium", "Large"];
+function cardItem(card){
+  if (card.dataset.shawl) return {key: SHAWL.key, name: SHAWL.name, size: "", price: SHAWL.price};
+  const i = Math.max(0, $(".oSize", card).selectedIndex), z = OIL_SIZES[i];
+  return {key: card.dataset.id + i, name: card.dataset.oil, size: sizeEN[i], price: z.p};
+}
+document.addEventListener("click", e => {
+  const q = e.target.closest(".qty button"); if (!q) return;
+  const out = q.parentElement.querySelector("output"), v = Math.max(1, Math.min(20, (+out.value || 1) + (q.classList.contains("qp") ? 1 : -1)));
+  out.value = v; out.textContent = v;
+});
+$$(".oil-card").forEach(card => $(".oadd", card).addEventListener("click", e => {
+  const it = cardItem(card), qv = $(".qv", card), n = +qv.textContent || 1, cur = cart.get(it.key);
+  cart.set(it.key, Object.assign(it, {qty: Math.min(20, (cur ? cur.qty : 0) + n)}));
+  qv.textContent = "1"; renderCart();
+  const r = e.currentTarget.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, 16);
+}));
+function cartTotal(){ let n = 0, sum = 0; cart.forEach(i => { n += i.qty; sum += i.qty * i.price; }); return {n, sum}; }
+function renderCart(){
+  const t = T[lang], {n, sum} = cartTotal(), bar = $("#obar");
+  bar.hidden = !n || !$("#shop.active");
+  $("#obarTxt").textContent = t.sh_bar.replace("{n}", n).replace("{t}", money(sum));
+  const box = $("#osItems");
+  box.innerHTML = n ? [...cart.entries()].map(([k, i]) => '<div class="os-it" data-k="' + k + '"><span class="nm">' + i.name + (i.size ? '<small>' + i.size + '</small>' : '') + '<small>' + money(i.price) + ' ' + t.sh_each + '</small></span>' +
+    '<div class="qty" role="group" aria-label="Quantity"><button type="button" class="oq" data-d="-1" aria-label="Decrease quantity">−</button><output>' + i.qty + '</output><button type="button" class="oq" data-d="1" aria-label="Increase quantity">+</button></div>' +
+    '<span class="ln">' + money(i.qty * i.price) + '</span><button type="button" class="rm" aria-label="Remove">✕</button></div>').join("") : '<p class="os-empty">' + t.sh_empty + '</p>';
+  $("#osSubtotal").textContent = money(sum);
+}
+$("#osItems").addEventListener("click", e => {
+  const row = e.target.closest(".os-it"); if (!row) return;
+  const k = row.dataset.k, it = cart.get(k);
+  if (e.target.closest(".rm")) cart.delete(k);
+  else if (e.target.closest(".oq")){ it.qty = Math.max(1, Math.min(20, it.qty + +e.target.closest(".oq").dataset.d)); }
+  renderCart();
+});
+let orderRef = null, orderOpened = 0, sending = false;
+const sentRefs = new Set();
+function openSheet(){
+  const off = !ORDER_ENDPOINT;
+  $("#osOff").hidden = !off; $("#osCopy").hidden = !off; $("#osSend").hidden = off;
+  $("#orderForm").hidden = false; $("#osDone").hidden = true; $("#osMsg").textContent = "";
+  if (!orderRef || sentRefs.has(orderRef)) orderRef = "MO-" + Date.now().toString(36).toUpperCase();
+  orderOpened = Date.now(); renderCart();
+  const d = $("#osheet"); if (d.showModal) d.showModal(); else d.setAttribute("open", "");
+}
+function closeSheet(){ const d = $("#osheet"); if (d.close) d.close(); else d.removeAttribute("open"); }
+$("#obarBtn").addEventListener("click", openSheet);
+$("#osClose").addEventListener("click", closeSheet);
+$("#osDoneClose").addEventListener("click", closeSheet);
+function orderSummary(f){
+  const lines = [...cart.values()].map(i => i.qty + " × " + i.name + (i.size ? " (" + i.size + ")" : "") + " @ " + money(i.price) + " = " + money(i.qty * i.price));
+  return {lines, subtotal: money(cartTotal().sum)};
+}
+function orderText(f){
+  const v = k => f.elements[k].value.trim(), {lines, subtotal} = orderSummary(f);
+  return ["MERCHANDISE ORDER REQUEST - Glory App", "Reference: " + orderRef, "Submitted: " + new Date().toString(), "",
+    "Name: " + v("name"), "Email: " + v("email"), "Phone: " + (v("phone") || "-"),
+    "Ship to: " + [v("address"), v("city"), v("state"), v("postal"), v("country")].join(", "), "",
+    "Items:", ...lines, "Estimated merchandise subtotal: " + subtotal,
+    "Shipping and final total: to be set on the ministry's Square invoice.", "", "Notes: " + (v("notes") || "-")].join("\n");
+}
+function validOrder(f){
+  $$("input,textarea", f).forEach(i => i.classList.add("touched"));
+  if (!cart.size){ $("#osMsg").textContent = T[lang].sh_empty; return false; }
+  if (!f.checkValidity()){ f.reportValidity(); return false; }
+  return true;
+}
+$("#osCopy").addEventListener("click", async () => {
+  const f = $("#orderForm"); if (!validOrder(f)) return;
+  try { await navigator.clipboard.writeText(orderText(f)); $("#osMsg").textContent = T[lang].sh_copied; }
+  catch(e){ $("#osMsg").textContent = orderText(f); }
+});
+$("#orderForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = e.target, t = T[lang], msg = $("#osMsg"), btn = $("#osSend");
+  if (!ORDER_ENDPOINT || sending) return;
+  if (!validOrder(f)) return;
+  if (f.elements._honey.value || Date.now() - orderOpened < 3000) { msg.textContent = t.sh_fail; return; }   // likely a bot
+  if (sentRefs.has(orderRef)) { msg.textContent = t.sh_dupe; return; }
+  const v = k => f.elements[k].value.trim(), {lines, subtotal} = orderSummary(f);
+  const data = {
+    _subject: "Merchandise order request " + orderRef + " - " + v("name"), _template: "table", _captcha: "false", _replyto: v("email"), _honey: "",
+    "Reference": orderRef, "Submitted": new Date().toString(), "Name": v("name"), "Email": v("email"), "Phone": v("phone") || "-",
+    "Shipping address": v("address"), "City": v("city"), "State / Province": v("state"), "Postal code": v("postal"), "Country": v("country"),
+    "Items": lines.join("\n"), "Estimated merchandise subtotal": subtotal,
+    "Shipping and final total": "To be set on the ministry's Square invoice", "Order notes": v("notes") || "-",
+    "Customer consent": "Agreed to send order and shipping details to Ben Lim Global"
+  };
+  sending = true; btn.disabled = true; msg.textContent = t.ca_sending;
+  try {
+    const r = await fetch(ORDER_ENDPOINT, {method: "POST", headers: {"Content-Type": "application/json", "Accept": "application/json"}, body: JSON.stringify(data)});
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || String(j.success) !== "true") throw new Error("not delivered");
+    sentRefs.add(orderRef); $("#osRef").textContent = orderRef;
+    cart.clear(); f.reset(); $$(".touched", f).forEach(i => i.classList.remove("touched")); renderCart();
+    f.hidden = true; $("#osDone").hidden = false; msg.textContent = "";
+  } catch(err){
+    msg.textContent = t.sh_fail;   // same reference is kept, so a retry can be matched by the ministry
+  } finally { sending = false; btn.disabled = false; }
 });
 setLang(lang);
 </script>
