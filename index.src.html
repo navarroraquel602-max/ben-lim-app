@@ -432,6 +432,15 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
 .pa-lock svg{width:22px;height:22px;color:#8a5d10}
 .pa-lock b{font-size:14px}
 .pa-lock small{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+/* Ministry photos */
+.ghero>.gbg{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;opacity:.32;pointer-events:none}
+.ghero>*:not(.gbg){z-index:2}
+.ghero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 50% 50%,rgba(13,11,8,.15),rgba(5,5,5,.75) 80%)}
+.cphotos{display:flex;gap:10px;overflow-x:auto;margin:12px -16px;padding:0 16px 6px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.cphotos img{flex:none;height:210px;width:auto;max-width:86%;object-fit:cover;border-radius:14px;scroll-snap-align:center;box-shadow:0 8px 20px -8px rgba(0,0,0,.45)}
+.vimg,.banner{display:block;width:100%;height:190px;object-fit:cover;border-radius:14px;margin:0 0 14px}
+.card.vg .vimg{margin:-2px 0 14px}
+@media (min-width:700px){.cphotos img{height:260px}.vimg,.banner{height:260px}}
 /* Burmese: letter-spacing breaks the script, and words run longer */
 html[lang=my] *{letter-spacing:0!important}
 html[lang=my] body{line-height:1.7}
@@ -463,6 +472,7 @@ html[lang=my] .onode i{font-size:8px}
   <!-- HOME: globe hub. Every circle opens a part of the app. -->
   <section id="home" class="active">
     <div class="ghero">
+      <img class="gbg" src="media/crusade-crowd.jpg" alt="">
       <div class="gkick" data-t="g_kick"></div>
       <h1 data-t="g_title"></h1>
       <div class="orbit">
@@ -506,8 +516,7 @@ html[lang=my] .onode i{font-size:8px}
 
     <h2 data-t="cr_title"></h2>
     <p data-t="cr_intro"></p>
-    <div class="ctiles" data-live="tiles"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 3.2 2.8 4.6 4.4 6.4 1.4 1.6 2.1 3.2 2.1 5.1A6.5 6.5 0 0 1 12 21a6.5 6.5 0 0 1-6.5-6.5c0-2.4 1.2-4 2.6-5.2.2 1.6 1 2.7 2.2 3.2C10 9 10.6 5.6 12 3Z"/></svg><span data-t="ct_1"></span></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.5 2.3 3.7 5.1 3.7 8.5s-1.2 6.2-3.7 8.5c-2.5-2.3-3.7-5.1-3.7-8.5S9.5 5.8 12 3.5Z"/></svg><span data-t="ct_2"></span></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11A6.5 6.5 0 0 1 12 3.5 6.5 6.5 0 0 1 18.5 10c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></svg><span data-t="ct_3"></span></div></div>
-    <p class="src" data-live="src"></p>
+    <div class="cphotos"><img src="media/monterrey-night.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy"><img src="media/mexico-city.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy"><img src="media/street-crowd.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy"><img src="media/crusade-crowd.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy"></div>
     <p><a class="btn" href="#" data-go="crusades" data-t="cr_link_btn"></a>
        <a class="btn ghost" href="#" data-go="crusadeApp" data-t="cr_apply"></a></p>
 
@@ -529,6 +538,7 @@ html[lang=my] .onode i{font-size:8px}
     </div>
     <h2 data-t="vision_title"></h2>
     <div class="card vg">
+      <img class="vimg" src="media/monterrey-hands.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy">
       <p class="vt" data-t="vision_text"></p>
       <div class="gl" data-t="goals_title"></div>
       <div class="goals"><p data-t="g1"></p><p data-t="g2"></p><p data-t="g3"></p><p data-t="g4"></p><p data-t="g5"></p></div>
@@ -542,6 +552,7 @@ html[lang=my] .onode i{font-size:8px}
   <!-- EVENTS -->
   <section id="events">
     <h2 data-t="events_title"></h2>
+    <img class="banner" src="media/arena.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy">
     <div class="card"><h3 data-t="cr_title"></h3><p data-t="cr_link_p"></p>
       <a class="btn" href="#" data-go="crusades" data-t="cr_link_btn"></a></div>
     <div data-live="events">
@@ -875,8 +886,7 @@ html[lang=my] .onode i{font-size:8px}
     <p><a class="btn ghost" href="#" data-back="home" data-t="inv_back"></a></p>
     <h2 data-t="cr_title"></h2>
     <p data-t="cr_intro"></p>
-    <div class="ctiles" data-live="tiles"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 3.2 2.8 4.6 4.4 6.4 1.4 1.6 2.1 3.2 2.1 5.1A6.5 6.5 0 0 1 12 21a6.5 6.5 0 0 1-6.5-6.5c0-2.4 1.2-4 2.6-5.2.2 1.6 1 2.7 2.2 3.2C10 9 10.6 5.6 12 3Z"/></svg><span data-t="ct_1"></span></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.5 2.3 3.7 5.1 3.7 8.5s-1.2 6.2-3.7 8.5c-2.5-2.3-3.7-5.1-3.7-8.5S9.5 5.8 12 3.5Z"/></svg><span data-t="ct_2"></span></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11A6.5 6.5 0 0 1 12 3.5 6.5 6.5 0 0 1 18.5 10c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></svg><span data-t="ct_3"></span></div></div>
-    <p class="src" data-live="src"></p>
+    <div class="cphotos"><img src="media/monterrey-night.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy"><img src="media/mexico-city.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy"><img src="media/street-crowd.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy"><img src="media/crusade-crowd.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy"></div>
     <div class="card"><h3 data-t="cr_next_h"></h3><p data-t="cr_next_p"></p>
       <a class="btn" href="#" data-go="crusadeApp" data-t="cr_apply"></a></div>
     <h3 class="sec" data-t="cr_trips"></h3>
