@@ -384,6 +384,7 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
 .card.mtrip{display:flex;gap:14px;align-items:flex-start}
 .card.mtrip img{width:96px;height:96px;object-fit:cover;border-radius:12px;flex:none}
 .card.mtrip p{font-size:14px}
+.card.mtrip .pd{display:inline-block;font:600 12px Lato,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#8a5d10;background:#fbf1d6;border-radius:999px;padding:2px 10px;margin-bottom:4px}
 .src{font-size:12px;color:var(--muted);margin:4px 0 0}
 .src b{color:#2e7d32}
 /* Application confirmation */
@@ -1403,6 +1404,11 @@ Object.assign(T3.es, {"ev_live":"En vivo desde benlimglobal.com — los eventos 
 Object.assign(T3.zh, {"ev_live":"实时来自 benlimglobal.com — 最新发布的活动在前","f_privacy":"隐私政策"});
 Object.assign(T3.ru, {"ev_live":"Обновляется с benlimglobal.com — новые события сверху","f_privacy":"Политика конфиденциальности"});
 Object.assign(T3.my, {"ev_live":"benlimglobal.com မှ တိုက်ရိုက် — နောက်ဆုံးတင်ထားသော အစီအစဉ်များ အရင်","f_privacy":"ကိုယ်ရေးအချက်အလက် မူဝါဒ"});
+Object.assign(T3.en, {"ev_live":"From benlimglobal.com — upcoming events, soonest first","ev_none":"No upcoming events are posted right now. Check the events page for the latest."});
+Object.assign(T3.es, {"ev_live":"Desde benlimglobal.com — próximos eventos, los más cercanos primero","ev_none":"No hay próximos eventos publicados ahora. Vea la página de eventos."});
+Object.assign(T3.zh, {"ev_live":"来自 benlimglobal.com — 即将举行的活动，按时间先后","ev_none":"目前没有即将举行的活动。请查看活动页面。"});
+Object.assign(T3.ru, {"ev_live":"С benlimglobal.com — ближайшие события по дате","ev_none":"Сейчас нет объявленных событий. Загляните на страницу событий."});
+Object.assign(T3.my, {"ev_live":"benlimglobal.com မှ — လာမည့် အစီအစဉ်များ၊ အနီးဆုံး အရင်","ev_none":"လက်ရှိတွင် လာမည့် အစီအစဉ် မရှိသေးပါ။ အစီအစဉ်များ စာမျက်နှာကို ကြည့်ပါ။"});
 for (const l in T3) Object.assign(T[l], T3[l]);
 for (const l in T) for (const k in T.en) if (!(k in T[l])) T[l][k] = T.en[k];  // fill gaps with English
 
@@ -1564,31 +1570,49 @@ fetch(MISSIONS_URL).then(r => r.ok ? r.json() : Promise.reject()).then(items => 
   }).filter(m => m.title && /^https:\/\/benlimglobal\.com\//.test(m.link));
   if (list.length){ useMissions(list); try { localStorage.setItem(MS_KEY, JSON.stringify(list)); } catch(e){} }
 }).catch(() => {});
-// ---- Events: pulled live from benlimglobal.com (the website's events plugin), newest posted first ----
-// The website does not share event dates with apps, so each card shows the event's own description
-// (which normally names the date and city) and links to the full event page.
-const EVENTS_URL = "https://benlimglobal.com/wp-json/wp/v2/mec-events?per_page=8&_embed=wp:featuredmedia&_fields=title,link,excerpt,content,_links,_embedded";
-const EV_KEY = "benlim-events";
-let eventsLive = null;
+// ---- Events: from benlimglobal.com, upcoming only, soonest first ----
+// events.json (made by update_events.py) has every event with its real dates; past events are hidden
+// automatically each day. Events added on the website after events.json was last made still appear
+// (from the live website feed), listed first and without a date, until update_events.py is run again.
+const EVENTS_URL = "https://benlimglobal.com/wp-json/wp/v2/mec-events?per_page=20&_embed=wp:featuredmedia&_fields=title,link,excerpt,content,_links,_embedded";
+const EV_KEY = "benlim-events2";
+let evDated = null, evLive = null, evKnown = null;
 const evEsc = x => String(x || "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const evToday = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+function evWhen(e){
+  if (!e.start) return "";
+  const f = d => { try { return new Date(d + "T12:00:00").toLocaleDateString(lang === "my" ? "my-MM" : lang, {month:"short", day:"numeric", year:"numeric"}); } catch(x){ return d; } };
+  return e.end && e.end !== e.start ? f(e.start) + " – " + f(e.end) : f(e.start);
+}
+function upcomingEvents(){
+  if (!evDated && !evLive) return null;
+  const today = evToday(), known = new Set((evDated || []).map(e => e.link).concat(evKnown || []));
+  const fresh = (evLive || []).filter(e => !known.has(e.link));            // added on the site since events.json
+  const dated = (evDated || []).filter(e => !e.start || (e.end || e.start) >= today);
+  return fresh.concat(dated);
+}
 function renderEvents(){
-  if (!eventsLive || !eventsLive.length) return;
-  const t = T[lang];
+  const list = upcomingEvents(), t = T[lang];
+  if (!list) return;
   $$('[data-live="events"]').forEach(box => {
-    box.innerHTML = eventsLive.map(e => '<div class="card mtrip">' + (e.img ? '<img src="' + evEsc(e.img) + '" alt="" loading="lazy">' : '') + '<div><h3>' + evEsc(e.title) + '</h3>' + (e.text ? '<p>' + evEsc(e.text) + '</p>' : '') + '<a class="btn" href="' + evEsc(e.link) + '" target="_blank" rel="noopener">' + evEsc(t.ev_detail) + '</a></div></div>').join("");
+    box.innerHTML = list.length ? list.map(e => '<div class="card mtrip">' + (e.img ? '<img src="' + evEsc(e.img) + '" alt="" loading="lazy">' : '') + '<div>' + (e.start ? '<div class="pd">' + evEsc(evWhen(e)) + '</div>' : '') + '<h3>' + evEsc(e.title) + '</h3>' + (e.text ? '<p>' + evEsc(e.text) + '</p>' : '') + '<a class="btn" href="' + evEsc(e.link) + '" target="_blank" rel="noopener">' + evEsc(t.ev_detail) + '</a></div></div>').join("")
+      : '<div class="card"><p>' + evEsc(t.ev_none) + '</p><a class="btn" href="https://benlimglobal.com/events/" target="_blank" rel="noopener">' + evEsc(t.open) + '</a></div>';
   });
   $$('[data-live="evsrc"]').forEach(p => { p.innerHTML = '<b>●</b> ' + evEsc(t.ev_live) + (lang !== "en" ? " " + evEsc(t.in_english) : ""); });
 }
-function useEvents(list){ eventsLive = list; renderEvents(); }
-try { const c = JSON.parse(localStorage.getItem(EV_KEY)); if (c && c.length) useEvents(c); } catch(e){}
+try { const c = JSON.parse(localStorage.getItem(EV_KEY)); if (c){ evDated = c.dated; evLive = c.live; evKnown = c.known; renderEvents(); } } catch(e){}
+const evSave = () => { try { localStorage.setItem(EV_KEY, JSON.stringify({dated: evDated, live: evLive, known: evKnown})); } catch(e){} };
+fetch("events.json", {cache: "no-store"}).then(r => r.ok ? r.json() : Promise.reject()).then(d => {
+  if (d && Array.isArray(d.events)){ evDated = d.events; evKnown = d.known || []; renderEvents(); evSave(); }
+}).catch(() => {});
 fetch(EVENTS_URL).then(r => r.ok ? r.json() : Promise.reject()).then(items => {
-  const list = items.map(p => {
+  evLive = items.map(p => {
     const m = ((p._embedded || {})["wp:featuredmedia"] || [])[0] || {}, sz = (m.media_details || {}).sizes || {};
     let text = unhtml((p.excerpt && p.excerpt.rendered) || (p.content && p.content.rendered));
     if (text.length > 180) text = text.slice(0, 177).replace(/\s+\S*$/, "") + "…";
-    return {title: unhtml(p.title && p.title.rendered), link: p.link, text, img: (sz.medium || sz.full || {}).source_url || m.source_url || ""};
+    return {title: unhtml(p.title && p.title.rendered), link: p.link, text, img: (sz.medium || sz.full || {}).source_url || m.source_url || "", start: "", end: ""};
   }).filter(e => e.title && /^https:\/\/benlimglobal\.com\//.test(e.link));
-  if (list.length){ useEvents(list); try { localStorage.setItem(EV_KEY, JSON.stringify(list)); } catch(e){} }
+  renderEvents(); evSave();
 }).catch(() => {});
 // ---- Prophecy library ----
 // Words come live from the blog on benlimglobal.com (newest first). To add a word that is not on the

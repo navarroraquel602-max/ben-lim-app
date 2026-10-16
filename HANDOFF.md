@@ -17,6 +17,7 @@ No framework, no build tools to install, and no paid services.
 | `sw.js` | Lets the app work offline. Change the cache name (`benlim-v61` → `benlim-v62`) each time you publish. |
 | `manifest.json` | App name and icon for "Add to Home Screen". |
 | `privacy.html` | Privacy policy (**draft**: the ministry must review it). |
+| `update_events.py` / `events.json` | Collects event dates from the website so past events are hidden (see Known limits). |
 | `logo.png`, `icon-*.png`, `oils/`, `books/` | Images. `photos/` and `about.jpg` are no longer shown (the bio is intentionally left out of the app). |
 
 There are **no environment variables, API keys or passwords** in the project.
@@ -36,7 +37,7 @@ The app reads the ministry's WordPress site, so **updating the website updates t
 | In the app | Comes from (WordPress) |
 |---|---|
 | Missions & Crusades trips and photos | Shop products in the **Missions** category (`product_cat` 91) |
-| Events | The events plugin (Events → add or edit an event) |
+| Events (upcoming only, with dates) | The events plugin (Events → add or edit an event), plus `events.json` (see below) |
 | Prophecy Library | Blog posts |
 
 If the site can't be reached, the app shows the last copy saved on the phone. Website text appears in English, and the app labels it "(in English)" for other languages.
@@ -91,6 +92,8 @@ Nothing has been transferred yet. **Do not transfer without the developer's appr
 
 ## Known limits
 
-- The website does not share event *dates* with apps, so event cards show each event's own description (which normally names the date and city), newest posted first.
+- The website's data feed does not include event *dates*. So `update_events.py` reads every event page and saves the upcoming events with their dates to `events.json`. The app hides events once they end (checked every day, automatically) and lists the rest soonest first.
+  - **When the ministry adds a new event**, it appears in the app right away from the live feed, listed first but without a date, until someone runs `python3 update_events.py` and publishes `events.json`. Doing that every week or two keeps dates on everything. It takes about 8 minutes because it reads pages slowly so the site doesn't block it.
+  - This could run automatically every day with a free GitHub Action. That needs the access token to also have the **Workflows** permission.
 - Partner sign-in is a preview only. The button is disabled and no accounts exist.
 - Booking, oil, shawl and call requests open the visitor's email app. Switching them to FormSubmit too is possible once the missions form is activated and working.
