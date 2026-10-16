@@ -916,9 +916,6 @@ footer h4{color:#ffcf6b}footer a{color:#d8cfbb}footer small{color:#9c917c}
       <div class="goals"><p data-t="g1"></p><p data-t="g2"></p><p data-t="g3"></p><p data-t="g4"></p><p data-t="g5"></p></div>
     </div>
 
-    <div class="card" style="text-align:center">
-      <button class="btn ghost" type="button" id="shareApp" data-t="share_app"></button>
-    </div>
   </section>
 
   <!-- EVENTS -->
@@ -1858,7 +1855,6 @@ async function shareApp(e, msg){
   try { await navigator.clipboard.writeText(text + " " + url); alert(T[lang].sh_copied); }
   catch(e){ prompt(T[lang].sh_copied, text + " " + url); }
 }
-$("#shareApp").addEventListener("click", shareApp);
 $("#topShare").addEventListener("click", e => shareApp(e, T[lang].sh_app));
 $("#rpShare").addEventListener("click", shareApp);
 // ---- Prophecy Now ----
