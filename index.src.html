@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" translate="no">
 <head>
 <meta charset="utf-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0a0805">
 <title>Glory App</title>
@@ -762,6 +763,9 @@ header{background:#0a0805;border-bottom-color:rgba(224,162,52,.5)}
 header .topNav{background:rgba(255,255,255,.06);border-color:rgba(224,162,52,.45);color:#f3dca4}
 @media (min-width:1100px){nav button{color:#f3dca4}nav button:hover{color:#fff;background:rgba(224,162,52,.18)}nav button.on{color:#ffcf6b}}
 @media (max-width:400px){.crown-g{width:34px;height:38px}}
+#langToast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom));transform:translate(-50%,20px);z-index:20;background:#111;color:#ffcf6b;border:1px solid rgba(224,162,52,.6);border-radius:999px;padding:10px 18px;font:700 14px Lato,system-ui,sans-serif;opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;box-shadow:0 10px 24px -8px rgba(0,0,0,.6);white-space:nowrap}
+#langToast.show{opacity:1;transform:translate(-50%,0);animation:ltHide 2.6s ease forwards}
+@keyframes ltHide{0%,75%{opacity:1}100%{opacity:0}}
 /* Burmese: letter-spacing breaks the script, and words run longer */
 html[lang=my] *{letter-spacing:0!important}
 html[lang=my] body{line-height:1.7}
@@ -1603,7 +1607,7 @@ document.addEventListener("click", e => {
     if (g.dataset.lvl){ const t = document.getElementById("lvl-"+g.dataset.lvl); if (t) t.scrollIntoView(); }
     return; }
   const p = e.target.closest("[data-pick]");
-  if (p){ setLang(p.dataset.pick); go("hubpage"); }
+  if (p){ setLang(p.dataset.pick); go("home"); langToast(); }
 });
 
 // ---- Booking form ----
@@ -1742,6 +1746,11 @@ Object.assign(T3.es, {"pl_full_tr":"Leer la palabra completa en español","pl_tr
 Object.assign(T3.zh, {"pl_full_tr":"阅读完整中文话语","pl_tr_note":"完整话语将通过 Google 翻译从英文原文自动翻译打开。"});
 Object.assign(T3.ru, {"pl_full_tr":"Читать полностью на русском","pl_tr_note":"Полный текст откроется в автоматическом переводе Google Translate с английского оригинала."});
 Object.assign(T3.my, {"pl_full_tr":"မြန်မာဘာသာဖြင့် အပြည့်အစုံ ဖတ်ရန်","pl_tr_note":"အပြည့်အစုံကို အင်္ဂလိပ်မူရင်းမှ Google Translate ဖြင့် အလိုအလျောက် ဘာသာပြန်၍ ဖွင့်ပါမည်။"});
+Object.assign(T3.en, {"lt_done": "The app is now in English"});
+Object.assign(T3.es, {"lt_done": "La app ahora está en español"});
+Object.assign(T3.zh, {"lt_done": "应用已切换为中文"});
+Object.assign(T3.ru, {"lt_done": "Приложение теперь на русском"});
+Object.assign(T3.my, {"lt_done": "အက်ပ်ကို မြန်မာဘာသာသို့ ပြောင်းပြီးပါပြီ"});
 for (const l in T3) Object.assign(T[l], T3[l]);
 for (const l in T) for (const k in T.en) if (!(k in T[l])) T[l][k] = T.en[k];  // fill gaps with English
 
@@ -2199,6 +2208,12 @@ const CT = /*CT*/{};
 const ct = (o, f) => { const x = lang !== "en" && o && CT[o.link] && CT[o.link][lang]; return (x && x[f]) || (o && o[f]) || ""; };
 const ctAll = list => lang === "en" || (list || []).every(o => CT[o.link] && CT[o.link][lang]);
 const gTrans = url => "https://translate.google.com/translate?sl=en&tl=" + ({zh:"zh-CN"}[lang] || lang) + "&u=" + encodeURIComponent(url);
+// ---- Small confirmation after switching language ----
+function langToast(){
+  let t = document.getElementById("langToast");
+  if (!t){ t = document.createElement("div"); t.id = "langToast"; t.setAttribute("role", "status"); document.body.appendChild(t); }
+  t.textContent = "✓ " + T[lang].lt_done; t.classList.remove("show"); void t.offsetWidth; t.classList.add("show");
+}
 // ---- Page text translations (forms, course names): i18n/*.json, merged by build.py ----
 const FT = /*FT*/{};
 const FT_ROOTS = "#crusadeApp, #invite, #apply, #osheet, .courses";
@@ -2417,7 +2432,7 @@ try {
 $("#hubAuto").addEventListener("click", () => {
   const l = (navigator.language || "en").slice(0, 2).toLowerCase();
   setLang(["en","es","my","zh","ru"].includes(l) ? l : "en");
-  go("hubpage");
+  go("home"); langToast();
 });
 document.addEventListener("click", e => {
   const c = e.target.closest("#hubs [data-pick]");
