@@ -703,6 +703,51 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
 #shop .mitem .mp{color:#ffcf6b}
 #shop .mitem .mbtn{background:linear-gradient(135deg,#ffcf6b,#ff8a1f 55%,#e0532a);color:#2a0e00}
 @media (hover:hover){#shop .mitem:hover,.oil-card:hover{border-color:#ffb347;box-shadow:0 26px 46px -18px rgba(0,0,0,.75),0 0 24px rgba(255,140,40,.25)}}
+/* ===== Learn: "Go deeper" stage (courses + 1:1) ===== */
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+.deep{margin:26px -16px 0;padding:26px 16px 30px;border-radius:28px;color:#f6eedc;background:radial-gradient(90% 60% at 50% 105%,rgba(255,110,20,.35),transparent 65%),radial-gradient(60% 40% at 100% 0%,rgba(224,162,52,.25),transparent 60%),linear-gradient(175deg,#16110a,#050403);box-shadow:0 30px 60px -30px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,220,150,.15)}
+.deep p{color:#dcd2bd}
+.deep .note{color:#bfb39a}
+.deep h2,.deep h3.sec{margin-top:4px}
+.glow-t{font-family:Oswald,system-ui,sans-serif;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:linear-gradient(100deg,#c88a1d 0%,#ffe9b0 22%,#ffb347 40%,#fff6d8 50%,#ff9a3d 62%,#ffe9b0 80%,#c88a1d 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 14px rgba(255,150,40,.35))}
+.deep h3.glow-t{font-size:26px}
+.glow-t .ch{display:inline-block;background:inherit;background-size:inherit;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;white-space:pre}
+.deep .courses{margin:12px -16px 14px;padding:10px 16px 18px;scroll-padding-left:16px;scroll-padding-right:16px;perspective:900px}
+.deep .crs{width:182px;min-height:176px;border:2px solid transparent;color:#fff;background:linear-gradient(165deg,#2a1f10,#0b0805) padding-box,conic-gradient(from var(--ang),#ffcf6b,#ff7a1a,#c4321a,#3a2208 40%,#3a2208 60%,#ffcf6b) border-box;box-shadow:0 18px 34px -16px rgba(0,0,0,.85),0 0 22px -6px rgba(255,140,40,.4);transform-style:preserve-3d;transition:transform .15s ease,box-shadow .25s ease}
+.deep .crs::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;border-radius:0;background:linear-gradient(100deg,transparent,rgba(255,240,200,.22),transparent);transform:skewX(-18deg);right:auto}
+.deep .crs-n{font-size:34px;color:transparent;-webkit-text-stroke:1.2px rgba(255,207,107,.85);text-shadow:0 0 18px rgba(255,150,40,.45)}
+.deep .crs b{font-size:16px;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.deep .crs small{color:#ffcf6b}
+.deep .calls{perspective:900px}
+.deep .call{position:relative;overflow:hidden;border:2px solid transparent;color:#fff;min-height:150px;background:linear-gradient(165deg,#2a1f10,#0b0805) padding-box,conic-gradient(from var(--ang),#ffcf6b,#ff7a1a,#c4321a,#3a2208 40%,#3a2208 60%,#ffcf6b) border-box;box-shadow:0 18px 34px -16px rgba(0,0,0,.85),0 0 22px -6px rgba(255,140,40,.4);transform-style:preserve-3d;transition:transform .15s ease,box-shadow .25s ease}
+.deep .call .crown-i{width:30px;height:22px;color:#ffcf6b;filter:drop-shadow(0 0 8px rgba(255,170,60,.7));margin-bottom:6px}
+.deep .call span{color:#fff}
+.deep .call b{color:#ffcf6b;opacity:1}
+.deep .call em{font-size:30px;background:linear-gradient(180deg,#fff6d8,#ffcf6b 55%,#ff9a3d);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 10px rgba(255,150,40,.45))}
+.deep .call em small{-webkit-text-fill-color:#cdbf9f;color:#cdbf9f}
+.deep .call.c2{background:linear-gradient(165deg,#3a2a12,#0b0805) padding-box,conic-gradient(from var(--ang),#fff1c2,#ffcf6b,#ff7a1a,#3a2208 40%,#3a2208 60%,#fff1c2) border-box}
+.deep .call.c4{background:linear-gradient(165deg,#1a1a1a,#000) padding-box,conic-gradient(from var(--ang),#ffcf6b,#ff7a1a,#c4321a,#222 40%,#222 60%,#ffcf6b) border-box}
+.deep .btn{background:linear-gradient(135deg,#ffcf6b,#ff8a1f 55%,#e0532a);color:#2a0e00}
+.deep .crs:hover,.deep .call:hover{box-shadow:0 26px 46px -16px rgba(0,0,0,.9),0 0 34px -4px rgba(255,140,40,.65)}
+/* pop-in once the stage is on screen */
+.deep:not(.lit) .crs,.deep:not(.lit) .call{opacity:0;transform:translateY(26px) scale(.94)}
+.deep.lit .crs,.deep.lit .call{opacity:1;transition:opacity .5s ease var(--d,0ms),transform .6s cubic-bezier(.2,1.4,.4,1) var(--d,0ms),box-shadow .25s ease}
+@media (prefers-reduced-motion:no-preference){
+  .glow-t{animation:molten 5s linear infinite}
+  @keyframes molten{from{background-position:0% 0}to{background-position:-250% 0}}
+  .deep:not(.lit) .glow-t .ch{opacity:0;transform:translateY(.6em) rotateX(70deg)}
+  .deep.lit .glow-t .ch{animation:chUp .6s cubic-bezier(.2,1.5,.4,1) backwards;animation-delay:calc(var(--i) * 28ms)}
+  @keyframes chUp{from{opacity:0;transform:translateY(.6em) rotateX(70deg)}to{opacity:1;transform:none}}
+  .deep .crs,.deep .call{animation:spinb 6s linear infinite}
+  .deep .crs:nth-child(even),.deep .call:nth-child(even){animation-duration:7.5s;animation-direction:reverse}
+  @keyframes spinb{to{--ang:360deg}}
+  .deep .crs::after{animation:sweep2 4.8s ease-in-out infinite}
+  .deep .crs:nth-child(3n+2)::after{animation-delay:1.6s}.deep .crs:nth-child(3n)::after{animation-delay:3.2s}
+  @keyframes sweep2{0%,72%{left:-80%}100%{left:150%}}
+  .deep .btn{animation:btnGlow 2.2s ease-in-out infinite}
+  @keyframes btnGlow{0%,100%{box-shadow:0 8px 20px -6px rgba(255,110,30,.6)}50%{box-shadow:0 10px 32px -4px rgba(255,140,40,.95),0 0 0 4px rgba(255,170,60,.18)}}
+}
+@media (min-width:700px){.deep{margin:30px 0 0;padding:30px 28px 34px}.deep .courses{margin:12px -28px 14px;padding:10px 28px 18px;scroll-padding-left:28px}}
 /* Burmese: letter-spacing breaks the script, and words run longer */
 html[lang=my] *{letter-spacing:0!important}
 html[lang=my] body{line-height:1.7}
@@ -833,18 +878,20 @@ html[lang=my] .onode i{font-size:8px}
         <a class="mt-main" href="#" data-go="reading" aria-label="21 Days in John"></a></div>
     </div>
 
-    <h2 data-t="ln_deep"></h2>
+    <div class="deep fire" data-embers>
+    <h2 class="glow-t" data-t="ln_deep"></h2>
     <p class="note" data-t="ln_deep_p"></p>
-    <h3 class="sec" data-t="courses_title" id="coursesBlock"></h3>
+    <h3 class="sec glow-t" data-t="courses_title" id="coursesBlock"></h3>
     <p data-t="courses_p"></p>
     <div class="courses"><a class="crs" href="https://benlimcourses.teachable.com/courses" target="_blank" rel="noopener" style="--h:0"><span class="crs-n">01</span><b>7M Glory Equip</b><small data-t="t_mentor"></small></a><a class="crs" href="https://benlimcourses.teachable.com/courses" target="_blank" rel="noopener" style="--h:27"><span class="crs-n">02</span><b>Atmospheres Online School</b></a><a class="crs" href="https://benlimcourses.teachable.com/courses" target="_blank" rel="noopener" style="--h:54"><span class="crs-n">03</span><b>The Gift of Discernment Online School</b></a><a class="crs" href="https://benlimcourses.teachable.com/courses" target="_blank" rel="noopener" style="--h:81"><span class="crs-n">04</span><b>School of Healing</b></a><a class="crs" href="https://benlimcourses.teachable.com/courses" target="_blank" rel="noopener" style="--h:108"><span class="crs-n">05</span><b>School of Prayer</b></a><a class="crs" href="https://benlimcourses.teachable.com/courses" target="_blank" rel="noopener" style="--h:135"><span class="crs-n">06</span><b>School of Revival</b></a><a class="crs" href="https://benlimcourses.teachable.com/courses" target="_blank" rel="noopener" style="--h:162"><span class="crs-n">07</span><b>Inner Healing and Deliverance</b></a><a class="crs" href="https://benlimcourses.teachable.com/courses" target="_blank" rel="noopener" style="--h:189"><span class="crs-n">08</span><b>Sozo Inner Healing and Deliverance E-course</b></a><a class="crs" href="https://benlimcourses.teachable.com/courses" target="_blank" rel="noopener" style="--h:216"><span class="crs-n">09</span><b>Identity, Sonship, and the Father's Heart</b></a><a class="crs" href="https://benlimcourses.teachable.com/courses" target="_blank" rel="noopener" style="--h:243"><span class="crs-n">10</span><b>The Supernatural Gifts of the Holy Spirit</b></a><a class="crs" href="https://benlimcourses.teachable.com/courses" target="_blank" rel="noopener" style="--h:270"><span class="crs-n">11</span><b>Supernatural Prosperity eCourse</b></a><a class="crs" href="https://benlimcourses.teachable.com/courses" target="_blank" rel="noopener" style="--h:297"><span class="crs-n">12</span><b>Elite / Executive</b><small data-t="t_coach"></small></a><a class="crs" href="https://benlimcourses.teachable.com/courses" target="_blank" rel="noopener" style="--h:324"><span class="crs-n">13</span><b>Consultation</b><small data-t="t_coach"></small></a></div>
     <p><a class="btn" href="https://benlimcourses.teachable.com/courses" target="_blank" rel="noopener" data-t="courses_btn"></a></p>
 
-    <h3 class="sec" data-t="call_title"></h3>
+    <h3 class="sec glow-t" data-t="call_title"></h3>
     <p data-t="call_p"></p>
-    <div class="calls"><div class="call c1"><span data-t="call_l1"></span><b>Titanium</b><em>$500<small data-t="pt_mo"></small></em></div><div class="call c2"><span data-t="call_l2"></span><b>Diamond</b><em>$1,000<small data-t="pt_mo"></small></em></div><div class="call c3"><span data-t="call_l3"></span><b>Elite</b><em>$600<small data-t="pt_mo"></small></em></div><div class="call c4"><span data-t="call_l4"></span><b>Executive</b><em>$1,000<small data-t="pt_mo"></small></em></div></div>
+    <div class="calls"><div class="call c1"><svg class="crown-i" viewBox="0 0 40 28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 24 2 6l9 8 9-12 9 12 9-8-2 18Z"/><path d="M4 24h32"/></svg><span data-t="call_l1"></span><b>Titanium</b><em>$500<small data-t="pt_mo"></small></em></div><div class="call c2"><svg class="crown-i" viewBox="0 0 40 28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 24 2 6l9 8 9-12 9 12 9-8-2 18Z"/><path d="M4 24h32"/></svg><span data-t="call_l2"></span><b>Diamond</b><em>$1,000<small data-t="pt_mo"></small></em></div><div class="call c3"><svg class="crown-i" viewBox="0 0 40 28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 24 2 6l9 8 9-12 9 12 9-8-2 18Z"/><path d="M4 24h32"/></svg><span data-t="call_l3"></span><b>Elite</b><em>$600<small data-t="pt_mo"></small></em></div><div class="call c4"><svg class="crown-i" viewBox="0 0 40 28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 24 2 6l9 8 9-12 9 12 9-8-2 18Z"/><path d="M4 24h32"/></svg><span data-t="call_l4"></span><b>Executive</b><em>$1,000<small data-t="pt_mo"></small></em></div></div>
     <p class="note" data-t="call_note"></p>
     <p><a class="btn" id="askCall" href="#" data-t="call_btn"></a></p>
+    </div>
   </section>
 
   <!-- CONNECT (free contact) -->
@@ -1450,6 +1497,7 @@ function setLang(l){
   if (window.renderCart) renderCart();
   if (window.renderPartnerArea) renderPartnerArea();
   if (window.renderMusic) renderMusic();
+  if (window.splitGlow) splitGlow();
 }
 // Page history: every page visited, and where we are in it (like a web browser)
 let currentPage = "home", trail = ["home"], spot = 0;
@@ -2054,6 +2102,34 @@ document.addEventListener("pointerdown", e => {
     try { new IntersectionObserver(es => es.forEach(x => { vis = x.isIntersecting; if (vis && !W) size(); })).observe(host); } catch(e){ vis = true; }
     addEventListener("resize", () => { if (W) size(); });
     requestAnimationFrame(frame);
+  });
+})();
+// ---- Learn "Go deeper": letters rise, cards pop in, 3D tilt ----
+(function(){
+  const stage = document.querySelector(".deep"); if (!stage) return;
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.splitGlow = function(){
+    if (still) return;
+    stage.querySelectorAll(".glow-t").forEach(h => {
+      const txt = h.textContent; if (!txt || h.querySelector(".ch")) return;
+      h.innerHTML = [...txt].map((c, i) => '<span class="ch" style="--i:' + i + '">' + (c === " " ? " " : c.replace(/[&<>]/g, x => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[x]))) + '</span>').join("");
+      h.setAttribute("aria-label", txt);
+    });
+  };
+  splitGlow();
+  stage.querySelectorAll(".crs").forEach((c, i) => c.style.setProperty("--d", Math.min(i, 8) * 70 + "ms"));
+  stage.querySelectorAll(".call").forEach((c, i) => c.style.setProperty("--d", 200 + i * 90 + "ms"));
+  try { const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)){ stage.classList.add("lit"); io.disconnect(); } }, {threshold: .12}); io.observe(stage); } catch(e){ stage.classList.add("lit"); }
+  // backup: light it up whenever it is on screen, even if the observer never fires
+  const chk = setInterval(() => { if (stage.classList.contains("lit")) return clearInterval(chk);
+    const r = stage.getBoundingClientRect(); if (stage.offsetParent && r.top < innerHeight && r.bottom > 0) stage.classList.add("lit"); }, 600);
+  if (still) return;
+  stage.querySelectorAll(".crs,.call").forEach(card => {
+    card.addEventListener("pointermove", e => {
+      const r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      card.style.transform = "rotateY(" + (x * 14).toFixed(1) + "deg) rotateX(" + (-y * 14).toFixed(1) + "deg) translateZ(6px)";
+    });
+    card.addEventListener("pointerleave", () => { card.style.transform = ""; });
   });
 })();
 // ---- Prophecy library ----
