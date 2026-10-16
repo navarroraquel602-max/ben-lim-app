@@ -45,6 +45,12 @@ EXTRA = """
 <style>
 /* Black, Silver & White edition */
 .gbg,.cph img,.vimg,.evhead img,.banner,.ctiles a img{filter:grayscale(1) contrast(1.08)}
+/* silver edition keeps the clean white header with the black crown */
+.crown-w{display:block!important}.crown-g{display:none!important}
+header{background:#fff!important;border-bottom-color:#d9d9d9!important}
+.brand-t{background:none!important;color:#111!important;-webkit-text-fill-color:#111!important}
+header .topNav{background:#fff!important;border-color:#d9d9d9!important;color:#111!important}
+@media (min-width:1100px){nav button{color:#111!important}nav button.on{color:#555!important}}
 </style>
 """
 
@@ -54,5 +60,7 @@ def make(src):
     out = re.sub(r"(<script>)(.*?)(</script>)", lambda m: m.group(1) + recolor(m.group(2)) + m.group(3), out, flags=re.S)
     out = out.replace("</head>", EXTRA + "</head>", 1)
     out = out.replace('<link rel="manifest" href="manifest.json">', '<link rel="manifest" href="manifest-silver.json">', 1)
+    out = out.replace('<meta name="theme-color" content="#0a0805">', '<meta name="theme-color" content="#ffffff">')
+    out = out.replace('href="icon-192.png"', 'href="icon-silver-192.png"')
     out = out.replace("<title>Glory App</title>", "<title>Glory App · Silver</title>", 1)
     return out

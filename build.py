@@ -13,6 +13,7 @@ build = lambda src: re.sub(r'(src=)"([^"]+\.(?:png|jpg|jpeg))"', inline, src)
 open('index.html', 'w', encoding='utf-8').write(build(s))
 open('silver.html', 'w', encoding='utf-8').write(build(theme_silver.make(s)))
 m = json.load(open('manifest.json'))
-m.update(name="Glory App Silver", short_name="Glory App", start_url="./silver.html")
+m.update(name="Glory App Silver", short_name="Glory App", start_url="./silver.html", background_color="#ffffff", theme_color="#ffffff",
+         icons=[{"src": "icon-silver-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "icon-silver-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}])
 json.dump(m, open('manifest-silver.json', 'w'), separators=(',', ':'))
 print('built')
