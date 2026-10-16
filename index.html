@@ -579,6 +579,20 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
 .os-actions .btn[disabled]{opacity:.6;cursor:wait}
 .os-done{text-align:center}
 .os-done svg{width:52px;height:52px;color:#2e7d32}
+/* ---- Shop: Music & More shelf ---- */
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0 14px}
+.mitem{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;text-decoration:none;color:var(--text);box-shadow:0 4px 14px -8px rgba(0,0,0,.25);transition:transform .2s ease,box-shadow .2s ease}
+.mitem .mimg{position:relative;aspect-ratio:1;background:#f2f2f2}
+.mitem img{width:100%;height:100%;object-fit:cover;display:block}
+.mitem .mtag{position:absolute;left:8px;top:8px;font:700 10px Lato,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;background:rgba(17,17,17,.82);color:#f3dca4;border-radius:999px;padding:3px 8px}
+.mitem .mbody{padding:10px 10px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
+.mitem b{font-size:13.5px;line-height:1.25}
+.mitem .mp{font:600 18px Oswald,system-ui,sans-serif;margin-top:auto}
+.mitem .mp small{font:400 11px Lato,system-ui,sans-serif;color:var(--muted);margin-right:3px}
+.mitem .mbtn{display:block;text-align:center;background:#111;color:#f3dca4;border-radius:10px;padding:8px;font:700 12px Lato,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+@media (hover:hover){.mitem:hover{transform:translateY(-3px);box-shadow:0 12px 24px -10px rgba(0,0,0,.35)}}
+.mitem:active{transform:scale(.97)}
+@media (min-width:700px){.mgrid{grid-template-columns:repeat(3,1fr)}}
 /* Burmese: letter-spacing breaks the script, and words run longer */
 html[lang=my] *{letter-spacing:0!important}
 html[lang=my] body{line-height:1.7}
@@ -801,9 +815,11 @@ html[lang=my] .onode i{font-size:8px}
       <h3>Men of Valor</h3><p data-t="b_valor"></p>
       <a class="btn" href="https://benlimglobal.com/books/" target="_blank" rel="noopener" data-t="open"></a></div></div>
 
-    <h3 data-t="more_h"></h3>
-    <div class="card"><p data-t="more_p"></p>
-      <a class="btn" href="https://benlimglobal.com/shop/" target="_blank" rel="noopener" data-t="open"></a></div>
+    <!-- MUSIC & MORE: mirrors the benlimglobal.com store (shop.json, made by update_shop.py). Buying stays on the website. -->
+    <h3 class="sec" data-t="more_h"></h3>
+    <p class="note" data-t="mu_p"></p>
+    <div class="mgrid" id="musicGrid"></div>
+    <p><a class="btn ghost" href="https://benlimglobal.com/shop/" target="_blank" rel="noopener" data-t="mu_all"></a></p>
   </section>
 
   <!-- MERCHANDISE ORDER REQUEST (invoice request, not a checkout). Config: ORDER_ENDPOINT in the script. -->
@@ -1311,6 +1327,7 @@ function setLang(l){
   if (window.rpRing) rpRing();
   if (window.renderCart) renderCart();
   if (window.renderPartnerArea) renderPartnerArea();
+  if (window.renderMusic) renderMusic();
 }
 // Page history: every page visited, and where we are in it (like a web browser)
 let currentPage = "home", trail = ["home"], spot = 0;
@@ -1474,6 +1491,11 @@ Object.assign(T3.es, {"shawl_h": "Manto de oración"});
 Object.assign(T3.zh, {"shawl_h": "祷告巾"});
 Object.assign(T3.ru, {"shawl_h": "Молитвенное покрывало"});
 Object.assign(T3.my, {"shawl_h": "ဆုတောင်းပုဝါ"});
+Object.assign(T3.en, {"more_h":"Music & More","mu_p":"CDs, downloads and more from the ministry store. Tap an item to buy it on benlimglobal.com.","mu_buy":"Buy","mu_choose":"Choose tracks","mu_from":"from","mu_all":"See the full store"});
+Object.assign(T3.es, {"more_h":"Música y más","mu_p":"CD, descargas y más de la tienda del ministerio. Toque un artículo para comprarlo en benlimglobal.com.","mu_buy":"Comprar","mu_choose":"Elegir canciones","mu_from":"desde","mu_all":"Ver toda la tienda"});
+Object.assign(T3.zh, {"more_h":"音乐与更多","mu_p":"事工商店的 CD、下载等。点选商品即可在 benlimglobal.com 购买。","mu_buy":"购买","mu_choose":"选择曲目","mu_from":"起","mu_all":"查看完整商店"});
+Object.assign(T3.ru, {"more_h":"Музыка и другое","mu_p":"CD, загрузки и другое из магазина служения. Нажмите на товар, чтобы купить его на benlimglobal.com.","mu_buy":"Купить","mu_choose":"Выбрать треки","mu_from":"от","mu_all":"Весь магазин"});
+Object.assign(T3.my, {"more_h":"တေးဂီတနှင့် အခြား","mu_p":"ဓမ္မအမှုတော် စတိုးမှ CD၊ ဒေါင်းလုဒ်နှင့် အခြား။ benlimglobal.com တွင် ဝယ်ရန် ပစ္စည်းကို နှိပ်ပါ။","mu_buy":"ဝယ်ရန်","mu_choose":"သီချင်းများ ရွေးရန်","mu_from":"မှ စ၍","mu_all":"စတိုး အပြည့်အစုံ ကြည့်ရန်"});
 for (const l in T3) Object.assign(T[l], T3[l]);
 for (const l in T) for (const k in T.en) if (!(k in T[l])) T[l][k] = T.en[k];  // fill gaps with English
 
@@ -1853,6 +1875,22 @@ document.addEventListener("pointerdown", e => {
   };
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   try { const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)){ io.disconnect(); run(); } }, {threshold: .4}); io.observe(box); } catch(e){}
+})();
+// ---- Shop: Music & More (from shop.json; each item opens its page on benlimglobal.com) ----
+(function(){
+  let items = null;
+  const esc = x => String(x || "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const tag = n => /\bCD\b/i.test(n) ? "CD" : /single/i.test(n) ? "Single" : /download|album/i.test(n) ? "Download" : /oil/i.test(n) ? "Oil" : "";
+  window.renderMusic = function(){
+    const box = document.getElementById("musicGrid"); if (!box || !items) return;
+    const t = T[lang];
+    box.innerHTML = items.map(i => '<a class="mitem" href="' + esc(i.link) + '" target="_blank" rel="noopener"><span class="mimg">' + (i.img ? '<img src="' + esc(i.img) + '" alt="" loading="lazy">' : '') + (tag(i.name) ? '<span class="mtag">' + tag(i.name) + '</span>' : '') + '</span>' +
+      '<span class="mbody"><b>' + esc(i.name) + '</b>' + (i.price > 0 ? '<span class="mp">' + (i.from ? '<small>' + esc(t.mu_from) + '</small>' : '') + '$' + i.price.toFixed(2) + '</span>' : '<span class="mp"></span>') +
+      '<span class="mbtn">' + esc(i.kind === "grouped" ? t.mu_choose : t.mu_buy) + '</span></span></a>').join("");
+  };
+  fetch("shop.json", {cache: "no-store"}).then(r => r.ok ? r.json() : Promise.reject()).then(d => { items = (d && d.items) || []; renderMusic(); }).catch(() => {
+    const box = document.getElementById("musicGrid"); if (box) box.innerHTML = '<div class="card"><p>' + esc(T[lang].more_p) + '</p></div>';
+  });
 })();
 // ---- Prophecy library ----
 // Words come live from the blog on benlimglobal.com (newest first). To add a word that is not on the

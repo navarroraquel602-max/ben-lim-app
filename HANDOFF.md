@@ -17,6 +17,7 @@ No framework, no build tools to install, and no paid services.
 | `sw.js` | Lets the app work offline. Change the cache name (`benlim-v61` → `benlim-v62`) each time you publish. |
 | `manifest.json` | App name and icon for "Add to Home Screen". |
 | `privacy.html` | Privacy policy (**draft**: the ministry must review it). |
+| `update_shop.py` / `shop.json` | The Shop's "Music & More" shelf: mirrors the benlimglobal.com store (mission trips and free events skipped). Run `python3 update_shop.py` when products or prices change on the website. |
 | `update_events.py` / `events.json` | Collects event dates from the website so past events are hidden (see Known limits). |
 | `logo.png`, `icon-*.png`, `oils/`, `books/` | Images. `photos/` and `about.jpg` are no longer shown (the bio is intentionally left out of the app). |
 

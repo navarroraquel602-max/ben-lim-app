@@ -1,0 +1,104 @@
+{
+ "updated": "2026-10-16",
+ "items": [
+  {
+   "id": 1449,
+   "name": "Breakthrough Deliverance CD",
+   "link": "https://benlimglobal.com/product/breakthrough-deliverance-cd/",
+   "price": 15.0,
+   "from": false,
+   "kind": "simple",
+   "img": "https://benlimglobal.com/wp-content/uploads/2023/03/Deliverance-CD-Mock-Up-300x300.jpg"
+  },
+  {
+   "id": 1375,
+   "name": "Breakthrough Deliverance Downloadable Album",
+   "link": "https://benlimglobal.com/product/breakthrough-deliverance-album-2/",
+   "price": 10.0,
+   "from": false,
+   "kind": "simple",
+   "img": "https://benlimglobal.com/wp-content/uploads/2023/03/Deliverance-Case-Mock-300x300.jpg"
+  },
+  {
+   "id": 1373,
+   "name": "Breakthrough Deliverance Single Audio",
+   "link": "https://benlimglobal.com/product/breakthrough-deliverance-album/",
+   "price": 0.99,
+   "from": true,
+   "kind": "grouped",
+   "img": "https://benlimglobal.com/wp-content/uploads/2022/12/Deliverance-CD-Mock-Up-300x300.jpg"
+  },
+  {
+   "id": 1283,
+   "name": "Glory Imparations CD",
+   "link": "https://benlimglobal.com/product/glory-imparations-cd/",
+   "price": 15.0,
+   "from": false,
+   "kind": "simple",
+   "img": "https://benlimglobal.com/wp-content/uploads/2023/03/smartmockups_lkizuwe9-300x300.jpg"
+  },
+  {
+   "id": 1280,
+   "name": "Glory Imparations Downloable Album",
+   "link": "https://benlimglobal.com/product/glory-imparations-album/",
+   "price": 5.0,
+   "from": false,
+   "kind": "simple",
+   "img": "https://benlimglobal.com/wp-content/uploads/2023/03/smartmockups_lkizuwe9-300x300.jpg"
+  },
+  {
+   "id": 1261,
+   "name": "Glory Impartations Single Audio Download",
+   "link": "https://benlimglobal.com/product/glory-impartations/",
+   "price": 0.99,
+   "from": true,
+   "kind": "grouped",
+   "img": "https://benlimglobal.com/wp-content/uploads/2023/03/smartmockups_lfaa5zgm-300x300.jpg"
+  },
+  {
+   "id": 1450,
+   "name": "Heavenly Decrees",
+   "link": "https://benlimglobal.com/product/heavenly-decrees/",
+   "price": 15.0,
+   "from": false,
+   "kind": "simple",
+   "img": "https://benlimglobal.com/wp-content/uploads/2023/04/smartmockups_lkizpygc-300x300.jpg"
+  },
+  {
+   "id": 3789,
+   "name": "Prophetic Oil by Ben Lim & Steve Swanson",
+   "link": "https://benlimglobal.com/product/prophetic-oil-by-ben-lim-steve-swanson/",
+   "price": 0.0,
+   "from": false,
+   "kind": "external",
+   "img": "https://benlimglobal.com/wp-content/uploads/2024/08/large-300x300.jpg"
+  },
+  {
+   "id": 1460,
+   "name": "Prophetic War Room Digital Download",
+   "link": "https://benlimglobal.com/product/prophetic-war-room-digital-download/",
+   "price": 0.99,
+   "from": true,
+   "kind": "grouped",
+   "img": "https://benlimglobal.com/wp-content/uploads/2023/04/Photo-Mar-15-2023-1-35-40-AM-300x300.jpg"
+  },
+  {
+   "id": 1453,
+   "name": "The Prophetic War Room CD",
+   "link": "https://benlimglobal.com/product/the-prophetic-war-room/",
+   "price": 15.0,
+   "from": false,
+   "kind": "simple",
+   "img": "https://benlimglobal.com/wp-content/uploads/2023/04/smartmockups_lkizvnyi-300x300.jpg"
+  },
+  {
+   "id": 1457,
+   "name": "The Prophetic War Room Digital Album Download",
+   "link": "https://benlimglobal.com/product/the-prophetic-war-room-digital-album-download/",
+   "price": 10.0,
+   "from": false,
+   "kind": "simple",
+   "img": "https://benlimglobal.com/wp-content/uploads/2023/04/smartmockups_lkizvnyi-300x300.jpg"
+  }
+ ]
+}
