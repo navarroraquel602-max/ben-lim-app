@@ -766,6 +766,26 @@ header .topNav{background:rgba(255,255,255,.06);border-color:rgba(224,162,52,.45
 #langToast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom));transform:translate(-50%,20px);z-index:20;background:#111;color:#ffcf6b;border:1px solid rgba(224,162,52,.6);border-radius:999px;padding:10px 18px;font:700 14px Lato,system-ui,sans-serif;opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;box-shadow:0 10px 24px -8px rgba(0,0,0,.6);white-space:nowrap}
 #langToast.show{opacity:1;transform:translate(-50%,0);animation:ltHide 2.6s ease forwards}
 @keyframes ltHide{0%,75%{opacity:1}100%{opacity:0}}
+/* ---- Mission videos ---- */
+.vids{display:flex;gap:12px;overflow-x:auto;margin:6px -16px 18px;padding:4px 16px 12px;scroll-padding-left:16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.vtile{flex:none;width:240px;scroll-snap-align:start;border:0;padding:0;background:none;text-align:left;cursor:pointer;color:inherit}
+.vthumb{position:relative;display:block;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#111;box-shadow:0 14px 28px -14px rgba(0,0,0,.7),0 0 0 1px rgba(224,162,52,.4)}
+.vthumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.vthumb::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.65))}
+.vplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#ffcf6b,#ff8a1f 60%,#e0532a);box-shadow:0 0 0 6px rgba(255,170,60,.25),0 10px 24px -6px rgba(0,0,0,.6)}
+.vplay svg{width:22px;height:22px;margin-left:3px;fill:#2a0e00}
+.vtag{position:absolute;left:10px;bottom:8px;z-index:1;font:700 11px Lato,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#ffcf6b}
+.vtile b{display:block;margin-top:8px;font-size:14px;line-height:1.3}
+@media (hover:hover){.vtile:hover .vthumb img{transform:scale(1.06)}}
+.vtile:active .vthumb{transform:scale(.97)}
+@media (prefers-reduced-motion:no-preference){.vplay{animation:vpulse 2.2s ease-in-out infinite}@keyframes vpulse{0%,100%{box-shadow:0 0 0 6px rgba(255,170,60,.25),0 10px 24px -6px rgba(0,0,0,.6)}50%{box-shadow:0 0 0 12px rgba(255,170,60,.12),0 10px 24px -6px rgba(0,0,0,.6)}}}
+.vplayer{border:0;padding:0;background:transparent;width:min(960px,96vw);max-width:96vw;overflow:visible}
+.vplayer::backdrop{background:rgba(0,0,0,.88)}
+.vp-frame{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 0 0 1px rgba(224,162,52,.5),0 20px 60px rgba(0,0,0,.7)}
+.vp-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vp-t{color:#f6eedc;text-align:center;margin:10px 0 0;font-weight:700}
+.vp-x{position:absolute;right:0;top:-48px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(224,162,52,.6);background:#111;color:#ffcf6b;font-size:24px;cursor:pointer}
+@media (min-width:700px){.vtile{width:300px}}
 /* Burmese: letter-spacing breaks the script, and words run longer */
 html[lang=my] *{letter-spacing:0!important}
 html[lang=my] body{line-height:1.7}
@@ -867,6 +887,8 @@ footer h4{color:#ffcf6b}footer a{color:#d8cfbb}footer small{color:#9c917c}
     <h2 data-t="cr_title"></h2>
     <p data-t="cr_intro"></p>
     <div class="cphotos"><figure class="cph"><img src="media/monterrey-night.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy"></figure><figure class="cph"><img src="media/mexico-city.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy"></figure><figure class="cph"><img src="media/street-crowd.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy"></figure><figure class="cph"><img src="media/crusade-crowd.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy"></figure></div>
+    <h3 class="sec" data-t="mv_h"></h3>
+    <div class="vids" data-videos></div>
     <p><a class="btn" href="#" data-go="crusades" data-t="cr_link_btn"></a>
        <a class="btn ghost" href="#" data-go="crusadeApp" data-t="cr_apply"></a></p>
 
@@ -1075,6 +1097,12 @@ footer h4{color:#ffcf6b}footer a{color:#d8cfbb}footer small{color:#9c917c}
     </div>
   </dialog>
 
+  <dialog class="vplayer" id="vplayer" aria-label="Video">
+    <button type="button" class="vp-x" id="vpClose" aria-label="Close">×</button>
+    <div class="vp-frame" id="vpFrame"></div>
+    <p class="vp-t" id="vpTitle"></p>
+  </dialog>
+
   <section id="partners">
     <p><a class="btn ghost" href="#" data-back="home" data-t="inv_back"></a></p>
     <h2 data-t="pt_title"></h2>
@@ -1201,6 +1229,8 @@ footer h4{color:#ffcf6b}footer a{color:#d8cfbb}footer small{color:#9c917c}
     <h2 data-t="cr_title"></h2>
     <p data-t="cr_intro"></p>
     <div class="cphotos"><figure class="cph"><img src="media/monterrey-night.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy"></figure><figure class="cph"><img src="media/mexico-city.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy"></figure><figure class="cph"><img src="media/street-crowd.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy"></figure><figure class="cph"><img src="media/crusade-crowd.jpg" alt="Crowd worshiping at a Ben Lim Global crusade" loading="lazy"></figure></div>
+    <h3 class="sec" data-t="mv_h"></h3>
+    <div class="vids" data-videos></div>
     <div class="card"><h3 data-t="cr_next_h"></h3><p data-t="cr_next_p"></p>
       <a class="btn" href="#" data-go="crusadeApp" data-t="cr_apply"></a></div>
     <h3 class="sec" data-t="cr_trips"></h3>
@@ -1552,6 +1582,7 @@ function setLang(l){
   if (window.renderPartnerArea) renderPartnerArea();
   if (window.renderMusic) renderMusic();
   if (window.translatePage) translatePage();
+  if (window.renderVideos) renderVideos();
   if (window.splitGlow) splitGlow();
 }
 // Page history: every page visited, and where we are in it (like a web browser)
@@ -1751,6 +1782,11 @@ Object.assign(T3.es, {"lt_done": "La app ahora está en español"});
 Object.assign(T3.zh, {"lt_done": "应用已切换为中文"});
 Object.assign(T3.ru, {"lt_done": "Приложение теперь на русском"});
 Object.assign(T3.my, {"lt_done": "အက်ပ်ကို မြန်မာဘာသာသို့ ပြောင်းပြီးပါပြီ"});
+Object.assign(T3.en, {"mv_h": "Mission videos"});
+Object.assign(T3.es, {"mv_h": "Videos de misiones"});
+Object.assign(T3.zh, {"mv_h": "宣教视频"});
+Object.assign(T3.ru, {"mv_h": "Видео миссий"});
+Object.assign(T3.my, {"mv_h": "သာသနာပြု ဗီဒီယိုများ"});
 for (const l in T3) Object.assign(T[l], T3[l]);
 for (const l in T) for (const k in T.en) if (!(k in T[l])) T[l][k] = T.en[k];  // fill gaps with English
 
@@ -2233,6 +2269,27 @@ function translatePage(){
     });
   });
 }
+// ---- Mission videos (from the ministry's YouTube channel). To add one: put its YouTube id, place and titles in MISSION_VIDEOS. ----
+const MISSION_VIDEOS = [{"id": "jWOUR0z0YoQ", "place": {"en": "Uganda", "es": "Uganda", "zh": "乌干达", "ru": "Уганда", "my": "ယူဂန်ဒါ"}, "title": {"en": "Glory of Africa: Uganda Crusade", "es": "Gloria de África: Cruzada en Uganda", "zh": "非洲的荣耀：乌干达布道大会", "ru": "Слава Африки: евангелизация в Уганде", "my": "အာဖရိက၏ ဘုန်းတော်: ယူဂန်ဒါ ခရူးဆိတ်"}}, {"id": "c5p3rdJoxfQ", "place": {"en": "Pakistan", "es": "Pakistán", "zh": "巴基斯坦", "ru": "Пакистан", "my": "ပါကစ္စတန်"}, "title": {"en": "Pakistan Revival Crusade: Miracles", "es": "Cruzada de Avivamiento en Pakistán: Milagros", "zh": "巴基斯坦复兴布道大会：神迹", "ru": "Евангелизация пробуждения в Пакистане: чудеса", "my": "ပါကစ္စတန် နိုးကြားမှု ခရူးဆိတ်: အံ့ဖွယ်အမှုများ"}}, {"id": "2qcntKJLXK4", "place": {"en": "Cuba", "es": "Cuba", "zh": "古巴", "ru": "Куба", "my": "ကျူးဘား"}, "title": {"en": "Glory & Miracles in Havana, Cuba", "es": "Gloria y milagros en La Habana, Cuba", "zh": "古巴哈瓦那的荣耀与神迹", "ru": "Слава и чудеса в Гаване, Куба", "my": "ကျူးဘား ဟာဗားနားရှိ ဘုန်းတော်နှင့် အံ့ဖွယ်အမှုများ"}}, {"id": "RyDXsf52K2I", "place": {"en": "Dominican Republic", "es": "Rep. Dominicana", "zh": "多米尼加", "ru": "Доминикана", "my": "ဒိုမီနီကန်"}, "title": {"en": "History was made in the Dominican Republic", "es": "Se hizo historia en República Dominicana", "zh": "在多米尼加共和国创造了历史", "ru": "В Доминиканской Республике творилась история", "my": "ဒိုမီနီကန် သမ္မတနိုင်ငံတွင် သမိုင်းတွင်ခဲ့ပြီ"}}, {"id": "hIBt719SCFs", "place": {"en": "Mexico", "es": "México", "zh": "墨西哥", "ru": "Мексика", "my": "မက္ကဆီကို"}, "title": {"en": "Man with a stroke walks out of his wheelchair", "es": "Hombre con derrame cerebral se levanta de su silla de ruedas", "zh": "中风的人从轮椅上站起来行走", "ru": "Человек после инсульта встал с инвалидной коляски", "my": "လေဖြတ်သူ ဘီးတပ်ကုလားထိုင်မှ ထ၍ လမ်းလျှောက်"}}, {"id": "VpzyCuuOt28", "place": {"en": "Mexico", "es": "México", "zh": "墨西哥", "ru": "Мексика", "my": "မက္ကဆီကို"}, "title": {"en": "Prophecy fulfilled in Monterrey", "es": "Profecía cumplida en Monterrey", "zh": "蒙特雷：预言应验", "ru": "Пророчество исполнилось в Монтеррее", "my": "မွန်တယ်ရေးတွင် ပရောဖက်ပြုချက် ပြည့်စုံ"}}, {"id": "3iVXwtE4DUA", "place": {"en": "2025"}, "title": {"en": "2025 Highlights", "es": "Lo mejor de 2025", "zh": "2025 精彩回顾", "ru": "Лучшее за 2025 год", "my": "၂၀၂၅ ထူးခြားသော အခိုက်အတန့်များ"}}];
+function renderVideos(){
+  const pick = o => o[lang] || o.en, e = x => String(x).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const play = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7Z"/></svg>';
+  $$("[data-videos]").forEach(box => {
+    box.innerHTML = MISSION_VIDEOS.map(v => '<button type="button" class="vtile" data-vid="' + v.id + '"><span class="vthumb"><img src="https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg" alt="" loading="lazy"><span class="vplay">' + play + '</span><span class="vtag">' + e(pick(v.place)) + '</span></span><b>' + e(pick(v.title)) + '</b></button>').join("");
+  });
+}
+document.addEventListener("click", ev => {
+  const t = ev.target.closest(".vtile"); if (!t) return;
+  const v = MISSION_VIDEOS.find(x => x.id === t.dataset.vid); if (!v) return;
+  $("#vpFrame").innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + v.id + '?autoplay=1&rel=0&playsinline=1" title="' + (v.title[lang] || v.title.en).replace(/"/g, "&quot;") + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+  $("#vpTitle").textContent = v.title[lang] || v.title.en;
+  const d = $("#vplayer"); if (d.showModal) d.showModal(); else d.setAttribute("open", "");
+});
+function closeVideo(){ $("#vpFrame").innerHTML = ""; const d = $("#vplayer"); if (d.close) d.close(); else d.removeAttribute("open"); }
+$("#vpClose").addEventListener("click", closeVideo);
+$("#vplayer").addEventListener("close", () => { $("#vpFrame").innerHTML = ""; });
+$("#vplayer").addEventListener("click", e => { if (e.target.id === "vplayer") closeVideo(); });
+renderVideos();
 // ---- Prophecy library ----
 // Words come live from the blog on benlimglobal.com (newest first). To add a word that is not on the
 // blog, put it in PROPHECY_EXTRA: {date:"2026-10-20", title:"...", text:"...", video:"https://youtube.com/..."}
