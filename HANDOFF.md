@@ -17,7 +17,7 @@ No framework, no build tools to install, and no paid services.
 | `sw.js` | Lets the app work offline. Change the cache name (`benlim-v61` → `benlim-v62`) each time you publish. |
 | `manifest.json` | App name and icon for "Add to Home Screen". |
 | `privacy.html` | Privacy policy (**draft**: the ministry must review it). |
-| `logo.png`, `icon-*.png`, `oils/`, `books/` | Images. `photos/` and `about.jpg` are no longer shown. |
+| `logo.png`, `icon-*.png`, `oils/`, `books/` | Images. `photos/` and `about.jpg` are no longer shown (the bio is intentionally left out of the app). |
 
 There are **no environment variables, API keys or passwords** in the project.
 
@@ -52,7 +52,6 @@ All on-screen text lives in the `T`, `T2` and `T3` tables in `index.src.html`. T
 | Activate the crusade application | Whoever reads missions@benlimglobal.com | FormSubmit sends a one-time "Activate form" email after the first submission. Until someone clicks it, applicants are sent to their own email app instead. |
 | Square links for oils and prayer shawl | Whoever manages the ministry's Square account | One payment link per item and size. Then put the links on the shop buttons. The Power of Honor book already uses `square.link/u/qzlQBPJM`. |
 | Crowd and crusade photos/videos | Ministry | For the welcome area and Missions & Crusades. |
-| New bio | Ministry | The About section was removed from the homepage. Bio text is `about_p2` in the text tables. |
 | Weekly prophecy word | Ministry | Easiest: publish it as a blog post on benlimglobal.com, and the app picks it up. Or fill in `WORD` / `PROPHECY_EXTRA` in `index.src.html`. |
 | Links for Ben Lim Asia and Ben Lim Myanmar | Ministry | Only benlimfuego.com was found. |
 | Review the privacy policy | Ministry (ideally its lawyer) | `privacy.html`. Fill in the effective date and how long applications are kept. |
