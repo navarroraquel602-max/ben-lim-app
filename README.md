@@ -1,17 +1,14 @@
-# Ben Lim Global App (preview)
+# Glory App by Ben Lim Global
 
-Mobile web app. One file: index.html (images are inside it).
+Mobile web app for Ben Lim Global: a global hub for prophetic teaching, missions and crusades, partnership, and language communities (English, Español, Burmese, Chinese, Russian).
 
-## Put it online (free)
-1. Make a GitHub account (the ministry's, if it has one).
-2. New repository, name: ben-lim-app. Upload all files in this folder.
-3. Settings > Pages > Deploy from branch > main > / (root) > Save.
-4. In a minute you get a link like https://YOURNAME.github.io/ben-lim-app/
+**Live:** https://navarroraquel602-max.github.io/ben-lim-app/
 
 ## Add to Home Screen
 - iPhone (Safari): Share button > Add to Home Screen.
 - Android (Chrome): menu > Install app.
 
 ## Edit
-Change index.src.html, then run: python3 build.py
-Booking email: search BOOKING_EMAIL in index.src.html.
+Change `index.src.html`, then run `python3 build.py`, bump the cache name in `sw.js`, and push.
+
+See **[HANDOFF.md](HANDOFF.md)** for how the app works, what updates itself from benlimglobal.com, what the ministry still needs to provide, moving the project to the ministry, and the App Store / Google Play plan.
