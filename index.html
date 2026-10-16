@@ -275,6 +275,8 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
 .giveTop{padding:9px 18px;font-size:14px;margin:0}
 .topNav{flex:none;width:36px;height:36px;border:1px solid var(--line);border-radius:50%;background:#fff;color:#111;display:grid;place-items:center;cursor:pointer;padding:0}
 .topNav:disabled{opacity:.3;cursor:default}
+.topShare{color:#8a5d10;border-color:rgba(224,162,52,.6);background:#fffaf0}
+.topShare:active{transform:scale(.9)}
 .topNav:not(:disabled):active{transform:scale(.9)}
 .topNavs{display:flex;align-items:center;gap:8px;flex:none}
 .brand{min-width:0}
@@ -772,6 +774,7 @@ html[lang=my] .onode i{font-size:8px}
   </div>
   <div class="topNavs">
     <button class="topNav" id="topFwd" aria-label="Forward"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    <button class="topNav topShare" id="topShare" type="button" aria-label="Share this app"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7.5 7.5 4.5-4.5 4.5 4.5"/><path d="M8 11H6.5A1.5 1.5 0 0 0 5 12.5v7A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 17.5 11H16"/></svg></button>
   </div>
 </header>
 
@@ -1681,6 +1684,11 @@ Object.assign(T3.es, {"ct_sub":"Comuníquese con el equipo de Ben Lim Global: s�
 Object.assign(T3.zh, {"ct_sub":"联系 Ben Lim Global 团队：关注我们、发送信息或邀请 Ben 博士。","shop_sub":"来自 Ben Lim Global 的膏油、祷告巾、书籍和音乐。"});
 Object.assign(T3.ru, {"ct_sub":"Свяжитесь с командой Ben Lim Global: подпишитесь, напишите сообщение или пригласите доктора Бена.","shop_sub":"Масла помазания, молитвенные покрывала, книги и музыка от Ben Lim Global."});
 Object.assign(T3.my, {"ct_sub":"Ben Lim Global အဖွဲ့ကို ဆက်သွယ်ပါ: လိုက်ကြည့်ပါ၊ မက်ဆေ့ချ် ပို့ပါ သို့မဟုတ် ဒေါက်တာဘင်ကို ဖိတ်ကြားပါ။","shop_sub":"Ben Lim Global ထံမှ ဘိသိက်ဆီ၊ ဆုတောင်းပုဝါ၊ စာအုပ်နှင့် တေးဂီတ။"});
+Object.assign(T3.en, {"sh_app":"Glory App by Ben Lim Global: prophetic teaching, missions and the nations, in your language."});
+Object.assign(T3.es, {"sh_app":"Glory App de Ben Lim Global: enseñanza profética, misiones y las naciones, en su idioma."});
+Object.assign(T3.zh, {"sh_app":"Ben Lim Global 的 Glory App：先知性教导、宣教与列国，用您的语言。"});
+Object.assign(T3.ru, {"sh_app":"Glory App от Ben Lim Global: пророческое учение, миссии и народы — на вашем языке."});
+Object.assign(T3.my, {"sh_app":"Ben Lim Global ၏ Glory App: ပရောဖက်ပြုသော သွန်သင်ချက်၊ သာသနာပြုခြင်းနှင့် လူမျိုးများ — သင့်ဘာသာစကားဖြင့်။"});
 for (const l in T3) Object.assign(T[l], T3[l]);
 for (const l in T) for (const k in T.en) if (!(k in T[l])) T[l][k] = T.en[k];  // fill gaps with English
 
@@ -1745,14 +1753,15 @@ $("#rpReset").addEventListener("click", () => {
 });
 
 // ---- Share ----
-async function shareApp(){
-  const url = location.href.split("#")[0], text = T[lang].sh_text;
+async function shareApp(e, msg){
+  const url = location.origin + location.pathname, text = msg || T[lang].sh_text;
   try { if (navigator.share){ await navigator.share({title:"Glory App", text, url}); return; } }
   catch(e){ if (e && e.name === "AbortError") return; }
   try { await navigator.clipboard.writeText(text + " " + url); alert(T[lang].sh_copied); }
   catch(e){ prompt(T[lang].sh_copied, text + " " + url); }
 }
 $("#shareApp").addEventListener("click", shareApp);
+$("#topShare").addEventListener("click", e => shareApp(e, T[lang].sh_app));
 $("#rpShare").addEventListener("click", shareApp);
 // ---- Prophecy Now ----
 // WORD OF THE WEEK: paste Dr. Ben's word here each week. Leave text empty to show the "coming" message.
