@@ -1886,11 +1886,11 @@ document.addEventListener("pointerdown", e => {
 (function(){
   let items = null;
   const esc = x => String(x || "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-  const tag = n => /\bCD\b/i.test(n) ? "CD" : /single/i.test(n) ? "Single" : /download|album/i.test(n) ? "Download" : /oil/i.test(n) ? "Oil" : "";
+  const tag = (n, kind) => /\bCD\b/i.test(n) ? "CD" : /single/i.test(n) ? "Single" : /download|album/i.test(n) ? "Download" : kind === "external" ? "Album" : "";   // "Prophetic Oil" is an audio album on HearNow
   window.renderMusic = function(){
     const box = document.getElementById("musicGrid"); if (!box || !items) return;
     const t = T[lang];
-    box.innerHTML = items.map(i => '<a class="mitem" href="' + esc(i.link) + '" target="_blank" rel="noopener"><span class="mimg">' + (i.img ? '<img src="' + esc(i.img) + '" alt="" loading="lazy">' : '') + (tag(i.name) ? '<span class="mtag">' + tag(i.name) + '</span>' : '') + '</span>' +
+    box.innerHTML = items.map(i => '<a class="mitem" href="' + esc(i.link) + '" target="_blank" rel="noopener"><span class="mimg">' + (i.img ? '<img src="' + esc(i.img) + '" alt="" loading="lazy">' : '') + (tag(i.name, i.kind) ? '<span class="mtag">' + tag(i.name, i.kind) + '</span>' : '') + '</span>' +
       '<span class="mbody"><b>' + esc(i.name) + '</b>' + (i.price > 0 ? '<span class="mp">' + (i.from ? '<small>' + esc(t.mu_from) + '</small>' : '') + '$' + i.price.toFixed(2) + '</span>' : '<span class="mp"></span>') +
       '<span class="mbtn">' + esc(i.kind === "grouped" ? t.mu_choose : t.mu_buy) + '</span></span></a>').join("");
   };
