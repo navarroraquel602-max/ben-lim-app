@@ -85,7 +85,7 @@ To switch it on:
 - **Confirmation:** the customer sees it only after FormSubmit confirms delivery.
 - **Privacy:** nothing about the order is stored on the phone, and nothing goes in a web address.
 
-**Prices.** Confirmed by the ministry: Oil of Grace Small $15 / Large $45, Prayer Shawl $50. **Still to confirm:** the Medium size ($30), the Bridegroom Oil prices, and the shawl's exact product name and photo. These are in `OIL_SIZES` and `SHAWL` in `index.src.html`.
+**Prices (confirmed by the ministry, Oct 2026):** Oil of Grace and Bridegroom Oil, Small $15 / Medium $30 / Large $45; Prayer Shawl $50 (photo: `media/prayer-shawl.jpg`). Oil sizes in ounces are not needed. Prices are in `OIL_SIZES` and `SHAWL` in `index.src.html`.
 
 ## Moving the project to the ministry
 

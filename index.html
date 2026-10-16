@@ -547,7 +547,7 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
 .qty button{width:38px;height:44px;border:0;background:none;font:600 20px Lato,system-ui,sans-serif;color:#111;cursor:pointer}
 .qty button:active{background:#fbf1d6}
 .qty output{min-width:26px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
-.shawl-art svg{width:150px;height:auto;filter:drop-shadow(0 12px 12px rgba(0,0,0,.18))}
+.shawl-art .shawl-photo{height:auto;width:100%;max-width:260px;max-height:228px;object-fit:contain;border-radius:14px;--s:1}
 .obar{position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:9;display:flex;align-items:center;gap:10px;justify-content:space-between;background:#111;color:#fff;border:1px solid rgba(224,162,52,.6);border-radius:16px;padding:10px 10px 10px 16px;box-shadow:0 14px 30px -10px rgba(0,0,0,.55);font-weight:700;animation:pgIn .3s ease}
 .obar .btn{padding:10px 14px;font-size:13px;margin:0}
 .osheet{border:0;padding:0;width:100%;max-width:560px;max-height:92vh;margin:auto auto 0;border-radius:22px 22px 0 0;background:var(--bg);color:var(--text);box-shadow:0 -10px 40px rgba(0,0,0,.35)}
@@ -792,8 +792,8 @@ html[lang=my] .onode i{font-size:8px}
         <div class="buy"><div class="qty" role="group" aria-label="Quantity"><button type="button" class="qm" aria-label="Decrease quantity">−</button><output class="qv" aria-live="polite">1</output><button type="button" class="qp" aria-label="Increase quantity">+</button></div><button class="btn oadd" type="button" data-t="sh_add"></button></div>
       </div>
       <div class="card oil-card shawl-card" data-shawl="1">
-        <div class="bottle"><div class="bw shawl-art"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="shw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="#efe3c6"/></linearGradient></defs><path d="M14 30c18-8 74-8 92 0l-6 66c-26 8-54 8-80 0Z" fill="url(#shw)" stroke="#c9b27a" stroke-width="1.5"/><path d="M20 44h80M21 54h78M24 80h72M25 88h70" stroke="#1d3f8f" stroke-width="3"/><path d="M20 98v10M30 99v10M40 100v10M50 100v10M60 100v10M70 100v10M80 100v10M90 99v10M100 98v10" stroke="#c9b27a" stroke-width="1.4"/><path d="M52 18h16v14H52z" fill="#1d3f8f"/></svg></div></div>
-        <div class="bsoon" data-t="oil_soon"></div>
+        <div class="bottle"><div class="bw shawl-art"><img class="bphoto shawl-photo" src="media/prayer-shawl.jpg" alt="White prayer shawl with red and gold stripes and a matching bag"></div></div>
+        <div class="bsoon"></div>
         <h3 data-t="shawl_h"></h3><p data-t="sh_shawl_p"></p>
         <div class="oprice"><span data-t="oil_price"></span><b class="opv">$50.00</b></div>
         <div class="buy"><div class="qty" role="group" aria-label="Quantity"><button type="button" class="qm" aria-label="Decrease quantity">−</button><output class="qv" aria-live="polite">1</output><button type="button" class="qp" aria-label="Increase quantity">+</button></div><button class="btn oadd" type="button" data-t="sh_add"></button></div>
@@ -1496,6 +1496,11 @@ Object.assign(T3.es, {"more_h":"Música y más","mu_p":"CD, descargas y más de 
 Object.assign(T3.zh, {"more_h":"音乐与更多","mu_p":"事工商店的 CD、下载等。点选商品即可在 benlimglobal.com 购买。","mu_buy":"购买","mu_choose":"选择曲目","mu_from":"起","mu_all":"查看完整商店"});
 Object.assign(T3.ru, {"more_h":"Музыка и другое","mu_p":"CD, загрузки и другое из магазина служения. Нажмите на товар, чтобы купить его на benlimglobal.com.","mu_buy":"Купить","mu_choose":"Выбрать треки","mu_from":"от","mu_all":"Весь магазин"});
 Object.assign(T3.my, {"more_h":"တေးဂီတနှင့် အခြား","mu_p":"ဓမ္မအမှုတော် စတိုးမှ CD၊ ဒေါင်းလုဒ်နှင့် အခြား။ benlimglobal.com တွင် ဝယ်ရန် ပစ္စည်းကို နှိပ်ပါ။","mu_buy":"ဝယ်ရန်","mu_choose":"သီချင်းများ ရွေးရန်","mu_from":"မှ စ၍","mu_all":"စတိုး အပြည့်အစုံ ကြည့်ရန်"});
+Object.assign(T3.en, {"sh_shawl_p": "A white prayer shawl with red and gold stripes, with a matching bag."});
+Object.assign(T3.es, {"sh_shawl_p": "Un manto de oración blanco con franjas rojas y doradas, con bolsa a juego."});
+Object.assign(T3.zh, {"sh_shawl_p": "白色祷告巾，配红色和金色条纹，附配套收纳袋。"});
+Object.assign(T3.ru, {"sh_shawl_p": "Белое молитвенное покрывало с красными и золотыми полосами и сумкой в комплекте."});
+Object.assign(T3.my, {"sh_shawl_p": "အနီနှင့် ရွှေရောင် အစင်းများပါသော အဖြူရောင် ဆုတောင်းပုဝါ၊ လိုက်ဖက်သော အိတ်ပါဝင်သည်။"});
 for (const l in T3) Object.assign(T[l], T3[l]);
 for (const l in T) for (const k in T.en) if (!(k in T[l])) T[l][k] = T.en[k];  // fill gaps with English
 
@@ -2173,8 +2178,7 @@ $$(".oil-card:not(.shawl-card)").forEach(card => $(".oSize", card).addEventListe
 // submit one test, and have the inbox owner click FormSubmit's one-time activation email.
 // Proposed inbox from prior correspondence (NOT active): benlimgloballlc@gmail.com
 const ORDER_ENDPOINT = "";
-// Prices. Confirmed by the ministry: Oil of Grace Small $15 / Large $45, Prayer Shawl $50.
-// Still to confirm: the Medium size ($30), Bridegroom Oil prices, and the shawl's exact product name.
+// Prices confirmed by the ministry (Oct 2026): both oils Small $15 / Medium $30 / Large $45; Prayer Shawl $50.
 const SHAWL = {key: "S", name: "Prayer Shawl", price: 50};
 const cart = new Map();   // key -> {name, size, price, qty}; products only, kept in memory
 const money = n => "$" + n.toFixed(2);
