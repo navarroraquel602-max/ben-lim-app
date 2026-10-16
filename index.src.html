@@ -629,6 +629,39 @@ footer .icons a svg{width:100%;height:100%;padding:8px;fill:#fff;border-radius:1
 }
 @media (min-width:700px){#reading{max-width:760px;margin:0 auto}.rpgrid{gap:12px}.rptile b{font-size:22px}}
 @media (max-width:360px){.rphero{flex-direction:column;text-align:center}.rpgrid{gap:6px}.rptile small{display:none}}
+/* ===== GLORY LAYER: fire, depth and overlap (Learn, Events, Reading plan) ===== */
+.fire{position:relative;overflow:hidden;isolation:isolate}
+.fire::before{content:"";position:absolute;inset:-20% -10% -5%;z-index:0;pointer-events:none;mix-blend-mode:screen;opacity:1;
+  background:radial-gradient(70% 55% at 18% 108%,rgba(255,110,20,.85),transparent 70%),radial-gradient(65% 50% at 80% 112%,rgba(255,55,15,.75),transparent 70%),radial-gradient(45% 45% at 50% 104%,rgba(255,210,90,.8),transparent 70%),radial-gradient(30% 25% at 35% 100%,rgba(255,240,180,.55),transparent 70%)}
+.fire>canvas.embers{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.fire>*:not(canvas):not(img){position:relative;z-index:2}
+@media (prefers-reduced-motion:no-preference){.fire::before{animation:flicker 3.2s ease-in-out infinite alternate}}
+@keyframes flicker{0%{transform:translateY(0) scaleY(1);opacity:.75}35%{transform:translateY(-2%) scaleY(1.05);opacity:.95}70%{transform:translateY(1%) scaleY(.97);opacity:.8}100%{transform:translateY(-3%) scaleY(1.08);opacity:1}}
+/* headers become tall banners; content rises over them */
+.lhero{padding-bottom:64px;box-shadow:0 30px 60px -30px rgba(200,90,20,.55)}
+.lhero~.mtiles{margin-top:-52px;position:relative;z-index:3}
+.mtile{box-shadow:0 22px 40px -18px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08) inset}
+.evhead{height:200px;box-shadow:0 30px 60px -30px rgba(200,90,20,.55)}
+.fire.evhead>h2{position:absolute;left:18px;top:18px;bottom:auto;z-index:2}
+.evhead~[data-live="events"] .evx:first-child{margin-top:-54px;position:relative;z-index:3;box-shadow:0 28px 50px -18px rgba(0,0,0,.7),0 0 0 2px rgba(224,162,52,.55)}
+.evhead~[data-live="events"] .evx:first-child::before{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 40px rgba(255,140,40,.35) inset;z-index:1;pointer-events:none}
+.rphero{padding-bottom:70px;align-items:flex-start;box-shadow:0 30px 60px -30px rgba(200,90,20,.6)}
+.rpnext{margin-top:-58px;position:relative;z-index:3;border:0;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(120deg,#ffd27a,#ff7a1a,#e0a234,#fff1c2) border-box;border:2px solid transparent;box-shadow:0 26px 46px -18px rgba(150,60,10,.55),0 0 30px rgba(255,150,40,.25)}
+.rpnext .btn{background:linear-gradient(135deg,#ffcf6b,#ff8a1f 55%,#e0532a);box-shadow:0 8px 20px -6px rgba(255,110,30,.7)}
+.rpboard{position:relative;margin:12px -4px 18px;padding:16px 12px;border-radius:24px;background:radial-gradient(120% 80% at 50% 120%,rgba(255,110,20,.28),transparent 60%),linear-gradient(170deg,#17120b,#050403);box-shadow:0 24px 50px -20px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,220,150,.15)}
+.rpboard .rpgrid{margin:0}
+.rpboard .rptile{background:radial-gradient(circle at 35% 30%,#2b2215,#120e08);border-color:rgba(224,162,52,.35);color:#f3dca4}
+.rpboard .rptile small{color:rgba(243,220,164,.55)}
+.rpboard .rptile.done{background:radial-gradient(circle at 50% 85%,#fff3c4 0%,#ffc23d 25%,#ff7a1a 60%,#c4321a 100%);border-color:#ffb347;color:#2a0e00;box-shadow:0 0 14px rgba(255,140,40,.75),0 0 30px rgba(255,90,20,.35)}
+.rpboard .rptile.done small{color:#2a0e00}
+.rpboard .rptile.next{border:2px solid #ffb347;color:#fff;box-shadow:0 0 0 3px rgba(255,140,40,.25),0 0 18px rgba(255,140,40,.55)}
+@media (prefers-reduced-motion:no-preference){
+  .rpboard .rptile.done{animation:burn 2.4s ease-in-out infinite alternate}
+  .rpboard .rptile.done:nth-child(3n){animation-delay:-.8s}.rpboard .rptile.done:nth-child(3n+1){animation-delay:-1.6s}
+  @keyframes burn{0%{box-shadow:0 0 10px rgba(255,140,40,.6),0 0 22px rgba(255,90,20,.25)}100%{box-shadow:0 0 18px rgba(255,170,60,.9),0 0 38px rgba(255,90,20,.45)}}
+  .rpboard .rptile.next{animation:flame 1.4s ease-in-out infinite alternate}
+  @keyframes flame{0%{box-shadow:0 0 0 3px rgba(255,140,40,.2),0 0 12px rgba(255,140,40,.45)}100%{box-shadow:0 0 0 6px rgba(255,140,40,.32),0 0 28px rgba(255,120,30,.75)}}
+}
 /* Burmese: letter-spacing breaks the script, and words run longer */
 html[lang=my] *{letter-spacing:0!important}
 html[lang=my] body{line-height:1.7}
@@ -728,7 +761,7 @@ html[lang=my] .onode i{font-size:8px}
 
   <!-- EVENTS -->
   <section id="events">
-    <div class="evhead"><img src="media/arena.jpg" alt="Crowd worshiping at a Ben Lim Global crusade"><h2 data-t="events_title"></h2></div>
+    <div class="evhead fire" data-embers><img src="media/arena.jpg" alt="Crowd worshiping at a Ben Lim Global crusade"><h2 data-t="events_title"></h2></div>
     <div data-live="events">
     <div class="card"><h3>Milwaukee</h3><p data-t="ev1"></p>
       <a class="btn" href="https://benlimglobal.com/events/milwaukee-king-glory/" target="_blank" rel="noopener" data-t="ev_detail"></a></div>
@@ -741,7 +774,7 @@ html[lang=my] .onode i{font-size:8px}
 
   <!-- LEARN (free info) -->
   <section id="learn">
-    <div class="lhero">
+    <div class="lhero fire" data-embers>
       <span class="gkick" data-t="watch_title"></span>
       <h2 data-t="ln_h"></h2>
       <p data-t="ln_p"></p>
@@ -1233,7 +1266,7 @@ html[lang=my] .onode i{font-size:8px}
   <!-- READING PLAN -->
   <section id="reading">
     <p><a class="btn ghost" href="#" data-back="learn" data-t="inv_back"></a></p>
-    <div class="rphero">
+    <div class="rphero fire" data-embers>
       <div class="rpring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52"/><circle class="rg" id="rpRingBig" cx="60" cy="60" r="52" pathLength="100"/></svg><span><b id="rpCount">0</b><small>/ 21</small></span></div>
       <div class="rphero-t">
         <span class="gkick" data-t="watch_title"></span>
@@ -1244,7 +1277,7 @@ html[lang=my] .onode i{font-size:8px}
     </div>
     <div class="rpnext" id="rpNext" aria-live="polite"></div>
     <p class="note" data-t="rp_tap"></p>
-    <div id="rpList" class="rpgrid" role="group"></div>
+    <div class="rpboard"><div id="rpList" class="rpgrid" role="group"></div></div>
     <p class="rp-actions"><button class="btn" type="button" id="rpShare" data-t="share_app"></button>
        <button class="btn ghost" type="button" id="rpReset" data-t="rp_reset"></button></p>
   </section>
@@ -1939,6 +1972,34 @@ document.addEventListener("pointerdown", e => {
   };
   fetch("shop.json", {cache: "no-store"}).then(r => r.ok ? r.json() : Promise.reject()).then(d => { items = (d && d.items) || []; renderMusic(); }).catch(() => {
     const box = document.getElementById("musicGrid"); if (box) box.innerHTML = '<div class="card"><p>' + esc(T[lang].more_p) + '</p></div>';
+  });
+})();
+// ---- Glory layer: rising embers in fiery headers ----
+(function(){
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  document.querySelectorAll("[data-embers]").forEach(host => {
+    const cv = document.createElement("canvas"); cv.className = "embers"; cv.setAttribute("aria-hidden", "true");
+    host.insertBefore(cv, host.firstChild);
+    const ctx = cv.getContext("2d"); let W = 0, H = 0, dpr = 1, parts = [], vis = false;
+    const spawn = (y) => ({x: Math.random() * W, y: y == null ? H + Math.random() * 20 : y, r: Math.random() * 1.8 + .6, vy: .35 + Math.random() * .9, vx: (Math.random() - .5) * .3, life: 0, max: 140 + Math.random() * 160, hue: 22 + Math.random() * 28, w: Math.random() * 6.28});
+    function size(){ const r = host.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; parts = Array.from({length: Math.round(W / 9)}, () => spawn(Math.random() * H)); }
+    function frame(){
+      if (vis && W){
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H); ctx.globalCompositeOperation = "lighter";
+        for (let i = 0; i < parts.length; i++){
+          const p = parts[i]; p.life++; p.y -= p.vy; p.w += .05; p.x += p.vx + Math.sin(p.w) * .35;
+          const k = p.life / p.max; if (k >= 1 || p.y < -10){ parts[i] = spawn(); continue; }
+          const a = Math.sin(Math.PI * k) * .9, g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+          g.addColorStop(0, "hsla(" + (p.hue + 15) + ",100%,75%," + a + ")"); g.addColorStop(.4, "hsla(" + p.hue + ",100%,55%," + a * .6 + ")"); g.addColorStop(1, "hsla(" + p.hue + ",100%,45%,0)");
+          ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 4, 0, 7); ctx.fill();
+        }
+        ctx.globalCompositeOperation = "source-over";
+      }
+      requestAnimationFrame(frame);
+    }
+    try { new IntersectionObserver(es => es.forEach(x => { vis = x.isIntersecting; if (vis && !W) size(); })).observe(host); } catch(e){ vis = true; }
+    addEventListener("resize", () => { if (W) size(); });
+    requestAnimationFrame(frame);
   });
 })();
 // ---- Prophecy library ----
