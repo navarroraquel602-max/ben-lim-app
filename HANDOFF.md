@@ -63,7 +63,6 @@ All on-screen text lives in the `T`, `T2` and `T3` tables in `index.src.html`. T
 | Switch on oil and prayer shawl order requests | Ministry approval, then the developer | See "Merchandise order requests" below. |
 | More mission videos | Ministry | Videos come from the ministry's YouTube channel: add a video's YouTube id, place and titles to `MISSION_VIDEOS` in `index.src.html`. |
 | Weekly prophecy word | Ministry | Easiest: publish it as a blog post on benlimglobal.com, and the app picks it up. Or fill in `WORD` / `PROPHECY_EXTRA` in `index.src.html`. |
-| Links for Ben Lim Asia and Ben Lim Myanmar | Ministry | Only benlimfuego.com was found. |
 | Review the privacy policy | Ministry (ideally its lawyer) | `privacy.html`. Fill in the effective date and how long applications are kept. |
 
 ## Merchandise order requests (Square invoices)
