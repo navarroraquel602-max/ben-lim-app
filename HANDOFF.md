@@ -53,7 +53,7 @@ If the site can't be reached, the app shows the last copy saved on the phone. We
 
 ### Interface tables
 
-All on-screen text lives in the `T`, `T2` and `T3` tables in `index.src.html`. The languages are `en`, `es`, `my` (Burmese), `zh` and `ru`. Any text missing in a language falls back to English. **Burmese was machine-written and needs review by a native speaker.**
+All on-screen text lives in the `T`, `T2` and `T3` tables in `index.src.html`. The languages are `en`, `es`, `my` (Burmese), `zh` and `ru`. Any text missing in a language falls back to English.
 
 ## Things that need the ministry
 
