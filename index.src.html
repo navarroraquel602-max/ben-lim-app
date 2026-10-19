@@ -204,7 +204,7 @@
     .hero p{max-width:34em;margin-left:auto;margin-right:auto}
     .great{margin:28px -32px 0;padding:8px 32px 24px}
     .great p{max-width:52em}
-    #partners,#invite,#reading,#hubpage,#crusades,#prophecy,#members,#shop,#hubs{max-width:760px;margin-left:auto;margin-right:auto}
+    #partners,#invite,#reading,#crusades,#prophecy,#members,#shop,#hubs{max-width:760px;margin-left:auto;margin-right:auto}
     footer .wrap{max-width:1100px;padding:0 32px}
   }
   /* ---- Languages page ---- */
@@ -1161,14 +1161,6 @@ footer h4{color:#ffcf6b}footer a{color:#d8cfbb}footer small{color:#9c917c}
     <p style="text-align:center"><a class="btn ghost" href="https://benlimglobal.com/partnering/" target="_blank" rel="noopener" data-t="open"></a></p>
   </section>
 
-  <section id="hubpage">
-    <p><a href="#" data-go="hubs" data-t="inv_back"></a></p>
-    <h2 data-t="hp_title"></h2>
-    <p data-t="hp_welcome"></p>
-    <div class="card"><h3 data-t="hp_int_h"></h3><p data-t="hp_int_p"></p>
-      <a class="btn" id="hubInterest" href="#" data-t="hp_int_btn"></a></div>
-  </section>
-
   <section id="invite">
     <p><a href="#" data-go="connect" data-t="inv_back"></a></p>
     <h2 data-t="inv_title"></h2>
@@ -1414,31 +1406,6 @@ footer h4{color:#ffcf6b}footer a{color:#d8cfbb}footer small{color:#9c917c}
     </form>
   </section>
 
-  <!-- EVENT APPLICATION -->
-  <section id="apply">
-    <p><a class="btn ghost" href="#" data-back="events" data-t="inv_back"></a></p>
-    <h2 data-t="ap_title"></h2>
-    <p class="note" id="apEvent"></p>
-    <p data-t="ap_intro"></p>
-    <form id="applyForm" novalidate>
-      <input type="hidden" name="Event" id="apEventName">
-      <label>Full name *<input name="Full name" autocomplete="name" required></label>
-      <label>Email *<input name="Email" type="email" autocomplete="email" required></label>
-      <label>Phone *<input name="Phone" type="tel" autocomplete="tel" required></label>
-      <label>City and country<input name="City and country"></label>
-      <label>Church or ministry<input name="Church or ministry"></label>
-      <label>How many people are applying?<input name="Number of people" inputmode="numeric"></label>
-      <fieldset><legend>Have you been to a Ben Lim event before?</legend>
-        <label class="opt"><input type="radio" name="Attended before" value="Yes"> Yes</label>
-        <label class="opt"><input type="radio" name="Attended before" value="No"> No</label></fieldset>
-      <label>Why do you want to come? *<textarea name="Why attend" rows="4" required></textarea></label>
-      <label>Prayer needs or questions<textarea name="Prayer needs or questions" rows="3"></textarea></label>
-      <p><button class="btn" type="submit" data-t="ap_send"></button>
-         <button class="btn ghost" type="button" id="copyApply" data-t="inv_copy"></button></p>
-      <p class="note" id="applyMsg" role="status"></p>
-    </form>
-  </section>
-
   <!-- HUBS (language portals) -->
   <!-- READING PLAN -->
   <section id="reading">
@@ -1455,8 +1422,7 @@ footer h4{color:#ffcf6b}footer a{color:#d8cfbb}footer small{color:#9c917c}
     <div class="rpnext" id="rpNext" aria-live="polite"></div>
     <p class="note" data-t="rp_tap"></p>
     <div class="rpboard"><div id="rpList" class="rpgrid" role="group"></div></div>
-    <p class="rp-actions"><button class="btn" type="button" id="rpShare" data-t="share_app"></button>
-       <button class="btn ghost" type="button" id="rpReset" data-t="rp_reset"></button></p>
+    <p class="rp-actions"><button class="btn ghost" type="button" id="rpReset" data-t="rp_reset"></button></p>
   </section>
 
   <section id="hubs">
@@ -1674,12 +1640,6 @@ $("#askCall").addEventListener("click", e => {
   const body = "REQUEST FOR A CALL OR MEETING WITH DR. BEN LIM\n\nName:\nPhone:\nWhich one are you interested in? (30-minute call, personal meeting, coaching):\nBest days and times (include your time zone):\n";
   window.location.href = "mailto:" + SHOP_EMAIL + "?subject=" + encodeURIComponent("Call request - Dr. Ben Lim") + "&body=" + encodeURIComponent(body);
 });
-$("#hubInterest").addEventListener("click", e => {
-  e.preventDefault();
-  const names = {en:"English",es:"Spanish",my:"Burmese",zh:"Chinese",ru:"Russian"};
-  const body = "HUB INTEREST - " + names[lang] + "\n\nName:\nCountry or city:\nWhat would you like to see in this hub?\n";
-  window.location.href = "mailto:" + SHOP_EMAIL + "?subject=" + encodeURIComponent("Hub interest - " + names[lang]) + "&body=" + encodeURIComponent(body);
-});
 setLang(lang);
 </script>
 <script>
@@ -1856,7 +1816,6 @@ async function shareApp(e, msg){
   catch(e){ prompt(T[lang].sh_copied, text + " " + url); }
 }
 $("#topShare").addEventListener("click", e => shareApp(e, T[lang].sh_app));
-$("#rpShare").addEventListener("click", shareApp);
 // ---- Prophecy Now ----
 // WORD OF THE WEEK: paste Dr. Ben's word here each week. Leave text empty to show the "coming" message.
 // Add other languages as extra keys, for example text: {en:"...", es:"..."}.
@@ -1891,9 +1850,11 @@ function todayVerse(){
 function pwLoad(){ try { return JSON.parse(localStorage.getItem(PW_KEY)) || {}; } catch(e){ return {}; } }
 function renderProphecy(){
   const t = T[lang], pick = o => (o && (o[lang] || o.en)) || "";
-  $("#pwTitle").textContent = pick(WORD.title);
-  $("#pwText").textContent = pick(WORD.text) || t.pw_placeholder || T.en.pw_placeholder;
+  const lw = !pick(WORD.text) && window.__latestWord;   // no weekly word typed in: feature Dr. Ben's newest blog word
+  $("#pwTitle").textContent = lw ? ct(lw, "title") : pick(WORD.title);
+  $("#pwText").textContent = lw ? ct(lw, "text") : (pick(WORD.text) || t.pw_placeholder || T.en.pw_placeholder);
   $("#pwFrom").textContent = WORD.from;
+  const kick = document.querySelector(".pw [data-t=pw_kick]"); if (kick) kick.textContent = lw ? (t.pl_latest || T.en.pl_latest) : (t.pw_kick || T.en.pw_kick);
   const [ref, txt] = todayVerse(), v = "“" + txt + "” — " + ref;
   $("#homeVerse").textContent = v; $("#pageVerse").textContent = v;
   const st = pwLoad(), today = dayKey(new Date()), y = new Date(); y.setDate(y.getDate() - 1);
@@ -2341,6 +2302,7 @@ $("#plSearch").addEventListener("input", e => { plQuery = e.target.value.trim();
 function useWords(list){
   plItems = PROPHECY_EXTRA.map((p, i) => Object.assign({id: "x" + i, full: p.text ? [p.text] : null}, p)).concat(list).sort((a, b) => b.date.localeCompare(a.date));
   renderLibrary();
+  window.__latestWord = plItems[0] || null; renderProphecy();
 }
 try { const c = JSON.parse(localStorage.getItem(PL_KEY)); if (c && c.length) useWords(c); } catch(e){}
 fetch(PROPHECY_FEED).then(r => r.ok ? r.json() : Promise.reject()).then(posts => {
@@ -2355,15 +2317,6 @@ function renderPartnerArea(){
   $("#paTiers").innerHTML = PA_TIERS.map(([n, p, k]) => '<div class="card pa-tier"><span class="pl">' + lock + '</span><div class="pt"><b>' + n + '</b><span>' + plEsc(t[k]) + '</span></div><em>' + p + '</em></div>').join("");
 }
 renderPartnerArea();
-// ---- Event RSVP (opens an email to the team with the event filled in) ----
-document.addEventListener("click", e => {
-  const a = e.target.closest(".rsvpEv");
-  if (!a) return;
-  e.preventDefault();
-  const name = a.dataset.ev, when = T.en[a.dataset.evk];
-  const body = "EVENT RSVP\n\nEvent: " + name + " (" + when + ")\nName:\nPhone:\nHow many people are coming?\nQuestions:\n";
-  window.location.href = "mailto:" + SHOP_EMAIL + "?subject=" + encodeURIComponent("Event RSVP - " + name) + "&body=" + encodeURIComponent(body);
-});
 // ---- Crusade / mission application (opens an email to the missions team) ----
 const CRUSADE_EMAIL = "missions@benlimglobal.com";
 function crusadeText(){
@@ -2410,43 +2363,6 @@ $("#crusadeForm").addEventListener("submit", async e => {
   btn.disabled = false;
 });
 $("#crusadeAgain").addEventListener("click", () => { $("#crusadeDone").hidden = true; $("#crusadeForm").hidden = false; });
-// ---- Event RSVP (opens an email to the team with the answers filled in) ----
-const APPLY_EMAIL = "hello@benlimglobal.com"; // change this to where event applications should go
-function applyText(){
-  const f = $("#applyForm"), out = [];
-  for (const el of f.elements){
-    if (!el.name) continue;
-    if (el.type==="radio" && !el.checked) continue;
-    if (!el.value.trim()) continue;
-    out.push(el.name + ": " + el.value.trim());
-  }
-  return "EVENT RSVP\n\n" + out.join("\n");
-}
-document.addEventListener("click", e => {
-  const a = e.target.closest(".applyEv");
-  if (!a) return;
-  e.preventDefault();
-  const name = a.dataset.ev, k = a.dataset.evk, when = k ? T.en[k] : "";
-  $("#apEventName").value = k ? name + " (" + when + ")" : name + " (no date yet)";
-  $("#apEvent").textContent = k ? name + " - " + T[lang][k] : name;
-  $("#applyMsg").textContent = "";
-  go("apply");
-});
-$("#applyForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const f = e.target;
-  $$("input,textarea", f).forEach(i => i.classList.add("touched"));
-  if (!f.checkValidity()){ f.reportValidity(); return; }
-  const ev = $("#apEventName").value;
-  window.location.href = "mailto:" + APPLY_EMAIL + "?subject=" + encodeURIComponent("Event RSVP - " + ev) + "&body=" + encodeURIComponent(applyText());
-  $("#applyMsg").textContent = T[lang].inv_sent;
-});
-$("#copyApply").addEventListener("click", async () => {
-  const f = $("#applyForm");
-  if (!f.checkValidity()){ $$("input,textarea", f).forEach(i => i.classList.add("touched")); f.reportValidity(); return; }
-  try { await navigator.clipboard.writeText(applyText()); $("#applyMsg").textContent = T[lang].inv_copied; }
-  catch(err){ $("#applyMsg").textContent = applyText(); }
-});
 // ---- Motion: confetti and scroll reveal ----
 function burst(x, y, n, big){
   if (!window.matchMedia || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
